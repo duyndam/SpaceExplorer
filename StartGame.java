@@ -9,25 +9,32 @@ public class StartGame {
        ~ Most health
        ~ Intimidate: Reduces chance of aliens boarding
      - Navigator:
-       ~ 
+       ~
      - Medical Officer:
        ~ Able to heal crew members
-     - Science Officer:
-       ~
+     - Scavenger:
+       ~ Increased chance of finding ship parts
 
 
 
      Name each crew member
 
      Name ship (create new Ship object):
-       ~ Multiple types of ship?
 
      Start adventure */
      public static void main(String[] args) {
-       Crew crew = new Crew();
-       Ship starShip = new Ship(name, shield, hull, crew);
+       Ship frigate = new Ship("Endeavour");
+       Crew theTeam = new Crew(frigate);
+
+       CrewMember yuri = new CrewMember();
+       CrewMember val = new CrewMember("Engineer", "Valentina", 100, 0);
+       CrewMember bob = new CrewMember("Scientist", "Bob", 100, 0);
+
+       theTeam.addCrew(yuri);
+       theTeam.addCrew(val);
+       theTeam.addCrew(bob);
+
+       System.out.println(theTeam.toString());
 
      }
-
-
 }

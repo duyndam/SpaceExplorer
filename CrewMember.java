@@ -4,12 +4,14 @@ public class CrewMember {
   private String name;
   private int health;
   private int hunger;
+  private int fatigue;
 
   public CrewMember() {
     job = "Pilot";
     name = "Yuri";
     health = 100;
     hunger = 0;
+    fatigue = 0;
   }
 
   public CrewMember(String role, String crewName, int vitality, int food) {
@@ -43,6 +45,14 @@ public class CrewMember {
     return hunger;
   }
 
+  public void updateFatigue(int amount) {
+    fatigue += amount;
+  }
+
+  public int getFatigue() {
+    return fatigue;
+  }
+
   public String toString() {
     String bio = "I am " + name;
     return bio;
@@ -54,6 +64,6 @@ public class CrewMember {
 
     System.out.println(boi.toString());
     System.out.println(gyal.toString());
-    
+
   }
 }

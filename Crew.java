@@ -12,7 +12,8 @@ public class Crew {
 
   private ArrayList<CrewMember> crew;
 
-  public Crew() {
+  public Crew(Ship vessel) {
+    int money = 100;
     crew = new ArrayList<CrewMember>();
   }
 
@@ -41,29 +42,17 @@ public class Crew {
     }
   }
 
-  /**
-   *
-   */
+  public String inventory() {
+    String stuff = "This is everything the crew has:";
+    return stuff;
+  }
+
+
   public String toString() {
     String crewManifest = "";
     for (CrewMember cosmonaut: crew) {
       crewManifest += "\n" + cosmonaut.getName();
     }
     return crewManifest;
-  }
-
-  public static void main(String[] args) {
-    Crew theTeam = new Crew();
-
-    CrewMember yuri = new CrewMember();
-    CrewMember val = new CrewMember("Engineer", "Valentina", 100, 0);
-    CrewMember bob = new CrewMember("Scientist", "Bob", 100, 0);
-
-    theTeam.addCrew(yuri);
-    theTeam.addCrew(val);
-    theTeam.addCrew(bob);
-
-    System.out.println(theTeam.toString());
-
   }
 }
