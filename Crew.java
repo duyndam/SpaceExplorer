@@ -10,20 +10,25 @@ import java.util.Scanner;
 
 public class Crew {
 
-  private ArrayList<CrewMember> crew;
+  private ArrayList<CrewMember> crewMembers;
+  private Ship crewShip;
+  private ArrayList<Item> crewItems;
 
-  public Crew(Ship vessel) {
+  public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
     int money = 100;
-    crew = new ArrayList<CrewMember>();
+    crewMembers = listOfMembers;
+    crewShip = spaceShip;
   }
 
   /**
    * Establishes initial crew size
    */
   public int crewSize() {
-    return 4;
+    return crewMembers.size();
   }
 
+ 
+  
   /**
    * Adds a cosmonaut to the crew.
    *
@@ -31,8 +36,8 @@ public class Crew {
    * @return          true if successfully adds cosmonaut to crew, otherwise false
    */
   public boolean addCrew(CrewMember cosmonaut) {
-    if (crew.size() < crewSize() && !crew.contains(cosmonaut)) {
-      crew.add(cosmonaut);
+    if (crewMembers.size() < crewSize() && !crewMembers.contains(cosmonaut)) {
+      crewMembers.add(cosmonaut);
       System.out.println(cosmonaut.getName() + " was added to the crew.");
       return true;
     }
@@ -50,7 +55,7 @@ public class Crew {
 
   public String toString() {
     String crewManifest = "";
-    for (CrewMember cosmonaut: crew) {
+    for (CrewMember cosmonaut: crewMembers) {
       crewManifest += "\n" + cosmonaut.getName();
     }
     return crewManifest;
