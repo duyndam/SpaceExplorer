@@ -1,4 +1,14 @@
+import java.util.Scanner;
+
+
 public class StartGame {
+
+	public static int m_iDays;
+	public static int m_iParts;
+	public static int m_iGameScore = 0;
+	public static int m_iActualParts = 0;
+	public static int m_iActualDay = 1;
+	
   /**Choose 2-4 crew members from the following classes:
      - Engineer:
        ~ Bonus to repair
@@ -22,19 +32,47 @@ public class StartGame {
      Name ship (create new Ship object):
 
      Start adventure */
-     public static void main(String[] args) {
-       Ship frigate = new Ship("Endeavour");
-       Crew theTeam = new Crew(frigate);
-
-       CrewMember yuri = new CrewMember();
-       CrewMember val = new CrewMember("Engineer", "Valentina", 100, 0);
-       CrewMember bob = new CrewMember("Scientist", "Bob", 100, 0);
-
-       theTeam.addCrew(yuri);
-       theTeam.addCrew(val);
-       theTeam.addCrew(bob);
-
-       System.out.println(theTeam.toString());
-
+     public static void main(String[] args) 
+     {    
+    	 
+    	 String mode = "CONSOLE";
+    	 if(args.length == 1)
+    	 {
+    		 mode = args[0];
+    	 }
+    	 
+    	 Scanner inputDays = new Scanner(System.in);
+    	 boolean inputCorrect = false;
+    	 do
+    	 {
+    		 inputCorrect = false;
+    		 System.out.println("How many days you wanna play this game?(3-10): ");
+    		 try
+    		 {
+    			 m_iDays = inputDays.nextInt();
+    			 inputCorrect = true;
+    		 }catch(Exception e)
+    		 {
+    			 inputCorrect = false;
+    			 inputDays.nextLine();
+    		 }
+    		 
+    	 }while(m_iDays < 3 || m_iDays > 10 || inputCorrect == false);
+    	 
+    	 m_iParts = m_iDays * 2 / 3;
+    	 
+    	 
+    	 if(mode.equals("CONSOLE"))
+    	 {
+    		 ConsoleGame spaceExplorer = new ConsoleGame();
+    		 spaceExplorer.run();
+    	 }
+    	 else
+    	 {
+    		 gui.StartFrame spaceExplorerGUI = new gui.StartFrame();
+    		 spaceExplorerGUI.main(args);
+    	 }
+    	 
      }
+
 }
