@@ -5,29 +5,59 @@ public class Ship {
 
   public Ship(String shipName) {
     name = shipName;
-    int shieldpercent = 100;
+    shield = 100;
+  }
+  
+  public Ship(String shipName, int shieldStartValue)
+  {
+	  name = shipName;
+	  shield = shieldStartValue;
   }
 
   public int getShield() {
     return shield;
   }
 
-  public void updateShield(int amount) {
-    shield += amount;
-    if (shield < 1) {
-      System.out.println("Ship destroyed :(");
+  //updated check to make sure the shield is at 0 or below before the ship counts as destroyed
+  //also build in security that the ship can't get repaired over 100%
+  //also switched to boolean so the print will happen after the call 
+  /* return:
+   * true  - if ship was destroyed with update
+   * false - if ship wasn't destroyed with update
+   */
+  public boolean updateShield(int amount) {
+    if(amount > 0 && shield+amount > 100)
+    {
+    	shield = 100;
+    }
+    else
+    {
+    	shield += amount;
+    }
+    
+    if (shield <= 0) {
+      return true;
+    	//System.out.println("Ship destroyed :(");
+    }
+    else
+    {
+    	return false;
     }
   }
 
   public String toString() {
-    String details = "Name: " + name + "\nShield: " + shield;
-    return details;
+    String shipString = "--------------------\n";
+    shipString += "Shipname : " + name + "\n";
+    shipString += "Shield   : " + shield + "\n";
+    shipString += "--------------------\n";
+    return shipString;
   }
 
-  public static void main(String[] args) {
+/*  public static void main(String[] args) {
     Ship starShip = new Ship("Nautilus");
     System.out.println(starShip.toString());
     starShip.updateShield(-50);
     starShip.updateShield(-50);
   }
+*/
 }
