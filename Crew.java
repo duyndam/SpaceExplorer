@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.Scanner;
 
 /**
- * @author      Royal Duyndam
+ * @author      Royal Duyndam, Alex Siegmund
  * @version     0.1.0
  * @since       0.0.0
  */
@@ -27,8 +27,6 @@ public class Crew {
     return crewMembers.size();
   }
 
- 
-  
   /**
    * Adds a cosmonaut to the crew.
    *
@@ -51,7 +49,6 @@ public class Crew {
     String stuff = "This is everything the crew has:";
     return stuff;
   }
-
 
   public String toString() {
     String crewManifest = "";

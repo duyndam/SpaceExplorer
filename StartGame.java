@@ -1,5 +1,11 @@
+// Import statements
 import java.util.Scanner;
 
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
 
 public class StartGame {
 
@@ -8,7 +14,7 @@ public class StartGame {
 	public static int m_iGameScore = 0;
 	public static int m_iActualParts = 0;
 	public static int m_iActualDay = 1;
-	
+
   /**Choose 2-4 crew members from the following classes:
      - Engineer:
        ~ Bonus to repair
@@ -32,15 +38,15 @@ public class StartGame {
      Name ship (create new Ship object):
 
      Start adventure */
-     public static void main(String[] args) 
-     {    
-    	 
+     public static void main(String[] args)
+     {
+
     	 String mode = "CONSOLE";
     	 if(args.length == 1)
     	 {
     		 mode = args[0];
     	 }
-    	 
+
     	 Scanner inputDays = new Scanner(System.in);
     	 boolean inputCorrect = false;
     	 do
@@ -56,12 +62,12 @@ public class StartGame {
     			 inputCorrect = false;
     			 inputDays.nextLine();
     		 }
-    		 
+
     	 }while(m_iDays < 3 || m_iDays > 10 || inputCorrect == false);
-    	 
+
     	 m_iParts = m_iDays * 2 / 3;
-    	 
-    	 
+
+
     	 if(mode.equals("CONSOLE"))
     	 {
     		 ConsoleGame spaceExplorer = new ConsoleGame();
@@ -72,7 +78,7 @@ public class StartGame {
     		 gui.StartFrame spaceExplorerGUI = new gui.StartFrame();
     		 spaceExplorerGUI.main(args);
     	 }
-    	 
+
      }
 
 }

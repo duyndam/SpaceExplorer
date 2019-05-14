@@ -1,4 +1,11 @@
+// Import statements
 import java.util.ArrayList;
+
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
 
 public class CrewMember {
 	static enum type
@@ -59,7 +66,7 @@ public class CrewMember {
 	  }
 	  return false;
   }
-  
+
   public boolean undoAction(String actionLogMessage)
   {
 	  if(actionList.size() == 0)
@@ -72,7 +79,7 @@ public class CrewMember {
 		  return true;
 	  }
   }
-  
+
   public void setName(String crewName) {
     name = crewName;
   }
@@ -130,12 +137,4 @@ public void setState(status state) {
 	this.state = state;
 }
 
-/*  public static void main(String[] args) {
-    CrewMember boi = new CrewMember();
-    CrewMember gyal = new CrewMember(type.PILOT, "Valentina", 100, 0);
-
-    System.out.println(boi.toString());
-    System.out.println(gyal.toString());
-  }
-  */
 }
