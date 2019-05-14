@@ -19,11 +19,10 @@ public class CrewMember {
 	}
 	static enum status
 	{
-		NORMAL,
-		CURED,
+		HEALTHY,
 		SPACE_PLAGUE_INFECTED
 	}
-  private type job;
+  public type job;
   private status state;
   private String name;
   private int health;
@@ -31,30 +30,23 @@ public class CrewMember {
   private int fatigue;
   private ArrayList<String> actionList;
 
-  /*public CrewMember() {
-    job = type.PILOT;
-    name = "Yuri";
-    health = 100;
-    hunger = 0;
-    fatigue = 0;
-  }*/
-
-  public CrewMember(String crewName, type role)
-  {
+  public CrewMember(String crewName, type role) {
 	  name = crewName;
 	  job = role;
 	  health = 100;
 	  hunger = 0;
 	  fatigue = 0;
+		state = status.HEALTHY;
 	  actionList = new ArrayList<>();
   }
-  public CrewMember(type role, String crewName, int vitality, int food) {
+  public CrewMember(type role, String crewName, int vitality, int food, int tired) {
     job = role;
     name = crewName;
     health = vitality;
     hunger = food;
-    fatigue = 0;
-	actionList = new ArrayList<>();
+    fatigue = tired;
+		state = status.HEALTHY;
+	  actionList = new ArrayList<>();
   }
 
   public boolean doAction(String actionLogMessage)
@@ -112,6 +104,19 @@ public class CrewMember {
     return fatigue;
   }
 
+	/**
+	 * @return the state, e.g. healthy, infected
+	 */
+	public status getState() {
+		return state;
+	}
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(status state) {
+		this.state = state;
+	}
+
   //adapted toString function
   public String toString() {
     String crewString = "--------------------\n";
@@ -124,17 +129,5 @@ public class CrewMember {
     crewString += "--------------------\n";
     return crewString;
   }
-/**
- * @return the state
- */
-public status getState() {
-	return state;
-}
-/**
- * @param state the state to set
- */
-public void setState(status state) {
-	this.state = state;
-}
 
 }

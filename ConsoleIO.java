@@ -1,3 +1,8 @@
+// Import statements
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 /**
  * @author      Royal Duyndam, Alex Siegmund
  * @version     0.1.0
@@ -6,11 +11,15 @@
 
 public class ConsoleIO {
 
+  public static void printGameLength() {
+    System.out.println("How many days you wanna play this game?(3-10): ");
+  }
+
   public void printCrewInit() {
     System.out.println("Choose the amount of crew members you would like(2-4): ");
   }
 
-  public void printCrewInstructions() {
+  public void printCrewInstructions(int iCrewIndex) {
     System.out.println("--------------------- Creation of Crew member " + (iCrewIndex + 1) + " ----------------------");
     System.out.println("---How to create a crew member---");
     System.out.println("First line : [name] e.g. Yuri");
@@ -26,7 +35,7 @@ public class ConsoleIO {
     System.out.println("----------------------------------------------------------------------");
   }
 
-  public void printAreYouSure() {
+  public void printAreYouSure(String strName, CrewMember.type inputType) {
     System.out.println("Are you sure you want to create the crew member: " + strName + " as a " + inputType + "? (y/n): ");
   }
 
@@ -39,11 +48,11 @@ public class ConsoleIO {
     System.out.println("Enter a name for your ship: ");
   }
 
-  public void printShipConfirm() {
+  public void printShipConfirm(String strName) {
     System.out.println("You want to name your ship " + strName + "? (y/n)");
   }
 
-  public void printAdvConfirm() {
+  public void printAdvConfirm(ArrayList<CrewMember> crewList, Ship crewShip) {
     System.out.println("This would be your crew:");
     for(int iCrewIndex = 0; iCrewIndex < crewList.size(); iCrewIndex++)
     {
@@ -53,7 +62,6 @@ public class ConsoleIO {
     System.out.println("Are you sure you want to start the adventure? (y/n)");
   }
 
-  }
   public void printAdvStart() {
     System.out.println("The adventure starts!!!");
   }
@@ -78,5 +86,12 @@ public class ConsoleIO {
     System.out.println("5: Move on to next day");
   }
 
-  public void print
+  public void printCrewStatus(ArrayList<CrewMember> crewList, int iCrewIndex) {
+    System.out.print(crewList.get(iCrewIndex).toString());
+  }
+
+  public void printShipStatus(Ship crewShip) {
+    System.out.print(crewShip.toString());
+  }
+
 }

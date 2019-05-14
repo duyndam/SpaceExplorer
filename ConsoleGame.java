@@ -5,70 +5,67 @@ import java.util.Scanner;
 
 public class ConsoleGame {
 
-	public void run()
-	{
+	public void run() {
 		Scanner inputScanner = new Scanner(System.in);
 		int amountCM = 0;
-	   	ArrayList<CrewMember> crewList = new ArrayList<>();
-	   	Ship crewShip = null;
-	   	String strName = "";
-	   	int iInputType = 0;
-	   	CrewMember.type inputType = CrewMember.type.PILOT;
-	   	boolean characterCreate = false;
-	   	boolean shipCreate = false;
-	   	boolean inputTypeCorrect = false;
-	   	boolean startAdventure = false;
-	   	do
-	   	{
-	   	 //CREW AMOUNT
-		   	 do
-		   	 {
+	  ArrayList<CrewMember> crewList = new ArrayList<>();
+	  Ship crewShip = null;
+	  String strName = "";
+	  int iInputType = 0;
+	  CrewMember.type inputType = CrewMember.type.PILOT;
+	  boolean characterCreate = false;
+	  boolean shipCreate = false;
+	  boolean inputTypeCorrect = false;
+	  boolean startAdventure = false;
+
+		ConsoleIO printer = new ConsoleIO();
+
+		 	do {
+				/**
+				 * Choose crew size
+				 */
+		   	 do {
 		   		 inputTypeCorrect = true;
-		   		 ConsoleIO.printCrewInit();
-		   		 try
-		   		 {
+		   		 printer.printCrewInit();
+		   		 try {
 		   			 amountCM = inputScanner.nextInt();
-		   		 }catch(InputMismatchException e)
-		   		 {
+		   		 }
+					 catch(InputMismatchException e) {
 		   			 inputTypeCorrect = false;
 		   			 inputScanner.nextLine();
 		   		 }
-		   	 }while((!inputTypeCorrect) || (amountCM < 2 || amountCM > 4));
+		   	 }
+				 while((!inputTypeCorrect) || (amountCM < 2 || amountCM > 4));
 
 		   	inputScanner.nextLine();
 		   	 //CREW CREATION
 		   	 crewList.clear();
-		   	 for(int iCrewIndex = 0; iCrewIndex < amountCM; iCrewIndex++)
-		   	 {
-		    	 do
-		    	 {
+		   	 for(int iCrewIndex = 0; iCrewIndex < amountCM; iCrewIndex++) {
+		    	 do {
 		    		 inputTypeCorrect = true;
 		    		 characterCreate = false;
-		    		 ConsoleIO.printCrewInstructions();
-		    		 try
-		    		 {
+		    		 printer.printCrewInstructions(iCrewIndex);
+		    		 try {
 		    			 strName = inputScanner.nextLine();
 		    			 iInputType = Integer.parseInt(inputScanner.nextLine());
 		    			 --iInputType;
 		    			 inputType = CrewMember.type.values()[iInputType];
-		    		 }catch(Exception e)
-		    		 {
+		    		 }
+						 catch(Exception e) {
 		    			 inputTypeCorrect = false;
 		    		 }
-		    		 if(inputTypeCorrect)
-		    		 {
-		    			 ConsoleIO.printAreYouSure();
+		    		 if(inputTypeCorrect) {
+		    			 printer.printAreYouSure(strName, inputType);
 		    			 String strCreation = inputScanner.nextLine();
-		    			 if(strCreation.equals("y"))
-		    			 {
+		    			 if(strCreation.equals("y")) {
 		    				 characterCreate = true;
 		    			 }
 		    		 }
-		    		 else
-		    		 {
-		    			 ConsoleIO.printCrewError();
+		    		 else {
+		    			 printer.printCrewError();
 		    		 }
-		    	 }while(!characterCreate);
+		    	 }
+					 while(!characterCreate);
 		    	 crewList.add(new CrewMember(strName,inputType));
 		   	 }
 
@@ -77,9 +74,9 @@ public class ConsoleGame {
 		   	 do
 		   	 {
 		   		shipCreate = false;
-		   		ConsoleIO.printShipCreate();
+		   		printer.printShipCreate();
 		   		strName = inputScanner.nextLine();
-					ConsoleIO.printShipConfirm();
+					printer.printShipConfirm(strName);
 		   		String strCreation = inputScanner.nextLine();
 		   		if(strCreation.equals("y"))
 	   			{
@@ -88,7 +85,7 @@ public class ConsoleGame {
 		   	 }while(!shipCreate);
 		   	crewShip = new Ship(strName);
 
-		   	ConsoleIO.printAdvConfirm();
+		   	printer.printAdvConfirm(crewList, crewShip);
 
 		   	String strCreation = inputScanner.nextLine();
 	   		if(strCreation.equals("y"))
@@ -98,11 +95,11 @@ public class ConsoleGame {
 	   	}while(!startAdventure);
 
 	   	Crew gameCrew = new Crew(crewList,crewShip);
-	   	ConsoleIO.printAdvStart();
+	   	printer.printAdvStart();
 	   	do
 	   	{
 	   		inputTypeCorrect = false;
-				ConsoleIO.printDailyMenu();
+				printer.printDailyMenu();
 		   	try
 	   		{
 	   			iInputType = inputScanner.nextInt();
@@ -121,17 +118,17 @@ public class ConsoleGame {
 		   	case 1:
 		   		for(int iCrewIndex = 0; iCrewIndex < crewList.size(); iCrewIndex++)
 		   		{
-		   			System.out.print(crewList.get(iCrewIndex).toString());
+		   			printer.printCrewStatus(crewList, iCrewIndex);
 		   		}
 		   		break;
 		   	case 2:
-		   		System.out.print(crewShip.toString());
+		   		printer.printShipStatus(crewShip);
 		   		break;
 		   	case 3:
 		   		do
 			   	{
 		   			inputTypeCorrect = false;
-			   		ConsoleIO.printOutpostMenu();
+			   		printer.printOutpostMenu();
 				   	try
 			   		{
 			   			iInputType = inputScanner.nextInt();
