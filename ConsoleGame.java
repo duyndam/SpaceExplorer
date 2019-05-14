@@ -3,14 +3,21 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
+
 public class ConsoleGame {
 
 	public void run() {
 		Scanner inputScanner = new Scanner(System.in);
 		int amountCM = 0;
-	  ArrayList<CrewMember> crewList = new ArrayList<>();
-	  Ship crewShip = null;
+	  ArrayList<CrewMember> crewMembers = new ArrayList<>();
+		Ship spaceShip = null;
 	  String strName = "";
+		Crew gameCrew = new Crew(crewMembers, spaceShip);
 	  int iInputType = 0;
 	  CrewMember.type inputType = CrewMember.type.PILOT;
 	  boolean characterCreate = false;
@@ -39,7 +46,7 @@ public class ConsoleGame {
 
 		   	inputScanner.nextLine();
 		   	 //CREW CREATION
-		   	 crewList.clear();
+		   	 //crewList.clear();
 		   	 for(int iCrewIndex = 0; iCrewIndex < amountCM; iCrewIndex++) {
 		    	 do {
 		    		 inputTypeCorrect = true;
@@ -66,82 +73,76 @@ public class ConsoleGame {
 		    		 }
 		    	 }
 					 while(!characterCreate);
-		    	 crewList.add(new CrewMember(strName,inputType));
+		    	 //crewList.add(new CrewMember(strName,inputType));
+					 gameCrew.addCrew(new CrewMember(strName,inputType));
 		   	 }
 
 		   	 //inputScanner.nextLine();
 		   	 //SHIP CREATION
-		   	 do
-		   	 {
+		   	 do {
 		   		shipCreate = false;
 		   		printer.printShipCreate();
 		   		strName = inputScanner.nextLine();
 					printer.printShipConfirm(strName);
 		   		String strCreation = inputScanner.nextLine();
-		   		if(strCreation.equals("y"))
-	   			{
+		   		if(strCreation.equals("y")) {
 		   			 shipCreate = true;
 	   			}
-		   	 }while(!shipCreate);
-		   	crewShip = new Ship(strName);
-
-		   	printer.printAdvConfirm(crewList, crewShip);
+		   	 }
+				while(!shipCreate);
+		   	spaceShip = new Ship(strName);
+				gameCrew.setShip(spaceShip);
+		   	printer.printAdvConfirm(gameCrew);
 
 		   	String strCreation = inputScanner.nextLine();
-	   		if(strCreation.equals("y"))
-   			{
+	   		if(strCreation.equals("y")) {
 	   			startAdventure = true;
    			}
-	   	}while(!startAdventure);
+	   	}
+			while(!startAdventure);
 
-	   	Crew gameCrew = new Crew(crewList,crewShip);
 	   	printer.printAdvStart();
-	   	do
-	   	{
+	   	do {
 	   		inputTypeCorrect = false;
 				printer.printDailyMenu();
-		   	try
-	   		{
+		   	try {
 	   			iInputType = inputScanner.nextInt();
-	   			if(iInputType >= 1 && iInputType <= 4)
-	   			{
+	   			if(iInputType >= 1 && iInputType <= 4) {
 	   				inputTypeCorrect = true;
 	   			}
-	   		}catch(Exception e)
-	   		{
+	   		}
+				catch(Exception e) {
 	   			inputTypeCorrect = false;
 	   			inputScanner.nextLine();
 	   		}
-	   	}while(!inputTypeCorrect);
-	   	switch(iInputType)
-	   	{
+	   	}
+			while(!inputTypeCorrect);
+	   	switch(iInputType) {
 		   	case 1:
-		   		for(int iCrewIndex = 0; iCrewIndex < crewList.size(); iCrewIndex++)
-		   		{
-		   			printer.printCrewStatus(crewList, iCrewIndex);
+		   		for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++) {
+		   			printer.printCrewStatus(gameCrew, iCrewIndex);
 		   		}
 		   		break;
 		   	case 2:
-		   		printer.printShipStatus(crewShip);
+		   		printer.printShipStatus(gameCrew);
 		   		break;
 		   	case 3:
-		   		do
-			   	{
+		   		do {
 		   			inputTypeCorrect = false;
+						Station outpost = new Station();
 			   		printer.printOutpostMenu();
-				   	try
-			   		{
+				   	try {
 			   			iInputType = inputScanner.nextInt();
-			   			if(iInputType >= 1 && iInputType <= 6)
-			   			{
+			   			if(iInputType >= 1 && iInputType <= 6) {
 			   				inputTypeCorrect = true;
 			   			}
-			   		}catch(Exception e)
-			   		{
+			   		}
+						catch(Exception e) {
 			   			inputTypeCorrect = false;
 			   			inputScanner.nextLine();
 			   		}
-			   	}while(!inputTypeCorrect);
+			   	}
+					while(!inputTypeCorrect);
 		   		break;
 		   	case 4:
 		   		break;

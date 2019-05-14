@@ -1,3 +1,9 @@
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
+
 public class Ship {
 
   private String name;
@@ -7,7 +13,7 @@ public class Ship {
     name = shipName;
     shield = 100;
   }
-  
+
   public Ship(String shipName, int shieldStartValue)
   {
 	  name = shipName;
@@ -20,7 +26,7 @@ public class Ship {
 
   //updated check to make sure the shield is at 0 or below before the ship counts as destroyed
   //also build in security that the ship can't get repaired over 100%
-  //also switched to boolean so the print will happen after the call 
+  //also switched to boolean so the print will happen after the call
   /* return:
    * true  - if ship was destroyed with update
    * false - if ship wasn't destroyed with update
@@ -34,7 +40,7 @@ public class Ship {
     {
     	shield += amount;
     }
-    
+
     if (shield <= 0) {
       return true;
     	//System.out.println("Ship destroyed :(");
@@ -47,17 +53,9 @@ public class Ship {
 
   public String toString() {
     String shipString = "--------------------\n";
-    shipString += "Shipname : " + name + "\n";
-    shipString += "Shield   : " + shield + "\n";
+    shipString += "Ship name : " + name + "\n";
+    shipString += "Shield    : " + shield + "\n";
     shipString += "--------------------\n";
     return shipString;
   }
-
-/*  public static void main(String[] args) {
-    Ship starShip = new Ship("Nautilus");
-    System.out.println(starShip.toString());
-    starShip.updateShield(-50);
-    starShip.updateShield(-50);
-  }
-*/
 }

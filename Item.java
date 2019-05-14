@@ -1,19 +1,22 @@
-
-
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
 
 public class Item {
 	private String m_Name = "Default";
 	private int m_BuyPrice = -1;
 	private int m_SellPrice = -1;
 	private int m_Value = -1;
-	
+
 	/**
 	 * @return the m_Name
 	 */
 	public String get_Name() {
 		return m_Name;
 	}
-	
+
 	/**
 	 * @param m_Name the m_Name to set
 	 */
@@ -62,10 +65,10 @@ public class Item {
 	public void set_Value(int m_Value) {
 		this.m_Value = m_Value;
 	}
-	
+
   public String toString() {
 	    String strItem =  m_Name + "|" + m_BuyPrice + "|" + m_SellPrice + "|" + m_Value;
 	    return strItem;
 	  }
-	
+
 }

@@ -52,13 +52,13 @@ public class ConsoleIO {
     System.out.println("You want to name your ship " + strName + "? (y/n)");
   }
 
-  public void printAdvConfirm(ArrayList<CrewMember> crewList, Ship crewShip) {
+  public void printAdvConfirm(Crew gameCrew) {
     System.out.println("This would be your crew:");
-    for(int iCrewIndex = 0; iCrewIndex < crewList.size(); iCrewIndex++)
+    /**for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++)
     {
-      System.out.print(crewList.get(iCrewIndex).toString());
-    }
-    System.out.print(crewShip.toString());
+      System.out.print(gameCrew.crewMembers.get(iCrewIndex).toString());
+    }*/
+    System.out.println(gameCrew.toString());
     System.out.println("Are you sure you want to start the adventure? (y/n)");
   }
 
@@ -86,12 +86,12 @@ public class ConsoleIO {
     System.out.println("5: Move on to next day");
   }
 
-  public void printCrewStatus(ArrayList<CrewMember> crewList, int iCrewIndex) {
-    System.out.print(crewList.get(iCrewIndex).toString());
+  public void printCrewStatus(Crew gameCrew, int iCrewIndex) {
+    System.out.print(gameCrew.crewMembers.get(iCrewIndex).toString());
   }
 
-  public void printShipStatus(Ship crewShip) {
-    System.out.print(crewShip.toString());
+  public void printShipStatus(Crew gameCrew) {
+    System.out.print(gameCrew.crewShip.toString());
   }
 
 }

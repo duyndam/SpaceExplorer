@@ -10,9 +10,8 @@ import java.util.Scanner;
 
 public class Crew {
 
-  private ArrayList<CrewMember> crewMembers;
-  private Ship crewShip;
-  private ArrayList<Item> crewItems;
+  public ArrayList<CrewMember> crewMembers;
+  public Ship crewShip;
 
   public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
     int money = 100;
@@ -20,41 +19,24 @@ public class Crew {
     crewShip = spaceShip;
   }
 
-  /**
-   * Establishes initial crew size
-   */
   public int crewSize() {
     return crewMembers.size();
   }
 
-  /**
-   * Adds a cosmonaut to the crew.
-   *
-   * @param cosmonaut cosmonaut to be added
-   * @return          true if successfully adds cosmonaut to crew, otherwise false
-   */
-  public boolean addCrew(CrewMember cosmonaut) {
-    if (crewMembers.size() < crewSize() && !crewMembers.contains(cosmonaut)) {
-      crewMembers.add(cosmonaut);
-      System.out.println(cosmonaut.getName() + " was added to the crew.");
-      return true;
-    }
-    else {
-      System.out.println("The ship is fully crewed.");
-      return false;
-    }
+  public void setShip(Ship vessel) {
+    crewShip = vessel;
   }
-
-  public String inventory() {
-    String stuff = "This is everything the crew has:";
-    return stuff;
+  
+  public void addCrew(CrewMember cosmonaut) {
+    crewMembers.add(cosmonaut);
   }
 
   public String toString() {
     String crewManifest = "";
     for (CrewMember cosmonaut: crewMembers) {
-      crewManifest += "\n" + cosmonaut.getName();
+      crewManifest += "\n" + cosmonaut.toString();
     }
+    crewManifest += crewShip.toString();
     return crewManifest;
   }
 }
