@@ -102,6 +102,11 @@ public class ConsoleGame {
 			while(!startAdventure);
 
 	   	printer.printAdvStart();
+			/**
+			 * MAIN GAME LOOP
+			 *
+			 * Print out daily menu with options, visit outposts and planets
+			 */
 	   	do {
 	   		inputTypeCorrect = false;
 				printer.printDailyMenu();
@@ -130,6 +135,7 @@ public class ConsoleGame {
 		   		do {
 		   			inputTypeCorrect = false;
 						Station outpost = new Station();
+						outpost.populateStation();
 			   		printer.printOutpostMenu();
 				   	try {
 			   			iInputType = inputScanner.nextInt();
@@ -145,6 +151,7 @@ public class ConsoleGame {
 					while(!inputTypeCorrect);
 		   		break;
 		   	case 4:
+					printer.printCrewActions();
 		   		break;
 	   		default:
 	   			break;

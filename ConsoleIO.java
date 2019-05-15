@@ -67,6 +67,7 @@ public class ConsoleIO {
   }
 
   public void printOutpostMenu() {
+    System.out.println("--- Remote Outpost ---");
     System.out.println("Outpost menu: ");
     System.out.println("1: Show objects for sale");
     System.out.println("2: Show own objects & money");
@@ -87,11 +88,21 @@ public class ConsoleIO {
   }
 
   public void printCrewStatus(Crew gameCrew, int iCrewIndex) {
-    System.out.print(gameCrew.crewMembers.get(iCrewIndex).toString());
+    System.out.println(gameCrew.crewMembers.get(iCrewIndex).toString());
   }
 
   public void printShipStatus(Crew gameCrew) {
-    System.out.print(gameCrew.crewShip.toString());
+    System.out.println(gameCrew.crewShip.toString());
+  }
+
+  public void printCrewActions() {
+    System.out.println("Potential Crew Actions:");
+    System.out.println("1: Pilot ship");
+    System.out.println("2: Eat food");
+    System.out.println("3: Use medkit");
+    System.out.println("4: Sleep");
+    System.out.println("5: Repair ship");
+    System.out.println("6: Visit nearby planet");
   }
 
 }

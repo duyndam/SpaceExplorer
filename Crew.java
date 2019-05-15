@@ -1,5 +1,5 @@
 // Import statements
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -26,7 +26,7 @@ public class Crew {
   public void setShip(Ship vessel) {
     crewShip = vessel;
   }
-  
+
   public void addCrew(CrewMember cosmonaut) {
     crewMembers.add(cosmonaut);
   }
@@ -34,7 +34,7 @@ public class Crew {
   public String toString() {
     String crewManifest = "";
     for (CrewMember cosmonaut: crewMembers) {
-      crewManifest += "\n" + cosmonaut.toString();
+      crewManifest += cosmonaut.toString();
     }
     crewManifest += crewShip.toString();
     return crewManifest;

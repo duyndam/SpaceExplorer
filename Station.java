@@ -30,6 +30,16 @@ public class Station {
 
   public Station() {
     wares = new ArrayList<>();
+  }
 
+  public void populateStation() {
+    for (int i = 0; i < numMed; i++) {
+      MedicalItem meds = new MedicalItem();
+      wares.add(meds);
+    }
+    for (int j = 0; j < numFood; j++) {
+      FoodItem food = new FoodItem();
+      wares.add(food);
+    }
   }
 }
