@@ -79,7 +79,8 @@ public class ConsoleIO {
   }
 
   public void printCrewInventory(Crew gameCrew) {
-    System.out.println("It works :)");
+    System.out.println("--- Items on board the " + gameCrew.crewShip.name + " ---");
+    System.out.println(gameCrew.cargoHold());
   }
 
   public void printDailyMenu() {

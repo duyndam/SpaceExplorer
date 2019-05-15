@@ -6,8 +6,8 @@
 
 public class Ship {
 
-  private String name;
-  private int shield;
+  public String name;
+  public int shield;
 
   public Ship(String shipName) {
     name = shipName;
