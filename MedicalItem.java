@@ -20,7 +20,7 @@ public class MedicalItem extends Item{
 		this.m_Type = m_Type;
 	}
 	 public String toString() {
-		    String strItem =  m_Type + super.toString();
+		    String strItem =  m_Type + " " + super.toString();
 		    return strItem;
 		  }
 

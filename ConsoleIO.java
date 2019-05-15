@@ -69,12 +69,17 @@ public class ConsoleIO {
   public void printOutpostMenu() {
     System.out.println("--- Remote Outpost ---");
     System.out.println("Outpost menu: ");
-    System.out.println("1: Show objects for sale");
-    System.out.println("2: Show own objects & money");
-    System.out.println("3: See objects prices");
-    System.out.println("4: See object attributes");
-    System.out.println("5: Open purchase menu");
-    System.out.println("6: Exit Outpost");
+    System.out.println("1: Show station inventory");
+    System.out.println("2: Show your inventory");
+    System.out.println("3: Exit Outpost");
+  }
+
+  public void printOutpostInventory(Station outpost) {
+    System.out.println(outpost.toString());
+  }
+
+  public void printCrewInventory(Crew gameCrew) {
+    System.out.println("It works :)");
   }
 
   public void printDailyMenu() {

@@ -122,6 +122,7 @@ public class ConsoleGame {
 	   		}
 	   	}
 			while(!inputTypeCorrect);
+			Station outpost = new Station();
 	   	switch(iInputType) {
 		   	case 1:
 		   		for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++) {
@@ -134,7 +135,6 @@ public class ConsoleGame {
 		   	case 3:
 		   		do {
 		   			inputTypeCorrect = false;
-						Station outpost = new Station();
 						outpost.populateStation();
 			   		printer.printOutpostMenu();
 				   	try {
@@ -149,6 +149,16 @@ public class ConsoleGame {
 			   		}
 			   	}
 					while(!inputTypeCorrect);
+					switch(iInputType) {
+						case 1:
+							printer.printOutpostInventory(outpost);
+							break;
+						case 2:
+							printer.printCrewInventory(gameCrew);
+							break;
+						case 3:
+							break;
+					}
 		   		break;
 		   	case 4:
 					printer.printCrewActions();

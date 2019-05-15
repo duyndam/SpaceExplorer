@@ -67,7 +67,7 @@ public class Item {
 	}
 
   public String toString() {
-	    String strItem =  m_Name + "|" + m_BuyPrice + "|" + m_SellPrice + "|" + m_Value;
+	    String strItem =  m_Name + " | " + m_BuyPrice + " | " + m_SellPrice + " | " + m_Value;
 	    return strItem;
 	  }
 

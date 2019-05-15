@@ -29,17 +29,27 @@ public class Station {
   ArrayList<Item> wares;
 
   public Station() {
+    numFood += 1;
+    numMed += 1;
     wares = new ArrayList<>();
   }
 
   public void populateStation() {
-    for (int i = 0; i < numMed; i++) {
+    for (int i = 0; i <= numMed; i++) {
       MedicalItem meds = new MedicalItem();
       wares.add(meds);
     }
-    for (int j = 0; j < numFood; j++) {
+    for (int j = 0; j <= numFood; j++) {
       FoodItem food = new FoodItem();
       wares.add(food);
     }
+  }
+
+  public String toString() {
+    String shopInventory = "";
+    for (Item product: wares) {
+      shopInventory += "\n" + product.toString();
+    }
+    return shopInventory;
   }
 }
