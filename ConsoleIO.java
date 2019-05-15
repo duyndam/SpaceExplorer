@@ -12,11 +12,11 @@ import java.util.Scanner;
 public class ConsoleIO {
 
   public static void printGameLength() {
-    System.out.println("How many days you wanna play this game?(3-10): ");
+    System.out.println("How many days do you want to play for? (3-10):");
   }
 
   public void printCrewInit() {
-    System.out.println("Choose the amount of crew members you would like(2-4): ");
+    System.out.println("Choose the amount of crew members you would like (2-4):");
   }
 
   public void printCrewInstructions(int iCrewIndex) {
@@ -25,18 +25,18 @@ public class ConsoleIO {
     System.out.println("First line : [name] e.g. Yuri");
     System.out.println("Second line: [type] e.g. 1");
     System.out.println("----------------------------------------------------------------------");
-    System.out.println("Types(1-6):");
-    System.out.println("1: Pilot - Reduces damage taken from asteroid belts");
-    System.out.println("2: Engineer - Repairs the ship more effectively");
-    System.out.println("3: Soldier - Decreases chance of alien attack");
-    System.out.println("4: Medical Officer - Decreases chance that space plague will spread");
-    System.out.println("5: Scavenger - Increases chance of finding ship parts");
-    System.out.println("6: Navigator - Decreases the chance of going through an asteroid belt");
+    System.out.println("Crew Specializations (You may choose more than one of each):");
+    System.out.println("1: PILOT - Reduces damage taken from asteroid belts");
+    System.out.println("2: ENGINEER - Repairs the ship more effectively");
+    System.out.println("3: SOLDIER - Decreases chance of an alien attack");
+    System.out.println("4: DOCTOR - Decreases chance of space plague spreading");
+    System.out.println("5: SCAVENGER - Increases chance of finding ship parts");
+    System.out.println("6: NAVIGATOR - Decreases the chance of going through an asteroid belt");
     System.out.println("----------------------------------------------------------------------");
   }
 
   public void printAreYouSure(String strName, CrewMember.type inputType) {
-    System.out.println("Are you sure you want to create the crew member: " + strName + " as a " + inputType + "? (y/n): ");
+    System.out.println("Are you sure you want to create the crew member: " + strName + " as a(n) " + inputType + "? (y/n): ");
   }
 
   public void printCrewError() {
