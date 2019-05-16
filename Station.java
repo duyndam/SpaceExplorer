@@ -1,5 +1,6 @@
 // Import statements
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -173,5 +174,5 @@ public class Station {
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;
-  }
+  }**/
 }
