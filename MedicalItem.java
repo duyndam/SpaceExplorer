@@ -1,8 +1,7 @@
 enum typeMedical
 {
 	HEALING,
-	CURES_SPACE_PLAGUE,
-	CURES_ASTEROID_INFECTION
+	CURES_SPACE_PLAGUE
 }
 public class MedicalItem extends Item{
 	private typeMedical m_Type = typeMedical.HEALING;
@@ -21,8 +20,8 @@ public class MedicalItem extends Item{
 		this.m_Type = m_Type;
 	}
 	 public String toString() {
-		    String strItem =  m_Type + super.toString();
+		    String strItem =  m_Type + " " + super.toString();
 		    return strItem;
 		  }
-	
+
 }

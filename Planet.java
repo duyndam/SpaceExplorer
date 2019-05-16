@@ -1,7 +1,21 @@
+// Import statements
+import java.util.ArrayList;
+import java.util.Random;
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
+
 public class Planet {
-  /* Player may visit a planet and find something randomly chosen from a list of options
+  
+  Random rand = new Random();
 
-  scavenger crew members have a higher chance of finding spaceship parts
+  private int luckyFind = rand.nextInt(5);
 
+  public Planet() {
+    name = "Europa";
+    climate = "Desert";
+  }
 
 }

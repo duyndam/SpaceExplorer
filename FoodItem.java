@@ -1,3 +1,9 @@
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
+
 enum typeFood
 {
 	MEAT,
@@ -24,10 +30,10 @@ public class FoodItem extends Item{
 	public void set_Type(typeFood m_Type) {
 		this.m_Type = m_Type;
 	}
-	
+
 	 public String toString() {
-		    String strItem =  m_Type + super.toString();
+		    String strItem =  m_Type + " " + super.toString();
 		    return strItem;
 		  }
-	
+
 }

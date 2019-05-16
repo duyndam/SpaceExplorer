@@ -1,5 +1,11 @@
+// Import statements
 import java.util.Scanner;
 
+/**
+ * @author      Royal Duyndam, Alex Siegmund
+ * @version     0.1.0
+ * @since       0.0.0
+ */
 
 public class StartGame {
 
@@ -8,71 +14,40 @@ public class StartGame {
 	public static int m_iGameScore = 0;
 	public static int m_iActualParts = 0;
 	public static int m_iActualDay = 1;
-	
-  /**Choose 2-4 crew members from the following classes:
-     - Engineer:
-       ~ Bonus to repair
-       ~ Passive buff to shields
-     - Pilot:
-       ~ Reduces chance of asteroid impact
-     - Soldier:
-       ~ Most health
-       ~ Intimidate: Reduces chance of aliens boarding
-     - Navigator:
-       ~
-     - Medical Officer:
-       ~ Able to heal crew members
-     - Scavenger:
-       ~ Increased chance of finding ship parts
 
+     public static void main(String[] args) {
 
-
-     Name each crew member
-
-     Name ship (create new Ship object):
-
-     Start adventure */
-     public static void main(String[] args) 
-     {    
-    	 
     	 String mode = "CONSOLE";
-    	 if(args.length == 1)
-    	 {
+    	 if(args.length == 1) {
     		 mode = args[0];
     	 }
-    	 
+
     	 Scanner inputDays = new Scanner(System.in);
     	 boolean inputCorrect = false;
-    	 do
-    	 {
+			 ConsoleIO printer = new ConsoleIO();
+    	 do {
     		 inputCorrect = false;
-    		 System.out.println("How many days you wanna play this game?(3-10): ");
-    		 try
-    		 {
+				 printer.printGameLength();
+    		 try {
     			 m_iDays = inputDays.nextInt();
     			 inputCorrect = true;
-    		 }catch(Exception e)
-    		 {
+    		 }
+				 catch(Exception e) {
     			 inputCorrect = false;
     			 inputDays.nextLine();
     		 }
-    		 
-    	 }while(m_iDays < 3 || m_iDays > 10 || inputCorrect == false);
-    	 
+    	 }
+			 while(m_iDays < 3 || m_iDays > 10 || inputCorrect == false);
+
     	 m_iParts = m_iDays * 2 / 3;
-    	 
-    	 
-    	 if(mode.equals("CONSOLE"))
-    	 {
+
+    	 if(mode.equals("CONSOLE")) {
     		 ConsoleGame spaceExplorer = new ConsoleGame();
     		 spaceExplorer.run();
     	 }
-    	 else
-    	 {
+    	 else {
     		 gui.StartFrame spaceExplorerGUI = new gui.StartFrame();
     		 spaceExplorerGUI.main(args);
     	 }
-    	 
      }
-
 }
