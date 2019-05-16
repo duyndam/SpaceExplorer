@@ -25,11 +25,6 @@ public class Station {
 	List<Item> availableItems;
 	
 	
-	public Station()
-	{
-		
-	}
-	
 	public String showOutpostMenue()
 	{
 		return null;
@@ -142,8 +137,8 @@ public class Station {
 		return strPurchase;
 	}
 	
-	/**
-    View objects, such as food and medical supplies that are for sale.
+	
+    //View objects, such as food and medical supplies that are for sale.
 
   Random rand = new Random();
 
@@ -174,5 +169,5 @@ public class Station {
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;
-  }**/
+  }
 }

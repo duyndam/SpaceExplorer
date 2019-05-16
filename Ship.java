@@ -6,8 +6,8 @@
 
 public class Ship {
 
-  public String name;
-  public int shield;
+  public String name;		//NOPE
+  public int shield;		//NOPE
 
   public Ship(String shipName) {
     name = shipName;
