@@ -160,7 +160,11 @@ public class ConsoleGame {
 							break;
 					}
 		   		break;
-		   	case 4:
+				case 4:
+					Planet body = new Planet();
+					printer.printPlanet(body);
+					break;
+		   	case 5:
 					printer.printCrewActions();
 		   		break;
 	   		default:

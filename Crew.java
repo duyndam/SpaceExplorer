@@ -13,9 +13,10 @@ public class Crew {
   public ArrayList<CrewMember> crewMembers;
   public ArrayList<Item> inventory = new ArrayList<>();
   public Ship crewShip;
+  public int money;
 
   public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
-    int money = 100;
+    money = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
   }
@@ -44,6 +45,7 @@ public class Crew {
     String cargo = "";
     for (Item thing: inventory) {
       cargo += thing.toString();
+      cargo += "Money: " + this.money;
     }
     return cargo;
   }

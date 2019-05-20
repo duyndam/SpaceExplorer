@@ -54,10 +54,6 @@ public class ConsoleIO {
 
   public void printAdvConfirm(Crew gameCrew) {
     System.out.println("This would be your crew:");
-    /**for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++)
-    {
-      System.out.print(gameCrew.crewMembers.get(iCrewIndex).toString());
-    }*/
     System.out.println(gameCrew.toString());
     System.out.println("Are you sure you want to start the adventure? (y/n)");
   }
@@ -83,14 +79,19 @@ public class ConsoleIO {
     System.out.println(gameCrew.cargoHold());
   }
 
+  public void printPlanet(Planet body) {
+    System.out.println(body.toString());
+  }
+
   public void printDailyMenu() {
     System.out.println("--- Day " + StartGame.m_iActualDay + " ---");
     System.out.println("Choose your action: ");
     System.out.println("1: Show crew status");
     System.out.println("2: Show spaceship status");
     System.out.println("3: Visit nearest outpost");
-    System.out.println("4: Do crew action");
-    System.out.println("5: Move on to next day");
+    System.out.println("4: Visit nearest planet");
+    System.out.println("5: Do crew action");
+    System.out.println("6: Move on to next day");
   }
 
   public void printCrewStatus(Crew gameCrew, int iCrewIndex) {
@@ -108,7 +109,6 @@ public class ConsoleIO {
     System.out.println("3: Use medkit");
     System.out.println("4: Sleep");
     System.out.println("5: Repair ship");
-    System.out.println("6: Visit nearby planet");
   }
 
 }

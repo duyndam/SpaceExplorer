@@ -13,7 +13,7 @@ public class CrewMember {
 		PILOT,
 		ENGINEER,
 		SOLDIER,
-		MEDICAL_OFFICER,
+		DOCTOR,
 		SCAVENGER,
 		NAVIGATOR
 	}

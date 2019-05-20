@@ -69,7 +69,7 @@ public class Item {
 	}
 
   public String toString() {
-	    String strItem =  m_Name + " | Buy: " + m_BuyPrice + " | Sell: " + m_SellPrice + " | Healing amount: " + m_Value;
+	    String strItem =  m_Name + " | Buy: " + m_BuyPrice + " | Sell: " + m_SellPrice + " | Attribute(s): " + m_Value;
 	    return strItem;
 	  }
 
