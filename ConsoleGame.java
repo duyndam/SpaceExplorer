@@ -187,19 +187,19 @@ public class ConsoleGame {
 					while(!inputTypeCorrect);
 					switch(iInputType) {
 						case 1:
-							System.out.println("You are a Pilot!");
+							printer.printPilotShip();
 							break;
 						case 2:
-							System.out.println("You eat a snack.");
+							printer.printEat();
 							break;
 						case 3:
-							System.out.println("You take some medicine.");
+							printer.printMeds();
 							break;
 						case 4:
-							System.out.println("Naptime...");
+							printer.printSleep();
 							break;
 						case 5:
-							System.out.println("You fix the ship.");
+							printer.printRepair();
 							break;
 						}
 		   		break;

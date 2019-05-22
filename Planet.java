@@ -11,7 +11,8 @@ public class Planet {
 
   private String name;
   private String climate;
-  private ArrayList things = new ArrayList<>();
+  private String found;
+  //private ArrayList things = new ArrayList<>();
 
   public Planet() {
     name = "Europa";

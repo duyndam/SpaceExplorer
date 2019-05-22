@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * ConsoleGame will call methods within this class when actions occur.
  *
- * When running the GUI version of the game, ConsoleIO is not used. 
+ * When running the GUI version of the game, ConsoleIO is not used.
  */
 public class ConsoleIO {
 
@@ -117,6 +117,26 @@ public class ConsoleIO {
     System.out.println("3: Use medkit");
     System.out.println("4: Sleep");
     System.out.println("5: Repair ship");
+  }
+
+  public void printPilotShip() {
+    System.out.println("You are a Pilot!");
+  }
+
+  public void printSleep() {
+    System.out.println("Naptime...");
+  }
+
+  public void printEat() {
+    System.out.println("You eat a snack.");
+  }
+
+  public void printMeds() {
+    System.out.println("You take some medicine.");
+  }
+
+  public void printRepair() {
+    System.out.println("You fix the ship.");
   }
 
 }

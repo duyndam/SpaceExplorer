@@ -22,7 +22,7 @@ public class StartGame {
 	public static int m_iActualDay = 1;
 
   public static void main(String[] args) {
-		String mode = "";
+		String mode = "CONSOLE";
 		if(args.length == 1) {
 			mode = args[0];
 		}
