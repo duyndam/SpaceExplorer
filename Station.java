@@ -9,27 +9,15 @@ import java.util.Random;
  * @since       0.0.0
  */
 
- /**
-   View objects, such as food and medical supplies that are for sale.
-
-   See the prices of each object.
-
-   See the attributes of the object
-
-   Enable the player to purchase objects such as food and medical supplies.
-
-   Be able to purchase multiple objects at a time without leaving the
-   outpost.
-   */
 public class Station {
 	List<Item> availableItems;
-	
-	
+
+
 	public String showOutpostMenue()
 	{
 		return null;
 	}
-	
+
 	public String showItemsForSale()
 	{
 		String strItemsForSale = "";
@@ -43,7 +31,7 @@ public class Station {
 		}
 		return strItemsForSale;
 	}
-	
+
 	public String showItemsAndMoneyPossesion(List<Item> crewPossesion, int crewMoney)
 	{
 		String strItemsPossesionAndMoney = "";
@@ -57,7 +45,7 @@ public class Station {
 		}
 		return strItemsPossesionAndMoney;
 	}
-	
+
 	public String showPrices(List<Item> crewPossesion)
 	{
 		String strPrices = "";
@@ -83,7 +71,7 @@ public class Station {
 		}
 		return strPrices;
 	}
-	
+
 	public String showAttributes(List<Item> crewPossesion)
 	{
 		String strAttributes = "";
@@ -109,13 +97,13 @@ public class Station {
 			}
 			else
 			{
-				
+
 			}
-			
+
 		}
 		return strAttributes;
 	}
-	
+
 	public String purchaseObject(List<Item> crewPossesion, int money, String name)
 	{
 		String strPurchase = "";
@@ -136,9 +124,6 @@ public class Station {
 		availableItems.remove(iRemoveIndex);
 		return strPurchase;
 	}
-	
-	
-    //View objects, such as food and medical supplies that are for sale.
 
   Random rand = new Random();
 

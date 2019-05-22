@@ -9,6 +9,14 @@ import java.util.Scanner;
  * @since       0.0.0
  */
 
+/**
+ * Essentially a printer. Prints all outputs from the ConsoleGame to the terminal
+ * window.
+ *
+ * ConsoleGame will call methods within this class when actions occur.
+ *
+ * When running the GUI version of the game, ConsoleIO is not used. 
+ */
 public class ConsoleIO {
 
   public static void printGameLength() {

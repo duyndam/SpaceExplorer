@@ -9,6 +9,11 @@ import java.util.Scanner;
  * @since       0.0.0
  */
 
+/**
+ * Console game environment.
+ *
+ * Includes all gameplay logic.
+ */
 public class ConsoleGame {
 
 	public void run() {

@@ -8,6 +8,15 @@ import java.util.Scanner;
  * @since       0.0.0
  */
 
+/**
+ * Crew class. This is where all player information is stored, including:
+ *
+ *  - List of crew members
+ *  - Ship object
+ *  - Crew inventory
+ *  - Crew money
+ *
+ */
 public class Crew {
 
   public ArrayList<CrewMember> crewMembers;
@@ -15,32 +24,74 @@ public class Crew {
   public Ship crewShip;
   public int money;
 
+  /**
+   * Initialises a new Crew object.
+   *
+   * During the setup phase of the game, the player adds crew members to the Crew.
+   *
+   * @param listOfMembers initially empty list of crewMembers, which is updated throughout gameplay.
+   * @param spaceShip     Ship object, named by the player, with default health.
+   */
   public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
     money = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
   }
 
+  /**
+   * How many crew members there are. Used rarely.
+   *
+   * @return      the size of the crew.
+   */
   public int crewSize() {
     return crewMembers.size();
   }
 
+  /**
+   * Assigns a ship to the crew.
+   *
+   * @param vessel ship to be assigned.
+   */
   public void setShip(Ship vessel) {
     crewShip = vessel;
   }
 
+  /**
+   * Adds a crew member to the crew. only called during the setup phase of the game.
+   *
+   * @param cosmonaut the crew member to be added.
+   */
   public void addCrew(CrewMember cosmonaut) {
     crewMembers.add(cosmonaut);
   }
 
+  /**
+   * Adds an item to the crew's inventory.
+   *
+   * Called whenever buying from stations or searching a planet.
+   *
+   * @param item item to be added to inventory.
+   */
   public void addItem(Item item) {
     inventory.add(item);
   }
 
+  /**
+   * Removes an item from the crew's inventory.
+   *
+   * Called whenever selling to stations, or during alien attacks.
+   *
+   * @param item item to be removed from inventory.
+   */
   public void removeItem(Item item) {
     inventory.remove(item);
   }
 
+  /**
+   * Show contents of the crew's inventory.
+   *
+   * @return      string detailing the contents of the cargo hold.
+   */
   public String cargoHold() {
     String cargo = "";
     for (Item thing: inventory) {
@@ -50,6 +101,11 @@ public class Crew {
     return cargo;
   }
 
+  /**
+   * Crew toString method.
+   *
+   * @return      string detailing all crew members and attributes, as well as ship attributes.
+   */
   public String toString() {
     String crewManifest = "";
     for (CrewMember cosmonaut: crewMembers) {

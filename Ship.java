@@ -32,21 +32,16 @@ public class Ship {
    * false - if ship wasn't destroyed with update
    */
   public boolean updateShield(int amount) {
-    if(amount > 0 && shield+amount > 100)
-    {
+    if(amount > 0 && shield+amount > 100) {
     	shield = 100;
     }
-    else
-    {
+    else {
     	shield += amount;
     }
-
     if (shield <= 0) {
       return true;
-    	//System.out.println("Ship destroyed :(");
     }
-    else
-    {
+    else {
     	return false;
     }
   }

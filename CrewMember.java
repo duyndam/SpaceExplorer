@@ -7,6 +7,21 @@ import java.util.ArrayList;
  * @since       0.0.0
  */
 
+/**
+ * Crew members which are added to the Crew class upon initialisation of the
+ * game instance.
+ *
+ * Each crew member has a Name, Job, Health level, Fatigue level, Hunger level,
+ * and State.
+ *
+ * Name                   : string of any length, has no effect on gameplay.
+ * Job                    : type, affects daily actions and random events.
+ * Health, Fatigue, Hunger: all integer values, increase/decrease when actions are
+ * performed or when time is advanced.
+ * State                  : type, either HEALTHY (default) or SPACE_PLAGUE_INFECTED,
+ * which causes health to decrease over time until removed by medicine.
+ *
+ */
 public class CrewMember {
 	static enum type
 	{
@@ -30,6 +45,14 @@ public class CrewMember {
   private int fatigue;
   private ArrayList<String> actionList;
 
+	/**
+	 * Initialise a new CrewMember with input name and role.
+	 *
+	 * Other attributes are default.
+	 *
+	 * @param crewName string input my player.
+	 * @param role     type chosen by player, stored as job.
+	 */
   public CrewMember(String crewName, type role) {
 	  name = crewName;
 	  job = role;
@@ -39,6 +62,16 @@ public class CrewMember {
 		state = status.HEALTHY;
 	  actionList = new ArrayList<>();
   }
+
+	/**
+	 * Initialise a new CrewMember with input name, role, and other attributes.
+	 *
+	 * @param role     type chosen by player, stored as job.
+	 * @param crewName string
+	 * @param vitality health value to initialise.
+	 * @param food     hunger value to initialise.
+	 * @param tired    fatigue value to initialise.
+	 */
   public CrewMember(type role, String crewName, int vitality, int food, int tired) {
     job = role;
     name = crewName;
@@ -49,6 +82,12 @@ public class CrewMember {
 	  actionList = new ArrayList<>();
   }
 
+	/**
+	 * Crew member does an action.
+	 *
+	 * Adds an action to the list of actions performed by this crew member on the
+	 * current day. This list is reset at the start of every new day.
+	 */
   public boolean doAction(String actionLogMessage)
   {
 	  if(actionList.size() < 2)
@@ -59,6 +98,15 @@ public class CrewMember {
 	  return false;
   }
 
+	/**
+	 * Crew member undoes an action.
+	 *
+	 * This method should never be called, since players cannot undo actions - it's
+	 * only here for redundancy.
+	 *
+	 * Removes an action from the list of actions performed by this crew member on the
+	 * current day. This list is reset at the start of every new day.
+	 */
   public boolean undoAction(String actionLogMessage)
   {
 	  if(actionList.size() == 0)
@@ -72,6 +120,11 @@ public class CrewMember {
 	  }
   }
 
+  /**
+	 * Getters and setters for crew member attributes.
+	 *
+	 * these are called primarily by the ConsoleGame class.
+	 */
   public void setName(String crewName) {
     name = crewName;
   }
@@ -104,20 +157,19 @@ public class CrewMember {
     return fatigue;
   }
 
-	/**
-	 * @return the state, e.g. healthy, infected
-	 */
 	public status getState() {
 		return state;
 	}
-	/**
-	 * @param state the state to set
-	 */
+
 	public void setState(status state) {
 		this.state = state;
 	}
 
-  //adapted toString function
+  /**
+	 * Crew member toString method
+	 *
+	 * @return      string containing all CrewMember attributes, nicely formatted.
+	 */
   public String toString() {
     String crewString = "--------------------\n";
     crewString += "Name    : " + name + "\n";
