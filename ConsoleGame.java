@@ -88,7 +88,7 @@ public class ConsoleGame {
 		   		if(strCreation.equals("y")) {
 		   			 shipCreate = true;
 	   			}
-		   	 }
+		   	}
 				while(!shipCreate);
 		   	spaceShip = new Ship(strName);
 				gameCrew.setShip(spaceShip);
@@ -98,15 +98,15 @@ public class ConsoleGame {
 	   		if(strCreation.equals("y")) {
 	   			startAdventure = true;
    			}
-	   	}
-			while(!startAdventure);
+	}
+	while(!startAdventure);
 
-	   	printer.printAdvStart();
-			/**
-			 * MAIN GAME LOOP
-			 *
-			 * Print out daily menu with options, visit outposts and planets
-			 */
+	printer.printAdvStart();
+	/**
+	 * MAIN GAME LOOP
+	 *
+	 * Print out daily menu with options, visit outposts and planets
+	 */
 	   	do {
 	   		inputTypeCorrect = false;
 				printer.printDailyMenu();
@@ -165,11 +165,43 @@ public class ConsoleGame {
 					printer.printPlanet(body);
 					break;
 		   	case 5:
-					printer.printCrewActions();
+					do {
+						inputTypeCorrect = false;
+						printer.printCrewActions();
+						try {
+							iInputType = inputScanner.nextInt();
+							if(iInputType >= 1 && iInputType <= 6) {
+								inputTypeCorrect = true;
+							}
+						}
+						catch(Exception e) {
+							inputTypeCorrect = false;
+							inputScanner.nextLine();
+						}
+					}
+					while(!inputTypeCorrect);
+					switch(iInputType) {
+						case 1:
+							System.out.println("You are a Pilot!");
+							break;
+						case 2:
+							System.out.println("You eat a snack.");
+							break;
+						case 3:
+							System.out.println("You take some medicine.");
+							break;
+						case 4:
+							System.out.println("Naptime...");
+							break;
+						case 5:
+							System.out.println("You fix the ship.");
+							break;
+						}
 		   		break;
-	   		default:
+	   		case 6:
 	   			break;
+				default:
+					break;
 	   	}
-
 	}
 }

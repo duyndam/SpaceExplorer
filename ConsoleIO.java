@@ -103,7 +103,7 @@ public class ConsoleIO {
   }
 
   public void printCrewActions() {
-    System.out.println("Potential Crew Actions:");
+    System.out.println("Potential Crew Actions: ");
     System.out.println("1: Pilot ship");
     System.out.println("2: Eat food");
     System.out.println("3: Use medkit");
