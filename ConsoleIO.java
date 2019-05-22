@@ -116,7 +116,24 @@ public class ConsoleIO {
     System.out.println("2: Eat food");
     System.out.println("3: Use medkit");
     System.out.println("4: Sleep");
-    System.out.println("5: Repair ship");
+    System.out.println("5: Visit planet");
+    System.out.println("6: Repair ship");
+    System.out.println("7: Exit");
+  }
+  
+  public void printCrewChooser(String strCrewMemberActionChooser)
+  {
+	  System.out.print(strCrewMemberActionChooser);
+  }
+  
+  public void printActionCrewMemberDoes(String strCrewMemberAction)
+  {
+	  System.out.println(strCrewMemberAction);
+  }
+  
+  public void printDoingActionAlready()
+  {
+	  System.out.println("This action can not be done!");
   }
 
 }
