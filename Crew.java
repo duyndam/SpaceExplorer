@@ -100,6 +100,17 @@ public class Crew {
     }
     return cargo;
   }
+  
+  public String createActionChoseString()
+  {
+	  String strActionString = "";
+	  for(int iCrewIndex = 0; iCrewIndex < crewMembers.size(); iCrewIndex++)
+	  {
+		  strActionString += iCrewIndex+1 + ": " + crewMembers.get(iCrewIndex).getName() +  crewMembers.get(iCrewIndex).getActionCountString() + "\n";
+	  }
+	  strActionString += crewMembers.size()+1 + ": Exit";
+	  return strActionString;
+  }
 
   /**
    * Crew toString method.
