@@ -12,6 +12,15 @@ import java.util.Random;
 public class Station {
 	List<Item> availableItems;
 
+	Random rand = new Random();
+
+  private int numMed = rand.nextInt(6);
+  private int numFood = rand.nextInt(6);
+
+	public Station() {
+    numFood += 1;
+    numMed += 1;
+  }
 
 	public String showOutpostMenue()
 	{
@@ -125,34 +134,23 @@ public class Station {
 		return strPurchase;
 	}
 
-  Random rand = new Random();
-
-  private int numMed = rand.nextInt(6);
-  private int numFood = rand.nextInt(6);
-  ArrayList<Item> wares;
-
-  public Station() {
-    numFood += 1;
-    numMed += 1;
-    wares = new ArrayList<>();
-  }
-
-  public void populateStation() {
+	public void populateStation() {
     for (int i = 0; i <= numMed; i++) {
       MedicalItem meds = new MedicalItem();
-      wares.add(meds);
+      availableItems.add(meds);
     }
     for (int j = 0; j <= numFood; j++) {
       FoodItem food = new FoodItem();
-      wares.add(food);
+      availableItems.add(food);
     }
   }
 
-  public String toString() {
+	public String toString() {
     String shopInventory = "";
-    for (Item product: wares) {
+    for (Item product: availableItems) {
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;
   }
+
 }
