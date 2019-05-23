@@ -17,8 +17,8 @@ enum typeMedical
  */
 public class MedicalItem extends Item{
 	private typeMedical m_Type = typeMedical.BANDAGE;
-	static final int AMOUNT_MED_ITEMS = 5;
-	
+	static final int AMOUNT_MED_ITEMS = 12;
+	static final int MEDIC_INDEX_MIN = 24;
 
 	/**
 	 * Getter method for medical Item
@@ -28,6 +28,7 @@ public class MedicalItem extends Item{
 	public typeMedical get_Type() {
 		return m_Type;
 	}
+	
 
 	/**
 	 * setter method for medical Item
@@ -51,7 +52,7 @@ public class MedicalItem extends Item{
 		  String lineIWant = br.readLine();
 			String details[] = lineIWant.split(",");
 			super.stringIfy(choice);
-			if (choice >= 24)
+			if (choice >= MEDIC_INDEX_MIN)
 			{
 				if (details[2].equals("0"))
 				{

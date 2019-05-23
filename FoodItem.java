@@ -17,7 +17,7 @@ enum typeFood
 }
 
 public class FoodItem extends Item{
-	static final int AMOUNT_FOOD_ITEMS = 10;
+	static final int AMOUNT_FOOD_ITEMS = 24;
 	
 	private typeFood m_Type = typeFood.MEAT;
 
