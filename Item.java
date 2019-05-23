@@ -1,3 +1,4 @@
+
 /**
  * @author      Alexander Siegmund, Royal Duyndam
  * @version     0.1.0
@@ -28,16 +29,18 @@ public class Item {
 	 * @return       the name of the item, e.g. "Energy Bar", "Pizza"
 	 */
 
-	public Item() {
-		
+	public void stringIfy(int choice) {
 	}
+
+	public Item() {
+	}
+
 	public String get_Name() {
 		return m_Name;
 	}
 
 	/**
-	 * name Setter method - primarily flavour text, though some items' names
-	 * have associated nutritional value.
+	 * name Setter method - just for flavour text
 	 *
 	 * @param m_Name the name to set
 	 */
@@ -99,8 +102,9 @@ public class Item {
 	 *
 	 * @return        string containg all attributes of the Item
 	 */
+
   public String toString() {
-	    String strItem =  m_Name + " | Buy: " + m_BuyPrice + " | Sell: " + m_SellPrice + " | Attribute(s): " + m_Value;
+	    String strItem =  "| Name: " + m_Name + " | Buy: " + m_BuyPrice + " | Sell: " + m_SellPrice + " | Attribute(s): " + m_Value;
 	    return strItem;
 	  }
 

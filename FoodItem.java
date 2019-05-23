@@ -1,3 +1,5 @@
+import java.io.*;
+
 /**
  * @author      Alexander Siegmund, Royal Duyndam
  * @version     0.1.0
@@ -41,7 +43,59 @@ public class FoodItem extends Item{
 	 * Food item toString method - calls to superclass toString method.
 	 *
 	 * @return       string containing the type of food, and associated attributes
-	 */      
+	 */
+
+	 public void stringIfy(int choice) {
+		 try {
+ 			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/SpaceExplorer-master/items.txt");
+ 		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+
+ 		  for(int i = 0; i < choice; ++i)
+ 		  {
+ 		    br.readLine();
+ 		  }
+
+ 		  String lineIWant = br.readLine();
+ 			String details[] = lineIWant.split(",");
+			super.stringIfy(choice);
+	 		if (choice < 24)
+	 		{
+	 			if (details[2].equals("0"))
+	 			{
+	 				this.set_Type(typeFood.MEAT);
+	 			}
+	 			else if (details[2].equals("1"))
+	 			{
+	 				this.set_Type(typeFood.FRUIT);
+	 			}
+				else if (details[2].equals("2"))
+	 			{
+	 				this.set_Type(typeFood.DAIRY);
+	 			}
+				else if (details[2].equals("3"))
+	 			{
+	 				this.set_Type(typeFood.POULTRY);
+	 			}
+				else if (details[2].equals("4"))
+	 			{
+	 				this.set_Type(typeFood.VEGETABLE);
+	 			}
+				else
+	 			{
+	 				this.set_Type(typeFood.LIQUID);
+	 			}
+	 		}
+			super.set_Name(details[1]);
+			super.set_BuyPrice(Integer.parseInt(details[3]));
+			super.set_SellPrice(Integer.parseInt(details[4]));
+			super.set_Value(Integer.parseInt(details[5]));
+		}
+		catch (IOException exception) {
+			System.out.println(":(");
+		}
+
+ 	}
+
 	 public String toString() {
 		    String strItem =  m_Type + " " + super.toString();
 		    return strItem;
