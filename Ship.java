@@ -9,11 +9,13 @@ public class Ship {
   private String name;
   private int shield;
   private int hull;
+  private int numPilots;
 
   public Ship(String shipName) {
     name = shipName;
     shield = 100;
     hull = 100;
+    numPilots = 0;
   }
 
   public Ship(String shipName, int shieldStartValue)
@@ -30,7 +32,10 @@ public class Ship {
     return hull;
   }
 
-  
+  public int getNumPilots() {
+    return numPilots;
+  }
+
   //updated check to make sure the shield is at 0 or below before the ship counts as destroyed
   //also build in security that the ship can't get repaired over 100%
   //also switched to boolean so the print will happen after the call
@@ -44,12 +49,6 @@ public class Ship {
     }
     else {
     	shield += amount;
-    }
-    if (shield <= 0) {
-      return true;
-    }
-    else {
-    	return false;
     }
   }
 
