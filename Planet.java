@@ -9,21 +9,20 @@ import java.util.Random;
 
 public class Planet {
 
-  private String name;
-  private String climate;
-  private String found;
-  //private ArrayList things = new ArrayList<>();
-
-  public Planet() {
-    name = "Europa";
-    climate = "desert";
-    found = "Thing";
-  }
+	static private final String[] PLANET_NAMES = {	"kolvupra", "dotruinia", "batruna",
+													"xagnoth", "seutis", "uebos",
+													"gidazuno", "moxuphun",	"dippe PJ06", 
+													"trars 3" };
+	Random randomGenerator = null;
+	public Planet()
+	{
+		randomGenerator = new Random();
+	}
 
   public String toString() {
     String body = "";
     body += "The planet " + this.name + " is a(n) " + this.climate + " planet.";
-    body += "\n You find a(n) " + this.found + ".";
+    //body += "\n You find a(n) " + this.found + ".";
     return body;
   }
 
