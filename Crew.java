@@ -33,7 +33,7 @@ public class Crew {
    * @param spaceShip     Ship object, named by the player, with default health.
    */
   public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
-	crewMoney = 100;
+	  crewMoney = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
   }
@@ -56,6 +56,9 @@ public class Crew {
     crewShip = vessel;
   }
 
+  public Ship getShip() {
+    return crewShip;
+  }
   /**
    * Adds a crew member to the crew. only called during the setup phase of the game.
    *
@@ -100,7 +103,7 @@ public class Crew {
     }
     return cargo;
   }
-  
+
   public String createActionChoseString()
   {
 	  String strActionString = "";

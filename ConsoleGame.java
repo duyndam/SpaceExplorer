@@ -14,10 +14,10 @@ import java.util.Scanner;
  *
  * Includes all gameplay logic.
  */
-public class ConsoleGame 
+public class ConsoleGame
 {
 
-	public void run() 
+	public void run()
 	{
 		Scanner inputScanner = new Scanner(System.in);
 		int amountCM = 0;
@@ -34,7 +34,7 @@ public class ConsoleGame
 
 		ConsoleIO printer = new ConsoleIO();
 
-		do 
+		do
 		{
 			/**
 			 * Choose crew size
@@ -43,7 +43,7 @@ public class ConsoleGame
 			{
 				inputTypeCorrect = true;
 		   		printer.printCrewInit();
-		   		try 
+		   		try
 		   		{
 		   			amountCM = inputScanner.nextInt();
 		   		}catch(InputMismatchException e)
@@ -69,15 +69,15 @@ public class ConsoleGame
 		    			iInputType = Integer.parseInt(inputScanner.nextLine());
 		    			--iInputType;
 		    			inputType = CrewMember.type.values()[iInputType];
-		    		}catch(Exception e) 
+		    		}catch(Exception e)
 		    		{
 		    			inputTypeCorrect = false;
 		    		}
-		    		if(inputTypeCorrect) 
+		    		if(inputTypeCorrect)
 		    		{
 		    			printer.printAreYouSure(strName, inputType);
 		    			String strCreation = inputScanner.nextLine();
-		    			if(strCreation.equals("y")) 
+		    			if(strCreation.equals("y"))
 		    			{
 		    				characterCreate = true;
 		    			}
@@ -100,12 +100,12 @@ public class ConsoleGame
 		   		strName = inputScanner.nextLine();
 				printer.printShipConfirm(strName);
 		   		String strCreation = inputScanner.nextLine();
-		   		if(strCreation.equals("y")) 
+		   		if(strCreation.equals("y"))
 		   		{
 		   			shipCreate = true;
 	   			}
 		   	}while(!shipCreate);
-		   	
+
 		   	spaceShip = new Ship(strName);
 			gameCrew.setShip(spaceShip);
 		   	printer.printAdvConfirm(gameCrew);
@@ -125,28 +125,28 @@ public class ConsoleGame
 		 */
 		do
 		{
-		
-	   	do 
+
+	   	do
 	   	{
 	   		inputTypeCorrect = false;
 			printer.printDailyMenu();
-		   	try 
+		   	try
 		   	{
 		   		iInputType = inputScanner.nextInt();
-	   			if(iInputType >= 1 && iInputType <= 6) 
+	   			if(iInputType >= 1 && iInputType <= 6)
 	   			{
 	   				inputTypeCorrect = true;
 	   			}
-	   		}catch(Exception e) 
+	   		}catch(Exception e)
 		   	{
 	   			inputTypeCorrect = false;
 	   			inputScanner.nextLine();
 	   		}
 	   	}while(!inputTypeCorrect);
-	   	
+
 		Station outpost = new Station();
-		
-	   	switch(iInputType) 
+
+	   	switch(iInputType)
 	   	{
 		   	case 1:
 		   		for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++)
@@ -163,21 +163,21 @@ public class ConsoleGame
 		   			inputTypeCorrect = false;
 		   			//outpost.populateStation();
 			   		printer.printOutpostMenu();
-				   	try 
+				   	try
 				   	{
 			   			iInputType = inputScanner.nextInt();
-			   			if(iInputType >= 1 && iInputType <= 6) 
+			   			if(iInputType >= 1 && iInputType <= 6)
 			   			{
 			   				inputTypeCorrect = true;
 			   			}
-			   		}catch(Exception e) 
+			   		}catch(Exception e)
 				   	{
 			   			inputTypeCorrect = false;
 			   			inputScanner.nextLine();
 			   		}
 			   	}while(!inputTypeCorrect);
-				
-		   		switch(iInputType) 
+
+		   		switch(iInputType)
 		   		{
 					case 1:
 						printer.printOutpostInventory(outpost);
@@ -194,19 +194,19 @@ public class ConsoleGame
 				printer.printPlanet(body);
 				break;
 		   	case 5:
-				do 
+				do
 				{
 					inputTypeCorrect = false;
-					
+
 					printer.printCrewChooser(gameCrew.createActionChoseString());
-					try 
+					try
 					{
 						iInputType = inputScanner.nextInt();
-						if(iInputType >= 1 && iInputType <= gameCrew.crewSize()+1) 
+						if(iInputType >= 1 && iInputType <= gameCrew.crewSize()+1)
 						{
 							inputTypeCorrect = true;
 						}
-					}catch(Exception e) 
+					}catch(Exception e)
 					{
 						inputTypeCorrect = false;
 						inputScanner.nextLine();
@@ -215,31 +215,32 @@ public class ConsoleGame
 				if(iInputType != gameCrew.crewSize()+1)
 				{
 					int chosenCrewMemberIndex = iInputType-1;
-					do 
+					do
 					{
 						inputTypeCorrect = false;
 						printer.printCrewActions();
-						try 
+						try
 						{
 							iInputType = inputScanner.nextInt();
-							if(iInputType >= 1 && iInputType <= 7) 
+							if(iInputType >= 1 && iInputType <= 7)
 							{
 								inputTypeCorrect = true;
 							}
-						}catch(Exception e) 
+						}catch(Exception e)
 						{
 							inputTypeCorrect = false;
 							inputScanner.nextLine();
 						}
 					}while(!inputTypeCorrect);
 					CrewMember chosenMember = gameCrew.crewMembers.get(chosenCrewMemberIndex);
-					switch(iInputType) 
+					switch(iInputType)
 					{
-						
+
 						case 1:
-							
+
 							if(chosenMember.doAction(CrewMember.PILOTING_ACTION))
 							{
+								gameCrew.crewShip.addPilot();
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.PILOTING_ACTION);
 							}
 							else
@@ -250,6 +251,7 @@ public class ConsoleGame
 						case 2:
 							if(chosenMember.doAction(CrewMember.EATING_ACTION))
 							{
+								chosenMember.updateHunger(-5));///PLACEHOLDER
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.EATING_ACTION);
 							}
 							else
@@ -260,6 +262,9 @@ public class ConsoleGame
 						case 3:
 							if(chosenMember.doAction(CrewMember.MEDICINE_ACTION))
 							{
+								MedicalItem test = new MedicalItem();
+								test.stringIfy();
+								chosenMember.updateHealth(5)
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.MEDICINE_ACTION);
 							}
 							else
@@ -270,6 +275,7 @@ public class ConsoleGame
 						case 4:
 							if(chosenMember.doAction(CrewMember.SLEEPING_ACTION))
 							{
+								chosenMember.updateFatigue(-25);
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.SLEEPING_ACTION);
 							}
 							else
@@ -290,6 +296,14 @@ public class ConsoleGame
 						case 6:
 							if(chosenMember.doAction(CrewMember.REPAIR_ACTION))
 							{
+								if (chosenMember.getType() == CrewMember.type.ENGINEER)
+								{
+									gameCrew.crewShip.update(25);
+								}
+								else
+								{
+									gameCrew.crewShip.update(10);
+								}
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.REPAIR_ACTION);
 							}
 							else

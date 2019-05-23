@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * ConsoleGame will call methods within this class when actions occur.
  *
- * When running the GUI version of the game, ConsoleIO is not used. 
+ * When running the GUI version of the game, ConsoleIO is not used.
  */
 public class ConsoleIO {
 
@@ -83,7 +83,7 @@ public class ConsoleIO {
   }
 
   public void printCrewInventory(Crew gameCrew) {
-    System.out.println("--- Items on board the " + gameCrew.crewShip.name + " ---");
+    System.out.println("--- Items on board the " + gameCrew.crewShip.getName() + " ---");
     System.out.println(gameCrew.cargoHold());
   }
 
@@ -120,17 +120,17 @@ public class ConsoleIO {
     System.out.println("6: Repair ship");
     System.out.println("7: Exit");
   }
-  
+
   public void printCrewChooser(String strCrewMemberActionChooser)
   {
 	  System.out.print(strCrewMemberActionChooser);
   }
-  
+
   public void printActionCrewMemberDoes(String strCrewMemberAction)
   {
 	  System.out.println(strCrewMemberAction);
   }
-  
+
   public void printDoingActionAlready()
   {
 	  System.out.println("This action can not be done!");

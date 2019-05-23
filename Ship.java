@@ -10,6 +10,7 @@ public class Ship {
   private int shield;
   private int hull;
   private int numPilots;
+  private final int MAX_PILOTS = 2;
 
   public Ship(String shipName) {
     name = shipName;
@@ -24,6 +25,10 @@ public class Ship {
 	  shield = shieldStartValue;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public int getShield() {
     return shield;
   }
@@ -36,35 +41,42 @@ public class Ship {
     return numPilots;
   }
 
-  //updated check to make sure the shield is at 0 or below before the ship counts as destroyed
-  //also build in security that the ship can't get repaired over 100%
-  //also switched to boolean so the print will happen after the call
-  /* return:
-   * true  - if ship was destroyed with update
-   * false - if ship wasn't destroyed with update
-   */
-  public boolean updateShield(int amount) {
-    if(amount > 0 && shield+amount > 100) {
-    	shield = 100;
+  public boolean addPilot() {
+    if (numPilots >= MAX_PILOTS) {
+      return false;
     }
     else {
-    	shield += amount;
-    }
-  }
-
-  public boolean updateHull(int amount) {
-    if(amount > 0 && hull+amount > 100) {
-    	hull = 100;
-    }
-    else {
-    	hull += amount;
-    }
-    if (hull <= 0) {
+      numPilots += 1;
       return true;
     }
-    else {
-    	return false;
+
+  }
+
+  public boolean update(int amount) {
+    if(shield > 0) {
+      if(amount > 0 && shield+amount > 100) {
+      	shield = 100;
+      }
+      else {
+      	shield += amount;
+      }
     }
+    else {
+      if(amount > 0 && hull+amount > 100) {
+      	hull = 100;
+      }
+      else {
+      	hull += amount;
+      }
+      if (hull <= 0) {
+        return true;
+      }
+      else {
+      	return false;
+      }
+
+    }
+    return false;
   }
 
   public String toString() {
@@ -72,6 +84,7 @@ public class Ship {
     shipString += "Ship name : " + name + "\n";
     shipString += "Shield    : " + shield + "\n";
     shipString += "Hull      : " + hull + "\n";
+    shipString += "Piloted by: " + numPilots + " out of " + MAX_PILOTS + "\n";
     shipString += "--------------------\n";
     return shipString;
   }

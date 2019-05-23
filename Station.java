@@ -15,7 +15,7 @@ public class Station {
 
 	private final int MAX_NUMBER_FOOD_ITEMS = 2;
 	private final int MIN_NUMBER_FOOD_ITEMS = 8;
-	
+
 	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
 	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
@@ -151,12 +151,13 @@ public class Station {
 		crewPossesion.remove(iRemoveIndex);
 		return strPurchase;
 	}
-  
 
-  public Station() 
-  {
-	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS;
-	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS;
+
+  public Station()
+	{
+		randomGenerator = new Random();
+	int numMed = randomGenerator.nextInt((MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS);
+	int numFood = randomGenerator.nextInt((MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS);
 	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
 	{
 		//TODO implement random MedItem read

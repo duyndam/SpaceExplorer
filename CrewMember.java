@@ -30,7 +30,7 @@ public class CrewMember {
 	static final String SLEEPING_ACTION = "is sleeping";
 	static final String VISIT_PLANET_ACTION = "is visiting a planet";
 	static final String REPAIR_ACTION   = "is repairing the ship";
-	
+
 	static enum type
 	{
 		PILOT,
@@ -145,25 +145,65 @@ public class CrewMember {
     return name;
   }
 
-  public void updateHealth(int amount) {
-    health += amount;
-  }
+	public boolean updateHealth(int amount) {
+      if(amount > 0 && health+amount > 100) {
+      	health = 100;
+      }
+      else {
+      	health += amount;
+      }
+      if (health <= 0) {
+        return true;
+      }
+      else {
+      	return false;
+      }
+    }
 
   public int getHealth() {
     return health;
   }
 
-  public void updateHunger(int amount) {
-    hunger += amount;
-  }
+	public boolean updateHunger(int amount) {
+			if(amount > 0 && hunger + amount > 100)
+			{
+				hunger = 100;
+				return true;
+			}
+			else if (amount < 0 && hunger + amount < 0)
+			{
+				hunger = 0;
+				return false;
+			}
+			else
+			{
+				hunger += amount;
+				return false;
+			}
+		}
 
   public int getHunger() {
     return hunger;
   }
 
-  public void updateFatigue(int amount) {
-    fatigue += amount;
-  }
+	public boolean updateFatigue(int amount) {
+		if(amount > 0 && fatigue + amount > 100)
+		{
+			fatigue = 100;
+			return true;
+		}
+		else if (amount < 0 && fatigue + amount < 0)
+		{
+			fatigue = 0;
+			return false;
+		}
+		else
+		{
+			fatigue += amount;
+			return false;
+		}
+	}
+
 
   public int getFatigue() {
     return fatigue;
@@ -173,10 +213,14 @@ public class CrewMember {
 		return state;
 	}
 
+	public type getType() {
+		return job;
+	}
+
 	public void setState(status state) {
 		this.state = state;
 	}
-	
+
 	public String getActionCountString()
 	{
 		String strActionCountString = "";
