@@ -131,6 +131,10 @@ public class CrewMember {
 	  }
   }
 
+	public void clearActions() {
+		actionList.clear();
+	}
+
   /**
 	 * Getters and setters for crew member attributes.
 	 *

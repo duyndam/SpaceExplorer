@@ -110,7 +110,7 @@ public class Station {
 		return strAttributes;
 	}
 
-	public String purchaseObject(List<Item> crewPossesion, int money, String name)
+	/**public String purchaseObject(List<Item> crewPossesion, int money, String name)
 	{
 		String strPurchase = "";
 		Item indexItem = null;
@@ -150,7 +150,7 @@ public class Station {
 		}
 		crewPossesion.remove(iRemoveIndex);
 		return strPurchase;
-	}
+	}*/
 
 
   public Station()

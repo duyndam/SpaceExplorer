@@ -64,6 +64,36 @@ public class Crew
   {
     return crewShip;
   }
+
+  public boolean addMoney(int amount) {
+    if(amount < 0 && crewMoney + amount < 0)
+    {
+      crewMoney = 0;
+      return false;
+    }
+    else
+    {
+      crewMoney += amount;
+      return true;
+    }
+  }
+
+  public boolean removeMoney(int amount) {
+    if(amount < 0 && crewMoney + amount < 0)
+    {
+      crewMoney = 0;
+      return false;
+    }
+    else
+    {
+      crewMoney -= amount;
+      return true;
+    }
+  }
+
+  public int getMoney() {
+    return crewMoney;
+  }
   /**
    * Adds a crew member to the crew. only called during the setup phase of the game.
    *
@@ -153,6 +183,8 @@ public class Crew
       crewManifest += cosmonaut.toString();
     }
     crewManifest += crewShip.toString();
+    crewManifest += "--------------------";
+    crewManifest += "\n Money: " + crewMoney;
     return crewManifest;
   }
 }

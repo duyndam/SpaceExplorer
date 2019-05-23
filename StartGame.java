@@ -21,6 +21,7 @@ public class StartGame {
 	public static int m_iActualParts = 0;
 	public static int m_iActualDay = 1;
 	public static boolean m_bEndCondition = false;
+	public static ConsoleIO printer = new ConsoleIO();
 
   public static void main(String[] args) {
 		String mode = "CONSOLE";
@@ -32,7 +33,7 @@ public class StartGame {
 		boolean inputCorrect = false;
 		do {
 			inputCorrect = false;
-			System.out.println("How many days you wanna play this game?(3-10): ");
+			printer.printGameLength();
 			try {
 				m_iDays = inputDays.nextInt();
 				inputCorrect = true;

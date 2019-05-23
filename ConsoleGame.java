@@ -28,6 +28,7 @@ public class ConsoleGame
 		String strName = "";
 		Crew gameCrew = new Crew(crewMembers, spaceShip);
 		int iInputType = 0;
+
 		CrewMember.type inputType = CrewMember.type.PILOT;
 		boolean characterCreate = false;
 		boolean shipCreate = false;
@@ -181,7 +182,7 @@ public class ConsoleGame
 				   	try
 				   	{
 			   			iInputType = inputScanner.nextInt();
-			   			if(iInputType >= 1 && iInputType <= 6)
+			   			if(iInputType >= 1 && iInputType <= 3)
 			   			{
 			   				inputTypeCorrect = true;
 			   			}
@@ -192,18 +193,83 @@ public class ConsoleGame
 			   		}
 			   	}while(!inputTypeCorrect);
 
-		   		switch(iInputType)
-		   		{
-					case 1:
-						printer.printOutpostInventory(actualOutpost);
+						int shopInput = 0;
+						boolean leave = false;
+						switch(shopInput)
+			   			{
+								case 1:
+									do
+									{
+										inputTypeCorrect = false;
+
+										printer.printOutpostInventory(actualOutpost);
+										try
+										{
+											shopInput = inputScanner.nextInt();
+											if(shopInput >= 1 && shopInput <= actualOutpost.availableItems.size()+1)
+											{
+												inputTypeCorrect = true;
+											}
+										}catch(Exception e)
+										{
+											inputTypeCorrect = false;
+											inputScanner.nextLine();
+										}
+									}while(!inputTypeCorrect);
+
+									if (shopInput >= actualOutpost.availableItems.size()+1)
+									{
+										leave = true;
+									}
+									Item item = actualOutpost.availableItems.get(shopInput-1);
+									if (gameCrew.getMoney() >= item.get_BuyPrice())
+									{
+										actualOutpost.availableItems.remove(item);
+										gameCrew.inventory.add(item);
+										gameCrew.removeMoney(item.get_BuyPrice());
+										printer.printBuy(item);
+									}
+									else
+									{
+										printer.printDoingActionAlready();
+									}
+									break;
+							case 2:
+								do
+								{
+									inputTypeCorrect = false;
+									printer.printCrewInventory(gameCrew);
+									try
+									{
+										shopInput = inputScanner.nextInt();
+										if(shopInput >= 1 && shopInput <= actualOutpost.availableItems.size()+1)
+										{
+										inputTypeCorrect = true;
+										}
+									}catch(Exception e)
+									{
+										inputTypeCorrect = false;
+										inputScanner.nextLine();
+									}
+								}while(!inputTypeCorrect);
+
+								if (shopInput >= actualOutpost.availableItems.size()+1)
+								{
+									leave = true;
+								}
+								else
+								{
+									item = gameCrew.inventory.get(shopInput-1);
+									gameCrew.inventory.remove(item);
+									actualOutpost.availableItems.add(item);
+									gameCrew.addMoney(item.get_SellPrice());
+									printer.printSell(item);
+								}
+									break;
+								case 3:
+									break;
+						}
 						break;
-					case 2:
-						printer.printCrewInventory(gameCrew);
-						break;
-					case 3:
-						break;
-				}
-		   		break;
 		   	case 4:
 				do
 				{
@@ -352,8 +418,10 @@ public class ConsoleGame
 						//GENERATE NEW PLANET
 					}
 
+					//RESET CREW ACTIONS AND UPDATE FATIGUE/HUNGER
 					for (CrewMember cosmonaut: gameCrew.crewMembers)
 					{
+						cosmonaut.clearActions();
 						cosmonaut.updateFatigue(10);
 						cosmonaut.updateHunger(10);
 					}
