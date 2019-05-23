@@ -22,6 +22,12 @@ public class StartGame {
 	public static int m_iActualDay = 1;
 	public static boolean m_bEndCondition = false;
 	public static ConsoleIO printer = new ConsoleIO();
+	
+	public static String m_stringInputGUI = "";
+	public static boolean m_stringInputReadyGUI = false;
+	
+	public static String m_stringInputLogic = "";
+	public static boolean m_stringInputReadyLogic = false;
 
   public static void main(String[] args) {
 		String mode = "CONSOLE";
