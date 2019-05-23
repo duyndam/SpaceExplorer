@@ -6,12 +6,14 @@
 
 public class Ship {
 
-  public String name;		//NOPE
-  public int shield;		//NOPE
+  private String name;
+  private int shield;
+  private int hull;
 
   public Ship(String shipName) {
     name = shipName;
     shield = 100;
+    hull = 100;
   }
 
   public Ship(String shipName, int shieldStartValue)
@@ -24,6 +26,11 @@ public class Ship {
     return shield;
   }
 
+  public int getHull() {
+    return hull;
+  }
+
+  
   //updated check to make sure the shield is at 0 or below before the ship counts as destroyed
   //also build in security that the ship can't get repaired over 100%
   //also switched to boolean so the print will happen after the call
@@ -46,10 +53,26 @@ public class Ship {
     }
   }
 
+  public boolean updateHull(int amount) {
+    if(amount > 0 && hull+amount > 100) {
+    	hull = 100;
+    }
+    else {
+    	hull += amount;
+    }
+    if (hull <= 0) {
+      return true;
+    }
+    else {
+    	return false;
+    }
+  }
+
   public String toString() {
     String shipString = "--------------------\n";
     shipString += "Ship name : " + name + "\n";
     shipString += "Shield    : " + shield + "\n";
+    shipString += "Hull      : " + hull + "\n";
     shipString += "--------------------\n";
     return shipString;
   }
