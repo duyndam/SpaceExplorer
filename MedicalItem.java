@@ -1,6 +1,7 @@
 enum typeMedical
 {
-	HEALING,
+	BANDAGE,
+	PAINKILLER,
 	CURES_SPACE_PLAGUE
 }
 
@@ -19,7 +20,7 @@ public class MedicalItem extends Item{
 	/**
 	 * Getter method for medical Item
 	 *
-	 * @return the type of item, e.g. Healing, anti-space plague medicine
+	 * @return the type of item, e.g. anti-space plague medicine
 	 */
 	public typeMedical get_Type() {
 		return m_Type;
@@ -28,7 +29,7 @@ public class MedicalItem extends Item{
 	/**
 	 * setter method for medical Item
 	 *
-	 * @param the type of item, e.g. Healing, anti-space plague medicine
+	 * @param the type of item, e.g. anti-space plague medicine
 	 */
 	public void set_Type(typeMedical m_Type) {
 		this.m_Type = m_Type;

@@ -27,6 +27,10 @@ public class Item {
 	 *
 	 * @return       the name of the item, e.g. "Energy Bar", "Pizza"
 	 */
+
+	public Item() {
+		
+	}
 	public String get_Name() {
 		return m_Name;
 	}

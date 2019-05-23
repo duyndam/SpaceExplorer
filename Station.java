@@ -19,6 +19,14 @@ public class Station {
 	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
 	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
+  private int numMed = rand.nextInt(6);
+  private int numFood = rand.nextInt(6);
+
+	public Station() {
+    numFood += 1;
+    numMed += 1;
+  }
+
 	public String showOutpostMenue()
 	{
 		return null;
@@ -163,11 +171,12 @@ public class Station {
 	//TODO implement random FoodItem read
   }
 
-  public String toString() {
+	public String toString() {
     String shopInventory = "";
     for (Item product: availableItems) {
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;
   }
+
 }

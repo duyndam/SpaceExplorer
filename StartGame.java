@@ -20,8 +20,7 @@ public class StartGame {
 	public static int m_iGameScore = 0;
 	public static int m_iActualParts = 0;
 	public static int m_iActualDay = 1;
-	public static boolean m_bEndCondition = false;
-	
+
   public static void main(String[] args) {
 		String mode = "CONSOLE";
 		if(args.length == 1) {

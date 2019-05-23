@@ -88,31 +88,6 @@ public class Crew {
   }
 
   /**
-   * Show contents of the crew's inventory.
-   *
-   * @return      string detailing the contents of the cargo hold.
-   */
-  public String cargoHold() {
-    String cargo = "";
-    for (Item thing: inventory) {
-      cargo += thing.toString();
-      cargo += "Money: " + this.money;
-    }
-    return cargo;
-  }
-  
-  public String createActionChoseString()
-  {
-	  String strActionString = "";
-	  for(int iCrewIndex = 0; iCrewIndex < crewMembers.size(); iCrewIndex++)
-	  {
-		  strActionString += iCrewIndex+1 + ": " + crewMembers.get(iCrewIndex).getName() +  crewMembers.get(iCrewIndex).getActionCountString() + "\n";
-	  }
-	  strActionString += crewMembers.size()+1 + ": Exit";
-	  return strActionString;
-  }
-
-  /**
    * Crew toString method.
    *
    * @return      string detailing all crew members and attributes, as well as ship attributes.

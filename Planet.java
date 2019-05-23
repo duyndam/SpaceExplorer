@@ -11,18 +11,19 @@ public class Planet {
 
   private String name;
   private String climate;
-  private ArrayList things = new ArrayList<>();
+  private String found;
+  //private ArrayList things = new ArrayList<>();
 
   public Planet() {
     name = "Europa";
     climate = "desert";
-    //found = "Thing";
+    found = "Thing";
   }
 
   public String toString() {
     String body = "";
     body += "The planet " + this.name + " is a(n) " + this.climate + " planet.";
-    //body += "\n You find a(n) " + this.found + ".";
+    body += "\n You find a(n) " + this.found + ".";
     return body;
   }
 
