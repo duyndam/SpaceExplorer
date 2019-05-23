@@ -1,3 +1,6 @@
+import java.io.*;
+
+
 enum typeMedical
 {
 	BANDAGE,
@@ -6,14 +9,14 @@ enum typeMedical
 }
 
 /**
- * Subclass that extends the generalized Item class. Includes two types of
- * item, one that heals damage to crew health, and one that cures a crew member
+ * Subclass that extends the generalized Item class. Includes three types of
+ * item, two that heal damage to crew health, and one that cures a crew member
  * of space plague.
  *
  * Actual amounts healed vary based on the item's "m_value"
  */
 public class MedicalItem extends Item{
-	private typeMedical m_Type = typeMedical.HEALING;
+	private typeMedical m_Type = typeMedical.BANDAGE;
 
 	/**
 	 * Getter method for medical Item
@@ -31,6 +34,45 @@ public class MedicalItem extends Item{
 	 */
 	public void set_Type(typeMedical m_Type) {
 		this.m_Type = m_Type;
+	}
+
+	public void stringIfy(int choice) {
+		try {
+			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/SpaceExplorer-master/items.txt");
+		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+
+		  for(int i = 0; i < choice; ++i)
+		  {
+		    br.readLine();
+		  }
+
+		  String lineIWant = br.readLine();
+			String details[] = lineIWant.split(",");
+			super.stringIfy(choice);
+			if (choice >= 24)
+			{
+				if (details[2].equals("0"))
+				{
+					this.set_Type(typeMedical.BANDAGE);
+				}
+				else if (details[2].equals("1"))
+				{
+					this.set_Type(typeMedical.PAINKILLER);
+				}
+				else
+				{
+					this.set_Type(typeMedical.CURES_SPACE_PLAGUE);
+				}
+			}
+			super.set_Name(details[1]);
+			super.set_BuyPrice(Integer.parseInt(details[3]));
+			super.set_SellPrice(Integer.parseInt(details[4]));
+			super.set_Value(Integer.parseInt(details[5]));
+		}
+		catch (IOException exception) {
+			System.out.println(":(");
+		}
+
 	}
 	 public String toString() {
 		    String strItem =  m_Type + " " + super.toString();
