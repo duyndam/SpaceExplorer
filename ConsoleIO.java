@@ -22,12 +22,12 @@ public class ConsoleIO
 
   public static void printGameLength()
   {
-    System.out.println("[ How many days do you want to play for? (3-10)");
+    System.out.println("[ How many days do you want to play for? (3-10) ]");
   }
 
   public void printCrewInit()
   {
-    System.out.println("[ Choose the amount of crew members you would like (2-4)");
+    System.out.println("[ Choose the number of crew members you would like (2-4) ]");
   }
 
   public void printCrewInstructions(int iCrewIndex)
@@ -50,35 +50,35 @@ public class ConsoleIO
 
   public void printAreYouSure(String strName, CrewMember.type inputType)
   {
-    System.out.println("[ Are you sure you want to create the crew member: " + strName + " as a(n) " + inputType + "? (y/n): ");
+    System.out.println("[ Are you sure you want to create the crew member: " + strName + " as a(n) " + inputType + "? (y/n) ]");
   }
 
   public void printCrewError()
   {
-    System.out.println("[ That is not a valid crew type.");
+    System.out.println("[ That is not a valid crew type. ]");
   }
 
   public void printShipCreate()
   {
     System.out.println("-------------------------- Creation of Ship --------------------------");
-    System.out.println("[ Enter a name for your ship: ");
+    System.out.println("[ Enter a name for your ship. ]");
   }
 
   public void printShipConfirm(String strName)
   {
-    System.out.println("[ Do you want to name your ship " + strName + "? (y/n)");
+    System.out.println("[ Do you want to name your ship " + strName + "? (y/n) ]");
   }
 
   public void printAdvConfirm(Crew gameCrew)
   {
     System.out.println("--- This would be your crew ---");
     System.out.println(gameCrew.toString());
-    System.out.println("[ Are you sure you want to start the adventure? (y/n)");
+    System.out.println("[ Are you sure you want to start the adventure? (y/n) ]");
   }
 
   public void printAdvStart()
   {
-    System.out.println("[ The adventure begins!");
+    System.out.println("[ The adventure begins! ]" );
   }
 
   public void printOutpostMenu()
@@ -92,7 +92,7 @@ public class ConsoleIO
 
   public void printOutpostInventory(Station outpost)
   {
-    System.out.println(outpost.showItemsForSale());
+    System.out.println(outpost.toString());
   }
 
   public void printCrewInventory(Crew gameCrew)
@@ -117,7 +117,7 @@ public class ConsoleIO
     System.out.println("5: Move on to next day");
   }
 
-  public void printCrewStatus(Crew gameCrew, int iCrewIndex)
+  public void printCrewStatus(Crew gameCrew)
   {
     System.out.println(gameCrew.toString());
   }
@@ -156,27 +156,27 @@ public class ConsoleIO
 
   public void printAsteroids(int damage)
   {
-    System.out.println("[ You fly through an asteroid belt, colliding with some large rocks...");
-    System.out.println("[ Your ship takes " + -damage + "points of damage.");
+    System.out.println("[ You fly through an asteroid belt, colliding with some large rocks... ]");
+    System.out.println("[ Your ship takes " + -damage + "points of damage. ]");
   }
 
   public void printPirates()
   {
-    System.out.println("[ Pirates board your ship while you sleep, stealing an item!");
+    System.out.println("[ Pirates board your ship while you sleep, stealing an item! ]");
   }
 
   public void printPlague()
   {
-    System.out.println("[ A member of your crew comes down with a strange illness.");
+    System.out.println("[ A member of your crew comes down with a strange illness. ]");
   }
 
   public void printBuy(Item item)
   {
-    System.out.println("[ You buy " + item.get_Name() + " for " + item.get_BuyPrice() + " credits.");
+    System.out.println("[ You buy " + item.get_Name() + " for " + item.get_BuyPrice() + " credits. ]");
   }
 
   public void printSell(Item item)
   {
-    System.out.println("[ You sell " + item.get_Name() + " for " + item.get_SellPrice() + " credits.");
+    System.out.println("[ You sell " + item.get_Name() + " for " + item.get_SellPrice() + " credits. ]");
   }
 }

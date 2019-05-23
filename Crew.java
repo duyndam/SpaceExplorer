@@ -182,9 +182,9 @@ public class Crew
     {
       crewManifest += cosmonaut.toString();
     }
-    crewManifest += crewShip.toString();
-    crewManifest += "--------------------";
-    crewManifest += "\n Money: " + crewMoney;
+    //crewManifest += crewShip.toString();
+    crewManifest += "Money: " + crewMoney;
+    crewManifest += "\n--------------------";
     return crewManifest;
   }
 }

@@ -157,8 +157,10 @@ public class Station {
 	{
 		availableItems = new ArrayList<Item>();
 		randomGenerator = new Random();
-	int numMed = randomGenerator.nextInt((MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS);
-	int numFood = randomGenerator.nextInt((MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS);
+	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS);
+	numMed += 1;
+	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS);
+	numFood += 1;
 	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
 	{
 		int itemNum = randomGenerator.nextInt(MedicalItem.AMOUNT_MED_ITEMS);

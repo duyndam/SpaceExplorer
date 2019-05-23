@@ -24,11 +24,11 @@ import java.util.ArrayList;
  */
 public class CrewMember {
 	final int MAX_ACTION_COUNT = 2;
-	static final String PILOTING_ACTION = "is piloting the ship";
-	static final String ITEM_ACTION   = "is using an item.";
-	static final String SLEEPING_ACTION = "is sleeping";
-	static final String VISIT_PLANET_ACTION = "is visiting a planet";
-	static final String REPAIR_ACTION   = "is repairing the ship";
+	static final String PILOTING_ACTION = " is piloting the ship";
+	static final String ITEM_ACTION   = " is using an item.";
+	static final String SLEEPING_ACTION = " is sleeping";
+	static final String VISIT_PLANET_ACTION = " is visiting a planet";
+	static final String REPAIR_ACTION   = " is repairing the ship";
 
 	static enum type
 	{

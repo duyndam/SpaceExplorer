@@ -97,7 +97,7 @@ public class FoodItem extends Item{
  	}
 
 	 public String toString() {
-		    String strItem = super.toString();
+		    String strItem = this.m_Type + " " + super.toString();
 		    return strItem;
 		  }
 
