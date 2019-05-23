@@ -123,6 +123,9 @@ public class ConsoleGame
 		 *
 		 * Print out daily menu with options, visit outposts and planets
 		 */
+		Station actualOutpost = new Station();
+		Planet actualPlanet = new Planet();
+		
 		do
 		{
 		
@@ -133,7 +136,7 @@ public class ConsoleGame
 		   	try 
 		   	{
 		   		iInputType = inputScanner.nextInt();
-	   			if(iInputType >= 1 && iInputType <= 6) 
+	   			if(iInputType >= 1 && iInputType <= 5) 
 	   			{
 	   				inputTypeCorrect = true;
 	   			}
@@ -144,7 +147,7 @@ public class ConsoleGame
 	   		}
 	   	}while(!inputTypeCorrect);
 	   	
-		Station outpost = new Station();
+		
 		
 	   	switch(iInputType) 
 	   	{
@@ -180,7 +183,7 @@ public class ConsoleGame
 		   		switch(iInputType) 
 		   		{
 					case 1:
-						printer.printOutpostInventory(outpost);
+						printer.printOutpostInventory(actualOutpost);
 						break;
 					case 2:
 						printer.printCrewInventory(gameCrew);
@@ -189,11 +192,7 @@ public class ConsoleGame
 						break;
 				}
 		   		break;
-			case 4:
-				Planet body = new Planet();
-				printer.printPlanet(body);
-				break;
-		   	case 5:
+		   	case 4:
 				do 
 				{
 					inputTypeCorrect = false;
@@ -302,7 +301,7 @@ public class ConsoleGame
 					}
 			   		break;
 				}
-	   		case 6:
+	   		case 5:
 	   			StartGame.m_iActualDay++;
 	   			break;
 				default:

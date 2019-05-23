@@ -97,9 +97,8 @@ public class ConsoleIO {
     System.out.println("1: Show crew status");
     System.out.println("2: Show spaceship status");
     System.out.println("3: Visit nearest outpost");
-    System.out.println("4: Visit nearest planet");
-    System.out.println("5: Do crew action");
-    System.out.println("6: Move on to next day");
+    System.out.println("4: Do crew action");
+    System.out.println("5: Move on to next day");
   }
 
   public void printCrewStatus(Crew gameCrew, int iCrewIndex) {
