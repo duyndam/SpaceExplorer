@@ -22,7 +22,7 @@ public class Crew {
   public ArrayList<CrewMember> crewMembers;
   public ArrayList<Item> inventory = new ArrayList<>();
   public Ship crewShip;
-  public int money;
+  private int crewMoney;
 
   /**
    * Initialises a new Crew object.
@@ -33,7 +33,7 @@ public class Crew {
    * @param spaceShip     Ship object, named by the player, with default health.
    */
   public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
-    money = 100;
+	crewMoney = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
   }
@@ -85,6 +85,31 @@ public class Crew {
    */
   public void removeItem(Item item) {
     inventory.remove(item);
+  }
+
+  /**
+   * Show contents of the crew's inventory.
+   *
+   * @return      string detailing the contents of the cargo hold.
+   */
+  public String cargoHold() {
+    String cargo = "";
+    for (Item thing: inventory) {
+      cargo += thing.toString();
+      cargo += "Money: " + this.crewMoney;
+    }
+    return cargo;
+  }
+  
+  public String createActionChoseString()
+  {
+	  String strActionString = "";
+	  for(int iCrewIndex = 0; iCrewIndex < crewMembers.size(); iCrewIndex++)
+	  {
+		  strActionString += iCrewIndex+1 + ": " + crewMembers.get(iCrewIndex).getName() +  crewMembers.get(iCrewIndex).getActionCountString() + "\n";
+	  }
+	  strActionString += crewMembers.size()+1 + ": Exit";
+	  return strActionString;
   }
 
   /**

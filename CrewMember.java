@@ -23,6 +23,14 @@ import java.util.ArrayList;
  *
  */
 public class CrewMember {
+	final int MAX_ACTION_COUNT = 2;
+	static final String PILOTING_ACTION = "is piloting the ship";
+	static final String EATING_ACTION   = "is eating a snack";
+	static final String MEDICINE_ACTION = "is using some medicine";
+	static final String SLEEPING_ACTION = "is sleeping";
+	static final String VISIT_PLANET_ACTION = "is visiting a planet";
+	static final String REPAIR_ACTION   = "is repairing the ship";
+	
 	static enum type
 	{
 		PILOT,
@@ -90,7 +98,11 @@ public class CrewMember {
 	 */
   public boolean doAction(String actionLogMessage)
   {
-	  if(actionList.size() < 2)
+	  if(actionList.contains(actionLogMessage))
+	  {
+		  return false;
+	  }
+	  if(actionList.size() < MAX_ACTION_COUNT)
 	  {
 		  actionList.add(actionLogMessage);
 		  return true;
@@ -163,6 +175,17 @@ public class CrewMember {
 
 	public void setState(status state) {
 		this.state = state;
+	}
+	
+	public String getActionCountString()
+	{
+		String strActionCountString = "";
+		strActionCountString += ("(" + actionList.size() + "/" + MAX_ACTION_COUNT + ") Actions");
+		for(int iActionIndex = 0; iActionIndex < actionList.size(); iActionIndex++)
+		{
+			strActionCountString += "\n..." + actionList.get(iActionIndex);
+		}
+		return strActionCountString;
 	}
 
   /**
