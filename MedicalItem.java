@@ -28,7 +28,7 @@ public class MedicalItem extends Item{
 	public typeMedical get_Type() {
 		return m_Type;
 	}
-	
+
 
 	/**
 	 * setter method for medical Item
@@ -41,7 +41,7 @@ public class MedicalItem extends Item{
 
 	public void stringIfy(int choice) {
 		try {
-			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/SpaceExplorer-master/items.txt");
+			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/Game/items.txt");
 		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
 
 		  for(int i = 0; i < choice; ++i)

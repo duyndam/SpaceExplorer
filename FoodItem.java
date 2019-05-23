@@ -18,7 +18,7 @@ enum typeFood
 
 public class FoodItem extends Item{
 	static final int AMOUNT_FOOD_ITEMS = 24;
-	
+
 	private typeFood m_Type = typeFood.MEAT;
 
 	/**
@@ -47,7 +47,7 @@ public class FoodItem extends Item{
 
 	 public void stringIfy(int choice) {
 		 try {
- 			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/SpaceExplorer-master/items.txt");
+ 			FileInputStream fs= new FileInputStream("/Users/Royal/Desktop/Game/items.txt");
  		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
 
  		  for(int i = 0; i < choice; ++i)
