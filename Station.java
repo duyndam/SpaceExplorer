@@ -19,14 +19,6 @@ public class Station {
 	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
 	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
-  private int numMed = rand.nextInt(6);
-  private int numFood = rand.nextInt(6);
-
-	public Station() {
-    numFood += 1;
-    numMed += 1;
-  }
-
 	public String showOutpostMenue()
 	{
 		return null;
@@ -161,7 +153,8 @@ public class Station {
 	}
   
 
-  public Station() {
+  public Station() 
+  {
 	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS;
 	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS;
 	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
