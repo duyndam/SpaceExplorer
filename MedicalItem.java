@@ -78,7 +78,7 @@ public class MedicalItem extends Item{
 
 	}
 	 public String toString() {
-		    String strItem =  m_Type + " " + super.toString();
+		    String strItem = super.toString();
 		    return strItem;
 		  }
 

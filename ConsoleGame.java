@@ -1,5 +1,7 @@
 // Import statements
 import java.util.ArrayList;
+import java.util.Random;
+import java.lang.Math;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -31,6 +33,15 @@ public class ConsoleGame
 		boolean shipCreate = false;
 		boolean inputTypeCorrect = false;
 		boolean startAdventure = false;
+
+		int modifier;
+		int chance;
+		int newChance;
+		int encounterType;
+		int encounterToday;
+		int damage;
+
+		Random encounter = new Random();
 
 		ConsoleIO printer = new ConsoleIO();
 
@@ -118,6 +129,7 @@ public class ConsoleGame
 		}while(!startAdventure);
 
 		printer.printAdvStart();
+
 		/**
 		 * MAIN GAME LOOP
 		 *
@@ -125,18 +137,19 @@ public class ConsoleGame
 		 */
 		Station actualOutpost = new Station();
 		Planet actualPlanet = new Planet();
-		
+
 		do
 		{
 
 	   	do
 	   	{
-	   		inputTypeCorrect = false;
+	   	inputTypeCorrect = false;
+
 			printer.printDailyMenu();
 		   	try
 		   	{
 		   		iInputType = inputScanner.nextInt();
-	   			if(iInputType >= 1 && iInputType <= 5) 
+	   			if(iInputType >= 1 && iInputType <= 5)
 	   			{
 	   				inputTypeCorrect = true;
 	   			}
@@ -146,10 +159,10 @@ public class ConsoleGame
 	   			inputScanner.nextLine();
 	   		}
 	   	}while(!inputTypeCorrect);
-	   	
-		
-		
-	   	switch(iInputType) 
+
+
+
+	   	switch(iInputType)
 	   	{
 		   	case 1:
 		   		for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewMembers.size(); iCrewIndex++)
@@ -164,7 +177,6 @@ public class ConsoleGame
 		   		do
 		   		{
 		   			inputTypeCorrect = false;
-		   			//outpost.populateStation();
 			   		printer.printOutpostMenu();
 				   	try
 				   	{
@@ -193,7 +205,7 @@ public class ConsoleGame
 				}
 		   		break;
 		   	case 4:
-				do 
+				do
 				{
 					inputTypeCorrect = false;
 
@@ -221,7 +233,7 @@ public class ConsoleGame
 						try
 						{
 							iInputType = inputScanner.nextInt();
-							if(iInputType >= 1 && iInputType <= 7)
+							if(iInputType >= 1 && iInputType <= 6)
 							{
 								inputTypeCorrect = true;
 							}
@@ -247,31 +259,46 @@ public class ConsoleGame
 								printer.printDoingActionAlready();
 							}
 							break;
+
 						case 2:
-							if(chosenMember.doAction(CrewMember.EATING_ACTION))
+							if(chosenMember.doAction(CrewMember.ITEM_ACTION) && !gameCrew.inventory.isEmpty())
 							{
-								chosenMember.updateHunger(-5));///PLACEHOLDER
-								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.EATING_ACTION);
+								do
+									{
+										inputTypeCorrect = false;
+										printer.printCrewInventory(gameCrew);
+										try
+										{
+											iInputType = inputScanner.nextInt();
+											if(iInputType >= 1 && iInputType <= gameCrew.inventory.size()+1)
+											{
+											inputTypeCorrect = true;
+											}
+										}catch(Exception e)
+										{
+											inputTypeCorrect = false;
+											inputScanner.nextLine();
+										}
+									}while(!inputTypeCorrect);
+								if (iInputType == gameCrew.inventory.size()+1)
+								{
+									break;
+								}
+								else
+								{
+									Item item = gameCrew.inventory.get(iInputType-1);
+									gameCrew.inventory.remove(iInputType-1);
+									chosenMember.updateHealth(item.get_Value());
+									printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.ITEM_ACTION);
+								}
 							}
-							else
+								else
 							{
 								printer.printDoingActionAlready();
 							}
+
 							break;
 						case 3:
-							if(chosenMember.doAction(CrewMember.MEDICINE_ACTION))
-							{
-								MedicalItem test = new MedicalItem();
-								test.stringIfy();
-								chosenMember.updateHealth(5)
-								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.MEDICINE_ACTION);
-							}
-							else
-							{
-								printer.printDoingActionAlready();
-							}
-							break;
-						case 4:
 							if(chosenMember.doAction(CrewMember.SLEEPING_ACTION))
 							{
 								chosenMember.updateFatigue(-25);
@@ -282,7 +309,7 @@ public class ConsoleGame
 								printer.printDoingActionAlready();
 							}
 							break;
-						case 5:
+						case 4:
 							if(chosenMember.doAction(CrewMember.VISIT_PLANET_ACTION))
 							{
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION);
@@ -292,7 +319,7 @@ public class ConsoleGame
 								printer.printDoingActionAlready();
 							}
 							break;
-						case 6:
+						case 5:
 							if(chosenMember.doAction(CrewMember.REPAIR_ACTION))
 							{
 								if (chosenMember.getType() == CrewMember.type.ENGINEER)
@@ -310,13 +337,88 @@ public class ConsoleGame
 								printer.printDoingActionAlready();
 							}
 							break;
-						case 7:
+						case 6:
 							break;
 					}
 			   		break;
 				}
 	   		case 5:
 	   			StartGame.m_iActualDay++;
+
+					//CHECK IF READY TO FLY - if so, generate new planet and outpost.
+					if (gameCrew.crewShip.getNumPilots() >= 2)
+					{
+						actualOutpost = new Station();
+						//GENERATE NEW PLANET
+					}
+
+					for (CrewMember cosmonaut: gameCrew.crewMembers)
+					{
+						cosmonaut.updateFatigue(10);
+						cosmonaut.updateHunger(10);
+					}
+
+					encounterToday = encounter.nextInt(3);
+
+					if (encounterToday < 1) {
+						boolean encounterHappens = true;
+						encounterType = encounter.nextInt(3);
+						switch(encounterType)
+						{
+							case 0:
+								if (!gameCrew.inventory.isEmpty())
+								{
+									modifier = gameCrew.jobCount(CrewMember.type.DOCTOR);
+									chance = (int) Math.pow(2, modifier)*3;
+									newChance = encounter.nextInt(chance);
+									if (newChance < 1)
+									{
+										boolean pirates = true;
+										int toSteal = encounter.nextInt(gameCrew.inventory.size());
+										gameCrew.inventory.remove(toSteal);
+										printer.printPirates();
+									}
+								}
+								break;
+							case 1:
+								modifier = gameCrew.jobCount(CrewMember.type.NAVIGATOR);
+								chance = (int) Math.pow(2, modifier)*3;
+								newChance = encounter.nextInt(chance);
+								if (newChance < 1)
+								{
+									boolean asteroids = true;
+									if (gameCrew.crewMembers.contains(CrewMember.type.PILOT))
+									{
+										double dmgMod = 0.1*gameCrew.jobCount(CrewMember.type.PILOT);
+										damage = -50;
+										damage -= 50*dmgMod;
+									}
+									else
+									{
+										damage = -50;
+									}
+									gameCrew.crewShip.update(damage);
+
+									printer.printAsteroids(damage);
+								}
+								break;
+							case 2:
+								modifier = gameCrew.jobCount(CrewMember.type.DOCTOR);
+								chance = (int) Math.pow(2, modifier)*3;
+								newChance = encounter.nextInt(chance);
+								if (newChance < 1)
+								{
+									boolean plague = true;
+									int infected = encounter.nextInt(gameCrew.crewSize());
+									CrewMember sickCrew = gameCrew.crewMembers.get(infected);
+									sickCrew.setState(CrewMember.status.SPACE_PLAGUE_INFECTED);
+									printer.printPlague();
+								}
+								break;
+							default:
+								break;
+						}
+					}
 	   			break;
 				default:
 					break;

@@ -17,7 +17,8 @@ import java.util.Scanner;
  *  - Crew money
  *
  */
-public class Crew {
+public class Crew
+{
 
   public ArrayList<CrewMember> crewMembers;
   public ArrayList<Item> inventory = new ArrayList<>();
@@ -32,7 +33,8 @@ public class Crew {
    * @param listOfMembers initially empty list of crewMembers, which is updated throughout gameplay.
    * @param spaceShip     Ship object, named by the player, with default health.
    */
-  public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip) {
+  public Crew(ArrayList<CrewMember> listOfMembers, Ship spaceShip)
+  {
 	  crewMoney = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
@@ -43,7 +45,8 @@ public class Crew {
    *
    * @return      the size of the crew.
    */
-  public int crewSize() {
+  public int crewSize()
+  {
     return crewMembers.size();
   }
 
@@ -52,11 +55,13 @@ public class Crew {
    *
    * @param vessel ship to be assigned.
    */
-  public void setShip(Ship vessel) {
+  public void setShip(Ship vessel)
+  {
     crewShip = vessel;
   }
 
-  public Ship getShip() {
+  public Ship getShip()
+  {
     return crewShip;
   }
   /**
@@ -64,7 +69,8 @@ public class Crew {
    *
    * @param cosmonaut the crew member to be added.
    */
-  public void addCrew(CrewMember cosmonaut) {
+  public void addCrew(CrewMember cosmonaut)
+  {
     crewMembers.add(cosmonaut);
   }
 
@@ -75,7 +81,8 @@ public class Crew {
    *
    * @param item item to be added to inventory.
    */
-  public void addItem(Item item) {
+  public void addItem(Item item)
+  {
     inventory.add(item);
   }
 
@@ -86,7 +93,8 @@ public class Crew {
    *
    * @param item item to be removed from inventory.
    */
-  public void removeItem(Item item) {
+  public void removeItem(Item item)
+  {
     inventory.remove(item);
   }
 
@@ -95,13 +103,30 @@ public class Crew {
    *
    * @return      string detailing the contents of the cargo hold.
    */
-  public String cargoHold() {
+  public String cargoHold()
+  {
     String cargo = "";
-    for (Item thing: inventory) {
-      cargo += thing.toString();
-      cargo += "Money: " + this.crewMoney;
+    int index = 0;
+    for (Item thing: inventory)
+    {
+      index += 1;
+      cargo += index + ": " + thing.toString()+ "\n";
+
     }
+    cargo += inventory.size()+1 + ": Exit";
     return cargo;
+  }
+
+  public int jobCount(CrewMember.type job) {
+    int count = 0;
+    for (CrewMember cosmonaut: crewMembers)
+    {
+      if (cosmonaut.getType() == job)
+      {
+        count += 1;
+      }
+    }
+    return count;
   }
 
   public String createActionChoseString()
@@ -120,9 +145,11 @@ public class Crew {
    *
    * @return      string detailing all crew members and attributes, as well as ship attributes.
    */
-  public String toString() {
+  public String toString()
+  {
     String crewManifest = "";
-    for (CrewMember cosmonaut: crewMembers) {
+    for (CrewMember cosmonaut: crewMembers)
+    {
       crewManifest += cosmonaut.toString();
     }
     crewManifest += crewShip.toString();

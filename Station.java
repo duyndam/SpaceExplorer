@@ -10,7 +10,7 @@ import java.util.Random;
  */
 
 public class Station {
-	List<Item> availableItems;
+	ArrayList<Item> availableItems;
 	Random randomGenerator = null;
 
 	private final int MAX_NUMBER_FOOD_ITEMS = 2;
@@ -19,7 +19,7 @@ public class Station {
 	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
 	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
-	public String showOutpostMenue()
+	public String showOutpostMenu()
 	{
 		return null;
 	}
@@ -155,14 +155,26 @@ public class Station {
 
   public Station()
 	{
+		availableItems = new ArrayList<Item>();
 		randomGenerator = new Random();
 	int numMed = randomGenerator.nextInt((MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS);
 	int numFood = randomGenerator.nextInt((MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS);
 	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
 	{
-		//TODO implement random MedItem read
+		int itemNum = randomGenerator.nextInt(MedicalItem.AMOUNT_MED_ITEMS);
+		itemNum += 24;
+		MedicalItem meds = new MedicalItem();
+		meds.stringIfy(itemNum);
+		availableItems.add(meds);
 	}
-	//TODO implement random FoodItem read
+	for(int iFoodItemAmount = 0; iFoodItemAmount < numFood; iFoodItemAmount++)
+	{
+		int itemNum = randomGenerator.nextInt(FoodItem.AMOUNT_FOOD_ITEMS);
+		FoodItem food = new FoodItem();
+		food.stringIfy(itemNum);
+		availableItems.add(food);
+	}
+
   }
 
 	public String toString() {

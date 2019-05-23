@@ -112,12 +112,11 @@ public class ConsoleIO {
   public void printCrewActions() {
     System.out.println("Potential Crew Actions: ");
     System.out.println("1: Pilot ship");
-    System.out.println("2: Eat food");
-    System.out.println("3: Use medkit");
-    System.out.println("4: Sleep");
-    System.out.println("5: Visit planet");
-    System.out.println("6: Repair ship");
-    System.out.println("7: Exit");
+    System.out.println("2: Use item");
+    System.out.println("3: Sleep");
+    System.out.println("4: Visit planet");
+    System.out.println("5: Repair ship");
+    System.out.println("6: Exit");
   }
 
   public void printCrewChooser(String strCrewMemberActionChooser)
@@ -135,4 +134,16 @@ public class ConsoleIO {
 	  System.out.println("This action can not be done!");
   }
 
+  public void printAsteroids(int damage) {
+    System.out.println("You fly through an asteroid belt, colliding with some large rocks...");
+    System.out.println("Your ship takes " + -damage + "points of damage.");
+  }
+
+  public void printPirates() {
+    System.out.println("Pirates board your ship while you sleep, stealing an item!");
+  }
+
+  public void printPlague() {
+    System.out.println("A member of your crew comes down with a strange illness.");
+  }
 }
