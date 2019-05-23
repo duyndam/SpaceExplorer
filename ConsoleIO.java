@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author      Royal Duyndam, Alex Siegmund
+ * @author      Alexander Siegmund, Royal Duyndam
  * @version     0.1.0
  * @since       0.0.0
  */

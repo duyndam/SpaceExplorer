@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author      Royal Duyndam, Alex Siegmund
+ * @author      Alexander Siegmund, Royal Duyndam
  * @version     0.1.0
  * @since       0.0.0
  */
 
 public class Station {
 	List<Item> availableItems;
+	Random randomGenerator = null;
 
+	private final int MAX_NUMBER_FOOD_ITEMS = 2;
+	private final int MIN_NUMBER_FOOD_ITEMS = 8;
+	
+	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
+	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
 	public String showOutpostMenue()
 	{
@@ -125,32 +131,41 @@ public class Station {
 		return strPurchase;
 	}
 
-  Random rand = new Random();
-
-  private int numMed = rand.nextInt(6);
-  private int numFood = rand.nextInt(6);
-  ArrayList<Item> wares;
+	public String sellObject(List<Item> crewPossesion, int money, String name)
+	{
+		String strPurchase = "";
+		Item indexItem = null;
+		int iRemoveIndex = -1;
+		for(int iIndex = 0; iIndex < crewPossesion.size(); ++iIndex)
+		{
+			indexItem = crewPossesion.get(iIndex);
+			if(indexItem.get_Name() == name)
+			{
+				strPurchase += indexItem.get_Name() + " was sold for " + indexItem.get_SellPrice() + " asteroidCoins";
+				money += indexItem.get_SellPrice();
+				iRemoveIndex = iIndex;
+				availableItems.add(crewPossesion.get(iRemoveIndex));
+				break;
+			}
+		}
+		crewPossesion.remove(iRemoveIndex);
+		return strPurchase;
+	}
+  
 
   public Station() {
-    numFood += 1;
-    numMed += 1;
-    wares = new ArrayList<>();
-  }
-
-  public void populateStation() {
-    for (int i = 0; i <= numMed; i++) {
-      MedicalItem meds = new MedicalItem();
-      wares.add(meds);
-    }
-    for (int j = 0; j <= numFood; j++) {
-      FoodItem food = new FoodItem();
-      wares.add(food);
-    }
+	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS + 1) + MIN_NUMBER_MEDICAL_ITEMS;
+	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS + 1) + MIN_NUMBER_FOOD_ITEMS;
+	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
+	{
+		//TODO implement random MedItem read
+	}
+	//TODO implement random FoodItem read
   }
 
   public String toString() {
     String shopInventory = "";
-    for (Item product: wares) {
+    for (Item product: availableItems) {
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;

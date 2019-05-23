@@ -12,6 +12,8 @@ enum typeMedical
  * Actual amounts healed vary based on the item's "m_value"
  */
 public class MedicalItem extends Item{
+	static final int AMOUNT_MED_ITEMS = 5;
+	
 	private typeMedical m_Type = typeMedical.HEALING;
 
 	/**

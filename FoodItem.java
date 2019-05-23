@@ -1,5 +1,5 @@
 /**
- * @author      Royal Duyndam, Alex Siegmund
+ * @author      Alexander Siegmund, Royal Duyndam
  * @version     0.1.0
  * @since       0.0.0
  */
@@ -15,6 +15,8 @@ enum typeFood
 }
 
 public class FoodItem extends Item{
+	static final int AMOUNT_FOOD_ITEMS = 10;
+	
 	private typeFood m_Type = typeFood.MEAT;
 
 	/**
