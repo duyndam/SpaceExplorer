@@ -13,7 +13,8 @@ import java.util.Scanner;
  * Else, will launch GUI application.
  *
  */
-public class StartGame {
+public class StartGame
+{
 
 	public static int m_iDays;
 	public static int m_iParts;
@@ -22,25 +23,35 @@ public class StartGame {
 	public static int m_iActualDay = 1;
 	public static boolean m_bEndCondition = false;
 	public static ConsoleIO printer = new ConsoleIO();
-	
+
 	public static String m_stringInputGUI = "";
 	public static boolean m_stringInputReadyGUI = false;
-	
+
 	public static String m_stringInputLogic = "";
 	public static boolean m_stringInputReadyLogic = false;
 
-  public static void main(String[] args) {
+
+  /**
+	 * Checks for game mode Console/GUI, takes appropriate action.
+	 *
+	 *
+	 */
+  public static void main(String[] args)
+	{
 		String mode = "CONSOLE";
-		if(args.length == 1) {
+		if(args.length == 1)
+		{
 			mode = args[0];
 		}
 
 		Scanner inputDays = new Scanner(System.in);
 		boolean inputCorrect = false;
-		do {
+		do
+		{
 			inputCorrect = false;
 			printer.printGameLength();
-			try {
+			try
+			{
 				m_iDays = inputDays.nextInt();
 				inputCorrect = true;
 			}
@@ -51,13 +62,18 @@ public class StartGame {
 		}
 		while(m_iDays < 3 || m_iDays > 10 || inputCorrect == false);
 
+		// calculate number of spaceship parts required - equal to 2/3 of game length.
 		m_iParts = m_iDays * 2 / 3;
 
-		if(mode.equals("CONSOLE")) {
+		// Check which game mode; if CONSOLE, run text-based console instance; else,
+		// run GUI.
+		if(mode.equals("CONSOLE"))
+		{
 			ConsoleGame spaceExplorer = new ConsoleGame();
 			spaceExplorer.run();
 		}
-		else {
+		else
+		{
 			gui.StartFrame spaceExplorerGUI = new gui.StartFrame();
 			spaceExplorerGUI.main(args);
 		}

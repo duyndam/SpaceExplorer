@@ -179,4 +179,9 @@ public class ConsoleIO
   {
     System.out.println("[ You sell " + item.get_Name() + " for " + item.get_SellPrice() + " credits. ]");
   }
+
+  public void printNothing()
+  {
+    System.out.println("You don't find anything :(");
+  }
 }

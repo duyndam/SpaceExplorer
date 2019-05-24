@@ -1,3 +1,4 @@
+// Import statement(s)
 import java.io.*;
 
 /**
@@ -6,6 +7,7 @@ import java.io.*;
  * @since       0.0.0
  */
 
+// Six types of food objects with different attributes.
 enum typeFood
 {
 	MEAT,
@@ -16,17 +18,18 @@ enum typeFood
 	LIQUID
 }
 
-public class FoodItem extends Item{
-	static final int AMOUNT_FOOD_ITEMS = 24;
-
+public class FoodItem extends Item
+{
 	private typeFood m_Type = typeFood.MEAT;
+	static final int AMOUNT_FOOD_ITEMS = 24;
 
 	/**
 	 * Getter method for food Item
 	 *
 	 * @return      the type of food, e.g. Meat, vegetable - this affects m_value
 	 */
-	public typeFood get_Type() {
+	public typeFood get_Type()
+	{
 		return m_Type;
 	}
 
@@ -35,18 +38,21 @@ public class FoodItem extends Item{
 	 *
 	 * @param m_Type the type of food, e.g. Meat, vegetable - this affects m_value
 	 */
-	public void set_Type(typeFood m_Type) {
+	public void set_Type(typeFood m_Type)
+	{
 		this.m_Type = m_Type;
 	}
 
-  /**
-	 * Food item toString method - calls to superclass toString method.
-	 *
-	 * @return       string containing the type of food, and associated attributes
-	 */
-
-	 public void stringIfy(int choice) {
-		 try {
+	 /**
+ 	  * When called with an integer, this method accesses items.txt, and applies the
+ 	  * attributes found at the integer index there to an existing default item.
+ 	  *
+ 	  * @param choice 		integer between 0 and 35, corresponding to an item in items.txt
+ 	  */
+	 public void stringIfy(int choice)
+	 {
+		 try
+		 {
  			FileInputStream fs= new FileInputStream("/graphics/items.txt");
  		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
 
@@ -96,9 +102,15 @@ public class FoodItem extends Item{
 
  	}
 
-	 public String toString() {
+	 /**
+	  * Food item toString method - calls to superclass toString method.
+	  *
+	  * @return       string containing the type of food, and associated attributes
+	  */
+	 public String toString()
+	 {
 		    String strItem = this.m_Type + " " + super.toString();
 		    return strItem;
-		  }
+	 }
 
 }

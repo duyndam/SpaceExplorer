@@ -10,7 +10,20 @@ import java.util.Random;
  * @since       0.0.0
  */
 
-public class Planet {
+
+/**
+ * Planet class. Player may send a crew member to the nearest planet, where they
+ * have a chance of finding:
+ *
+ * - random amount of money
+ * - random food item
+ * - random medical item
+ * - random spaceship part
+ * - nothing :(
+ *
+ */
+public class Planet
+{
 
 	private final int MIN_AMOUNT_MONEY = 10;
 	private final int MAX_AMOUNT_MONEY = 50;
@@ -22,11 +35,22 @@ public class Planet {
 													"gidazuno", "moxuphun",	"dippe PJ06",
 													"trars 3" };
 	private Random randomGenerator = null;
+
+	/**
+	 * Planet constructor.
+	 *
+	 * initializes the random number generator to be used throughout.
+	 */
 	public Planet()
 	{
 		randomGenerator = new Random();
 	}
 
+	/**
+	 * Medical item generator. Creates randomized medical item to be found.
+	 *
+	 * @return generatedItem 	medical item, chosen from items.txt
+	 */
 	public MedicalItem get_RandomMedicalItem()
 	{
 		MedicalItem generatedItem = new MedicalItem();
@@ -35,7 +59,12 @@ public class Planet {
 		generatedItem.stringIfy(iChoice);
 		return generatedItem;
 	}
-	
+
+	/**
+	 * Food item generator. Creates randomized food item to be found.
+	 *
+	 * @return generatedItem 	food item, chosen from items.txt
+	 */
 	public FoodItem get_RandomFoodItem()
 	{
 		FoodItem generatedItem = new FoodItem();
@@ -44,15 +73,20 @@ public class Planet {
 		generatedItem.stringIfy(iChoice);
 		return generatedItem;
 	}
-	
+
+	/**
+	 * Ship part generator. Creates randomized ship part to be found.
+	 *
+	 * @return strRandomShipPart 	string with name of part found, from parts.txt
+	 */
 	public String get_RandomShipPart()
 	{
 		String strRandomShipPart = "";
 		int iChoice = 0;
 		iChoice = randomGenerator.nextInt(MAX_DIFFERENT_PARTS_COUNT);
-		try 
+		try
 		{
-			
+
  			FileInputStream fs= new FileInputStream("txts/parts.txt");
  			BufferedReader br = new BufferedReader(new InputStreamReader(fs));
  			String[] strLineSplit = null;
@@ -65,18 +99,29 @@ public class Planet {
  			}
 		}catch(Exception e)
 		{
-			
+
 		}
 		return strRandomShipPart;
 	}
-	
+
+	/**
+	 * Money generator. Creates random amount of money to be found.
+	 *
+	 * @return iMoney 	Integer amount of money
+	 */
 	public int get_RandomAmountMoney()
 	{
 		int iMoney = 0;
 		iMoney = randomGenerator.nextInt(MAX_AMOUNT_MONEY - MIN_AMOUNT_MONEY + 1) + MIN_AMOUNT_MONEY;
 		return iMoney;
 	}
-	
+
+	/**
+	 * Finding method - determines if a part will be found on the planet.
+	 *
+	 * @return true 		if player finds a part on the planet
+	 * @return false    if player does not find a part
+	 */
 	public boolean findingPart()
 	{
 		if(!partFound)

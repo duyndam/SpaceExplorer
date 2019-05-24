@@ -16,26 +16,34 @@
  * 				FoodItem | MedicalItem
  * Each has subtypes which detail the items' effects.
  */
-public class Item {
+public class Item
+{
 	private String m_Name = "Default";
 	private int m_BuyPrice = -1;
 	private int m_SellPrice = -1;
 	private int m_Value = -1;
 
+	public void stringIfy(int choice)
+	{
+	}
+
 	/**
-	 * name Getter method - primarily flavour text, though some items' names
-	 * have associated nutritional value.
+	 * Null constructor, for redundancy.
+	 *
+	 * @return null  	nothing...
+	 */
+	public Item()
+	{
+		return null;
+	}
+
+	/**
+	 * name Getter method - primarily flavour text
 	 *
 	 * @return       the name of the item, e.g. "Energy Bar", "Pizza"
 	 */
-
-	public void stringIfy(int choice) {
-	}
-
-	public Item() {
-	}
-
-	public String get_Name() {
+	public String get_Name()
+	{
 		return m_Name;
 	}
 
@@ -44,7 +52,8 @@ public class Item {
 	 *
 	 * @param m_Name the name to set
 	 */
-	public void set_Name(String m_Name) {
+	public void set_Name(String m_Name)
+	{
 		this.m_Name = m_Name;
 	}
 
@@ -53,7 +62,8 @@ public class Item {
 	 *
 	 * @return        the price of the item in the outpost store
 	 */
-	public int get_BuyPrice() {
+	public int get_BuyPrice()
+	{
 		return m_BuyPrice;
 	}
 
@@ -62,7 +72,8 @@ public class Item {
 	 *
 	 * @param m_BuyPrice price to set
 	 */
-	public void set_BuyPrice(int m_BuyPrice) {
+	public void set_BuyPrice(int m_BuyPrice)
+	{
 		this.m_BuyPrice = m_BuyPrice;
 	}
 
@@ -71,7 +82,8 @@ public class Item {
 	 *
 	 * @return         price the item can be sold to an outpost for
 	 */
-	public int get_SellPrice() {
+	public int get_SellPrice()
+	{
 		return m_SellPrice;
 	}
 
@@ -80,32 +92,40 @@ public class Item {
 	 *
 	 * @param m_SellPrice sell price to set
 	 */
-	public void set_SellPrice(int m_SellPrice) {
+	public void set_SellPrice(int m_SellPrice)
+	{
 		this.m_SellPrice = m_SellPrice;
 	}
 
 	/**
-	 * @return        the nutritional value/healing value of the item
+	 * Gets the healing value/hunger satiation value.
+	 *
+	 * @return m_value	the nutritional value/healing value of the item
 	 */
-	public int get_Value() {
+	public int get_Value()
+	{
 		return m_Value;
 	}
 
 	/**
-	 * @param m_Value the m_Value to set
+	 * Sets the healing value/hunger satiation value.
+	 *
+	 * @param m_Value 	the nutritional value/healing value of the item
 	 */
-	public void set_Value(int m_Value) {
+	public void set_Value(int m_Value)
+	{
 		this.m_Value = m_Value;
 	}
+
   /**
 	 * Item toString method
 	 *
-	 * @return        string containg all attributes of the Item
+	 * @return strItem   string containg all attributes of the Item
 	 */
-
-  public String toString() {
+  public String toString()
+	{
 	    String strItem =  "| Name: " + m_Name + " | Buy: " + m_BuyPrice + " | Sell: " + m_SellPrice + " | Attribute(s): " + m_Value;
 	    return strItem;
-	  }
+	}
 
 }

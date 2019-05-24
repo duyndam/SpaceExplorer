@@ -9,7 +9,13 @@ import java.util.Random;
  * @since       0.0.0
  */
 
-public class Station {
+/**
+ * Station object. Upon initialization, generates a random list of Food and/or
+ * Medical items. The player may visit this station and buy/sell whenever they wish.
+ *
+ */
+public class Station
+{
 	ArrayList<Item> availableItems;
 	Random randomGenerator = null;
 
@@ -19,10 +25,19 @@ public class Station {
 	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
 	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
 
+
+ /**
+  * Null constructor. Left in for redundancy.
+  *
+  * @return null 			nothing :(
+  */
 	public String showOutpostMenu()
 	{
 		return null;
 	}
+
+	/*
+	NOTE: the following methods are not used in current version -- REMOVE?
 
 	public String showItemsForSale()
 	{
@@ -37,6 +52,7 @@ public class Station {
 		}
 		return strItemsForSale;
 	}
+
 
 	public String showItemsAndMoneyPossesion(List<Item> crewPossesion, int crewMoney)
 	{
@@ -110,7 +126,7 @@ public class Station {
 		return strAttributes;
 	}
 
-	/**public String purchaseObject(List<Item> crewPossesion, int money, String name)
+	public String purchaseObject(List<Item> crewPossesion, int money, String name)
 	{
 		String strPurchase = "";
 		Item indexItem = null;
@@ -152,7 +168,11 @@ public class Station {
 		return strPurchase;
 	}*/
 
-
+	/**
+	 * Station constructor; initializes a new station object and generates its
+	 * available items.
+	 *
+	 */
   public Station()
 	{
 		availableItems = new ArrayList<Item>();
@@ -179,9 +199,17 @@ public class Station {
 
   }
 
-	public String toString() {
+	/**
+	 * Station toString.
+	 * Outputs all available items with associated attributes.
+	 *
+	 * @return shopInventory string with all items + attributes.
+	 */
+	public String toString()
+	{
     String shopInventory = "";
-    for (Item product: availableItems) {
+    for (Item product: availableItems)
+		{
       shopInventory += "\n" + product.toString();
     }
     return shopInventory;

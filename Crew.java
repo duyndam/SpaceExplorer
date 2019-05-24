@@ -21,9 +21,11 @@ public class Crew
 {
 
   public ArrayList<CrewMember> crewMembers;
+  public ArrayList<String> shipParts;
   public ArrayList<Item> inventory = new ArrayList<>();
   public Ship crewShip;
   private int crewMoney;
+
 
   /**
    * Initialises a new Crew object.
@@ -128,6 +130,16 @@ public class Crew
     inventory.remove(item);
   }
 
+  /**
+   * Adds a spaceShip part to the crew.
+   *
+   * @param part  string part name
+   */
+  public void addPart(String part)
+  {
+    shipParts.add(part);
+  }
+  
   /**
    * Show contents of the crew's inventory.
    *
