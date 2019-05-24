@@ -191,7 +191,7 @@ public class ConsoleGame
 							inputScanner.nextLine();
 						}
 					}while(!inputTypeCorrect);
-	
+
 					//BUY/SELL AT STORE
 					leaveBuySellMenue = false;
 					switch(iInputType)
@@ -199,8 +199,8 @@ public class ConsoleGame
 						//VIEW ITEMS FOR SALE
 						case 1:
 							do
-							{	
-								
+							{
+
 								do
 								{
 						   			inputTypeCorrect = false;
@@ -218,7 +218,7 @@ public class ConsoleGame
 							   			inputScanner.nextLine();
 							   		}
 								}while(!inputTypeCorrect);
-								
+
 								if(iInputType == (actualOutpost.availableItems.size() + 1))
 								{
 									leaveBuySellMenue = true;
@@ -348,11 +348,12 @@ public class ConsoleGame
 								{
 									Item item = gameCrew.inventory.get(iInputType-1);
 									gameCrew.inventory.remove(iInputType-1);
-									if (item.isInstance(MedicalItem))
+
+									if (item instanceof MedicalItem)
 									{
-										if (item.getType() == MedicalItem.typeMedical.CURES_SPACE_PLAGUE)
+										if (item.MedicalItem.get_Type() == typeMedical.CURES_SPACE_PLAGUE)
 										{
-											chosenMember.setState(HEALTHY);
+											chosenMember.setState(CrewMember.status.HEALTHY);
 										}
 										chosenMember.updateHealth(item.get_Value());
 									}
@@ -451,7 +452,7 @@ public class ConsoleGame
 
 					StartGame.score += 1000;
 
-					if (gameCrew.shipParts >= StartGame.m_iParts)
+					if (gameCrew.shipParts.size() >= StartGame.m_iParts)
 					{
 						// Endgame score calculation
 						StartGame.score += 2000;
@@ -487,7 +488,7 @@ public class ConsoleGame
 						cosmonaut.clearActions();
 						cosmonaut.updateFatigue(10);
 						cosmonaut.updateHunger(10);
-						if (cosmonaut.getState() == SPACE_PLAGUE_INFECTED)
+						if (cosmonaut.getState() == CrewMember.status.SPACE_PLAGUE_INFECTED)
 						{
 							cosmonaut.updateHealth(-10);
 						}
@@ -524,17 +525,18 @@ public class ConsoleGame
 									boolean asteroids = true;
 									int shield = gameCrew.crewShip.getShield();
 									int hull = gameCrew.crewShip.getHull();
+									double shieldMod = 0.2*(100-shield);
 									if (gameCrew.crewMembers.contains(CrewMember.type.PILOT))
 									{
 										double dmgMod = 0.1*gameCrew.jobCount(CrewMember.type.PILOT);
-										double shieldMod = 0.2*(100-shield);
+
 										damage = -50;
 										damage -= 50*dmgMod;
 										damage -= shieldMod;
 									}
 									else
 									{
-										damage = -(50+shieldMod);
+										damage = (int)Math.round(-(50+shieldMod));
 									}
 									gameCrew.crewShip.update(damage);
 

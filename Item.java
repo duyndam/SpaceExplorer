@@ -30,11 +30,9 @@ public class Item
 	/**
 	 * Null constructor, for redundancy.
 	 *
-	 * @return null  	nothing...
 	 */
 	public Item()
 	{
-		return null;
 	}
 
 	/**
