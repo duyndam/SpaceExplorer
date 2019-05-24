@@ -1,6 +1,7 @@
+// Import statement(s)
 import java.io.*;
 
-
+// Three types of medical objects with different attributes.
 enum typeMedical
 {
 	BANDAGE,
@@ -39,6 +40,12 @@ public class MedicalItem extends Item{
 		this.m_Type = m_Type;
 	}
 
+	/**
+	 * When called with an integer, this method accesses items.txt, and applies the
+	 * attributes found at the integer index there to an existing default item.
+	 *
+	 * @param choice 		integer between 0 and 35, corresponding to an item in items.txt
+	 */
 	public void stringIfy(int choice) {
 		try {
 			//FileInputStream fs= new FileInputStream("graphics/items.txt");

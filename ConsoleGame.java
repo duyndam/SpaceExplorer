@@ -348,7 +348,18 @@ public class ConsoleGame
 								{
 									Item item = gameCrew.inventory.get(iInputType-1);
 									gameCrew.inventory.remove(iInputType-1);
-									chosenMember.updateHealth(item.get_Value());
+									if (item.isInstance(MedicalItem))
+									{
+										if (item.getType() == CURES_SPACE_PLAGUE)
+										{
+											chosenMember.setState(HEALTHY);
+										}
+										chosenMember.updateHealth(item.get_Value());
+									}
+									else
+									{
+										chosenMember.updateHunger(item.get_Value());
+									}
 									printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.ITEM_ACTION);
 								}
 							}
@@ -372,6 +383,40 @@ public class ConsoleGame
 						case 4:
 							if(chosenMember.doAction(CrewMember.VISIT_PLANET_ACTION))
 							{
+								Item thing = new Item();
+								String part;
+								int money;
+								Random luckyFind = new Random();
+								luckyFind.nextInt(5);
+								if (luckyFind < 1)
+								{
+									thing = actualPlanet.get_RandomFoodItem();
+									gameCrew.addItem(thing);
+								}
+								else if (luckyFind >= 1 && luckyFind < 2)
+								{
+									thing = actualPlanet.get_RandomMedicalItem();
+									gameCrew.addItem(thing);
+								}
+								else if (luckyFind >= 2 && luckyFind < 3)
+								{
+									money = actualPlanet.get_RandomAmountMoney();
+									gameCrew.addMoney(money);
+								}
+								else if (luckyFind >= 3 && luckyFind < 4)
+								{
+									part = actualPlanet.get_RandomShipPart();
+									gameCrew.addPart(part);
+								}
+								else
+								{
+									printer.printNothing();
+								}
+
+
+
+
+
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION);
 							}
 							else
@@ -403,13 +448,18 @@ public class ConsoleGame
 			   		break;
 				}
 	   		case 5:
+
+					if (gameCrew.shipParts >= StartGame.m_iParts)
+					{
+						StartGame.m_bEndCondition = true;
+					}
 	   			StartGame.m_iActualDay++;
 
 					//CHECK IF READY TO FLY - if so, generate new planet and outpost.
 					if (gameCrew.crewShip.getNumPilots() >= 2)
 					{
 						actualOutpost = new Station();
-						//GENERATE NEW PLANET
+						actualPlanet = new Planet();
 					}
 
 					//RESET CREW ACTIONS AND UPDATE FATIGUE/HUNGER
@@ -418,6 +468,10 @@ public class ConsoleGame
 						cosmonaut.clearActions();
 						cosmonaut.updateFatigue(10);
 						cosmonaut.updateHunger(10);
+						if (cosmonaut.getState() == SPACE_PLAGUE_INFECTED)
+						{
+							cosmonaut.updateHealth(-10);
+						}
 					}
 
 					encounterToday = encounter.nextInt(3);
@@ -449,15 +503,19 @@ public class ConsoleGame
 								if (newChance < 1)
 								{
 									boolean asteroids = true;
+									int shield = gameCrew.crewShip.getShield();
+									int hull = gameCrew.crewShip.getHull();
 									if (gameCrew.crewMembers.contains(CrewMember.type.PILOT))
 									{
 										double dmgMod = 0.1*gameCrew.jobCount(CrewMember.type.PILOT);
+										double shieldMod = 0.2*(100-shield);
 										damage = -50;
 										damage -= 50*dmgMod;
+										damage -= shieldMod;
 									}
 									else
 									{
-										damage = -50;
+										damage = -(50+shieldMod);
 									}
 									gameCrew.crewShip.update(damage);
 

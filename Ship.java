@@ -4,7 +4,12 @@
  * @since       0.0.0
  */
 
-public class Ship {
+/**
+ * Ship class, containing the player's spaceship. Has name, shield level, hull integrity,
+ * and number of crew members piloting (two "pilot seats").
+ */
+public class Ship
+{
 
   private String name;
   private int shield;
@@ -12,74 +17,143 @@ public class Ship {
   private int numPilots;
   private final int MAX_PILOTS = 2;
 
-  public Ship(String shipName) {
+  /**
+   * Ship constructor. Initializes new ship object with given name, and default
+   * other attributes.
+   *
+   * @param shipName string with name for ship.
+   */
+  public Ship(String shipName)
+  {
     name = shipName;
     shield = 100;
     hull = 100;
     numPilots = 0;
   }
 
-  public Ship(String shipName, int shieldStartValue)
+  /**
+   * Ship constructor. Initializes new ship object with given values.
+   *
+   * @param shipName          string with name for ship.
+   * @param shieldStartValue  int between 0 and 100
+   * @param hullIntegrity     int between 0 and 100
+   * @param pilots            int value for starting number of pilots.
+   */
+  public Ship(String shipName, int shieldStartValue, int hullIntegrity, int pilots)
   {
 	  name = shipName;
 	  shield = shieldStartValue;
+    hull = hullIntegrity;
+    numPilots = pilots;
   }
 
-  public String getName() {
+  /**
+   * Name getter.
+   *
+   * @return name       string with ship name.
+   */
+  public String getName()
+  {
     return name;
   }
 
-  public int getShield() {
+  /**
+   * Shield getter.
+   *
+   * @return shield     int with shield value
+   */
+  public int getShield()
+  {
     return shield;
   }
 
-  public int getHull() {
+  /**
+   * Hull integrity getter.
+   *
+   * @return hull       int with hull value.
+   */
+  public int getHull()
+  {
     return hull;
   }
 
-  public int getNumPilots() {
+  /**
+   * Pilot getter.
+   *
+   * @return numPilots  int with current piloted by number.
+   */
+  public int getNumPilots()
+  {
     return numPilots;
   }
 
-  public boolean addPilot() {
-    if (numPilots >= MAX_PILOTS) {
+  /**
+   * Adds a pilot to the ship's cockpit.
+   *
+   * @return false      if ship already has 2 pilots
+   * @return true       if pilot successfully added
+   */
+  public boolean addPilot()
+  {
+    if (numPilots >= MAX_PILOTS)
+    {
       return false;
     }
-    else {
+    else
+    {
       numPilots += 1;
       return true;
     }
-
   }
 
-  public boolean update(int amount) {
+  /**
+   * Updates ship shield/hull values when repairing/taking damage.
+   *
+   * @param  amount    int amount to repair/damage
+   * @return true      if ship destroyed (i.e. hull <= 0)
+   * @return false     if values updated successfully
+   */
+  public boolean update(int amount)
+  {
     if(shield > 0) {
-      if(amount > 0 && shield+amount > 100) {
+      if(amount > 0 && shield+amount > 100)
+      {
       	shield = 100;
       }
-      else {
+      else
+      {
       	shield += amount;
       }
     }
-    else {
-      if(amount > 0 && hull+amount > 100) {
+    else
+    {
+      if(amount > 0 && hull+amount > 100)
+      {
       	hull = 100;
       }
-      else {
+      else
+      {
       	hull += amount;
       }
-      if (hull <= 0) {
+      if (hull <= 0)
+      {
         return true;
       }
-      else {
+      else
+      {
       	return false;
       }
-
     }
     return false;
   }
 
-  public String toString() {
+  /**
+   * Ship toString.
+   *
+   * @return shipString   string containing all ship attributes.
+   */
+  public String toString()
+  {
     String shipString = "--------------------\n";
     shipString += "Ship name : " + name + "\n";
     shipString += "Shield    : " + shield + "\n";

@@ -22,7 +22,8 @@ import java.util.ArrayList;
  * which causes health to decrease over time until removed by medicine.
  *
  */
-public class CrewMember {
+public class CrewMember
+{
 	final int MAX_ACTION_COUNT = 2;
 	static final String PILOTING_ACTION = " is piloting the ship";
 	static final String ITEM_ACTION   = " is using an item.";
@@ -60,7 +61,8 @@ public class CrewMember {
 	 * @param crewName string input my player.
 	 * @param role     type chosen by player, stored as job.
 	 */
-  public CrewMember(String crewName, type role) {
+  public CrewMember(String crewName, type role)
+	{
 	  name = crewName;
 	  job = role;
 	  health = 100;
@@ -79,7 +81,8 @@ public class CrewMember {
 	 * @param food     hunger value to initialise.
 	 * @param tired    fatigue value to initialise.
 	 */
-  public CrewMember(type role, String crewName, int vitality, int food, int tired) {
+  public CrewMember(type role, String crewName, int vitality, int food, int tired)
+	{
     job = role;
     name = crewName;
     health = vitality;
@@ -94,6 +97,9 @@ public class CrewMember {
 	 *
 	 * Adds an action to the list of actions performed by this crew member on the
 	 * current day. This list is reset at the start of every new day.
+	 *
+	 * @return true 	if action was completed successfully.
+	 * @return false  if crew member is already doing action.
 	 */
   public boolean doAction(String actionLogMessage)
   {
@@ -117,6 +123,9 @@ public class CrewMember {
 	 *
 	 * Removes an action from the list of actions performed by this crew member on the
 	 * current day. This list is reset at the start of every new day.
+
+	 * @return true 	if action was completed successfully.
+	 * @return false  if crew member is already doing action.
 	 */
   public boolean undoAction(String actionLogMessage)
   {
@@ -131,43 +140,49 @@ public class CrewMember {
 	  }
   }
 
-	public void clearActions() {
+	/**
+	 * Clears the list of actions the crew member is performing. Called at the end
+	 * of each day.
+	 */
+	public void clearActions()
+	{
 		actionList.clear();
 	}
 
-  /**
-	 * Getters and setters for crew member attributes.
+	/**
+	 * Updates the crew member health when taking damage/healing.
 	 *
-	 * these are called primarily by the ConsoleGame class.
+	 * @return true 	if crew member dies (health <= 0)
+	 * @return false 	if health updated successfully without dying
 	 */
-  public void setName(String crewName) {
-    name = crewName;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-	public boolean updateHealth(int amount) {
-      if(amount > 0 && health+amount > 100) {
+	public boolean updateHealth(int amount)
+	{
+      if(amount > 0 && health+amount > 100)
+			{
       	health = 100;
       }
-      else {
+      else
+			{
       	health += amount;
       }
-      if (health <= 0) {
+      if (health <= 0)
+			{
         return true;
       }
-      else {
+      else
+			{
       	return false;
       }
     }
 
-  public int getHealth() {
-    return health;
-  }
-
-	public boolean updateHunger(int amount) {
+	/**
+	 * Updates the crew member hunger daily and when eating.
+	 *
+	 * @return true 	if crew member is starving (takes damage)
+	 * @return false 	if hunger updated successfully
+	 */
+	public boolean updateHunger(int amount)
+	{
 			if(amount > 0 && hunger + amount > 100)
 			{
 				hunger = 100;
@@ -185,11 +200,14 @@ public class CrewMember {
 			}
 		}
 
-  public int getHunger() {
-    return hunger;
-  }
-
-	public boolean updateFatigue(int amount) {
+	/**
+	 * Updates the crew member hunger daily and when eating.
+	 *
+	 * @return true 	if crew member is exhausted (cannot take actions)
+	 * @return false 	if fatigue updated successfully
+	 */
+	public boolean updateFatigue(int amount)
+	{
 		if(amount > 0 && fatigue + amount > 100)
 		{
 			fatigue = 100;
@@ -207,23 +225,91 @@ public class CrewMember {
 		}
 	}
 
-
-  public int getFatigue() {
-    return fatigue;
-  }
-
-	public status getState() {
-		return state;
+	/**
+	 * Set name of the crew member.
+	 *
+	 * @param crewName string name to set
+	 */
+	public void setName(String crewName)
+	{
+		name = crewName;
 	}
 
-	public type getType() {
-		return job;
-	}
-
-	public void setState(status state) {
+	/**
+	 * Sets the state of the crew member - e.g. Healthy
+	 *
+	 * @param state 	status enum
+	 */
+	public void setState(status state)
+	{
 		this.state = state;
 	}
 
+	/**
+	 * Get name of the crew member.
+	 *
+	 * @return name 	string name
+	 */
+  public String getName()
+	{
+    return name;
+  }
+
+	/**
+	 * Get the crew member's health.
+	 *
+	 * @return health 	integer health value
+	 */
+	public int getHealth()
+	{
+		return health;
+	}
+
+	/**
+	 * Get the crew member's hunger.
+	 *
+	 * @return hunger 	integer hunger value
+	 */
+	public int getHunger()
+	{
+		return hunger;
+	}
+
+	/**
+	 * Get the crew member's fatigue.
+	 *
+	 * @return fatigue 	integer fatigue value
+	 */
+  public int getFatigue()
+	{
+    return fatigue;
+  }
+
+	/**
+	 * Get the crew member's state.
+	 *
+	 * @return state 	state type, e.g. SPACE_PLAGUE_INFECTED
+	 */
+	public status getState()
+	{
+		return state;
+	}
+
+	/**
+	 * Get the crew member's type.
+	 *
+	 * @return job  	type, e.g. PILOT
+	 */
+	public type getType()
+	{
+		return job;
+	}
+
+	/**
+	 * Generates a string of all actions being performed by the crew member.
+	 *
+	 * @return strActionCountString 	string containing the crew member's actions.
+	 */
 	public String getActionCountString()
 	{
 		String strActionCountString = "";
@@ -240,7 +326,8 @@ public class CrewMember {
 	 *
 	 * @return      string containing all CrewMember attributes, nicely formatted.
 	 */
-  public String toString() {
+  public String toString()
+	{
     String crewString = "--------------------\n";
     crewString += "Name    : " + name + "\n";
     crewString += "Type    : " + job + "\n";
