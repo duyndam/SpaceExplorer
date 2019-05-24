@@ -29,7 +29,7 @@ public class FoodItem extends Item
 	 *
 	 * @return      the type of food, e.g. Meat, vegetable - this affects m_value
 	 */
-
+	 
 	public typeFood get_Type()
 	{
 		return m_Type;

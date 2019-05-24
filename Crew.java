@@ -113,7 +113,12 @@ public class Crew
    *
    * @param item item to be added to inventory.
    */
-  public void addItem(Item item)
+  public void addMedical(MedicalItem item)
+  {
+    inventory.add(item);
+  }
+
+  public void addFood(FoodItem item)
   {
     inventory.add(item);
   }
@@ -139,7 +144,7 @@ public class Crew
   {
     shipParts.add(part);
   }
-  
+
   /**
    * Show contents of the crew's inventory.
    *
