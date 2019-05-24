@@ -200,7 +200,7 @@ public class ConsoleGame
 						//VIEW ITEMS FOR SALE
 						case 1:
 							do
-								
+							{
 								do
 								{
 						   			inputTypeCorrect = false;
@@ -230,7 +230,16 @@ public class ConsoleGame
 									{
 										gameCrew.removeMoney(actualOutpost.availableItems.get(iInputType-1).get_BuyPrice());
 										printer.printBuy(actualOutpost.availableItems.get(iInputType-1));
-										gameCrew.addItem(actualOutpost.availableItems.get(iInputType-1));
+										if(actualOutpost.availableItems.get(iInputType-1) instanceof MedicalItem)
+										{
+											MedicalItem addItem = (MedicalItem)actualOutpost.availableItems.get(iInputType-1);
+											gameCrew.addMedical(addItem);
+										}
+										else
+										{
+											FoodItem addItem = (FoodItem)actualOutpost.availableItems.get(iInputType-1);
+											gameCrew.addFood(addItem);
+										}
 										actualOutpost.get_ItemList().remove(iInputType-1);
 									}
 									else
@@ -238,11 +247,12 @@ public class ConsoleGame
 										printer.printCantAfford();
 									}
 								}
+					
 							}while(!leaveBuySellMenue);
 							break;
 						case 2:
 							do
-								
+							{
 								do
 								{
 						   			inputTypeCorrect = false;
@@ -471,7 +481,6 @@ public class ConsoleGame
 				}
 				break;
 	   		case 5:
-
 					StartGame.score += 1000;
 
 					if (gameCrew.shipParts != null && gameCrew.shipParts.size() >= StartGame.m_iParts)
@@ -585,7 +594,7 @@ public class ConsoleGame
 	   			break;
 				default:
 					break;
-	   	}
+	}
 	   	if(StartGame.m_iActualDay > StartGame.m_iDays)
 	   	{
 				// Endgame score calculation
