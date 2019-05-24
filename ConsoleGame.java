@@ -346,25 +346,29 @@ public class ConsoleGame
 								}
 								else
 								{
-									Item item = gameCrew.inventory.get(iInputType-1);
-									gameCrew.inventory.remove(iInputType-1);
-
-									if (item instanceof MedicalItem)
+									if (gameCrew.inventory.get(iInputType-1) instanceof MedicalItem)
 									{
-										if (item.MedicalItem.get_Type() == typeMedical.CURES_SPACE_PLAGUE)
+										MedicalItem meds = (MedicalItem)gameCrew.inventory.get(iInputType-1);
+										if (meds.get_Type() == typeMedical.CURES_SPACE_PLAGUE)
 										{
 											chosenMember.setState(CrewMember.status.HEALTHY);
 										}
-										chosenMember.updateHealth(item.get_Value());
+										else
+										{
+											chosenMember.updateHealth(meds.get_Value());
+										}
 									}
 									else
 									{
-										chosenMember.updateHunger(item.get_Value());
+										FoodItem food = (FoodItem)gameCrew.inventory.get(iInputType-1);
+										chosenMember.updateHunger(food.get_Value());
 									}
+									gameCrew.inventory.remove(iInputType-1);
+
 									printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.ITEM_ACTION);
 								}
 							}
-								else
+							else
 							{
 								printer.printDoingActionAlready();
 							}
@@ -384,20 +388,21 @@ public class ConsoleGame
 						case 4:
 							if(chosenMember.doAction(CrewMember.VISIT_PLANET_ACTION))
 							{
-								Item thing = new Item();
 								String part;
 								int money;
 								Random luckyFind = new Random();
 								int found = luckyFind.nextInt(5);
 								if (found < 1)
 								{
+									FoodItem thing = new FoodItem();
 									thing = actualPlanet.get_RandomFoodItem();
-									gameCrew.addItem(thing);
+									gameCrew.addFood(thing);
 								}
 								else if (found >= 1 && found < 2)
 								{
+									MedicalItem thing = new MedicalItem();
 									thing = actualPlanet.get_RandomMedicalItem();
-									gameCrew.addItem(thing);
+									gameCrew.addMedical(thing);
 								}
 								else if (found >= 2 && found < 3)
 								{
@@ -413,10 +418,6 @@ public class ConsoleGame
 								{
 									printer.printNothing();
 								}
-
-
-
-
 
 								printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION);
 							}

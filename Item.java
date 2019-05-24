@@ -22,6 +22,7 @@ public class Item
 	private int m_BuyPrice = -1;
 	private int m_SellPrice = -1;
 	private int m_Value = -1;
+	private int type;
 
 	public void stringIfy(int choice)
 	{
@@ -103,6 +104,11 @@ public class Item
 	public int get_Value()
 	{
 		return m_Value;
+	}
+
+	public int get_Type()
+	{
+		return type;
 	}
 
 	/**
