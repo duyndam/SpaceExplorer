@@ -219,6 +219,10 @@ public class Station
     shopInventory += (counter+1) + ": leave Outpost";
     return shopInventory;
   }
+    public List<Item> get_ItemList()
+    {
+    	return this.availableItems;
+    }
     
     public int get_ItemCount()
     {

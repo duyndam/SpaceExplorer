@@ -174,6 +174,16 @@ public class ConsoleIO
   {
     System.out.println("[ You buy " + item.get_Name() + " for " + item.get_BuyPrice() + " credits. ]");
   }
+  
+  public void printMoney(int iMoney)
+  {
+    System.out.println("[ You have " + iMoney + " credits. ]");
+  }
+  
+  public void printCantAfford()
+  {
+    System.out.println("[ You can't afford that]");
+  }
 
   public void printSell(Item item)
   {

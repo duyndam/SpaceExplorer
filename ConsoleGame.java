@@ -39,7 +39,7 @@ public class ConsoleGame
 		int newChance;
 		int encounterType;
 		int encounterToday;
-		int damage;
+		int damage = 0;
 
 		Random encounter = new Random();
 
@@ -200,10 +200,10 @@ public class ConsoleGame
 						case 1:
 							do
 							{	
-								
 								do
 								{
 						   			inputTypeCorrect = false;
+						   			printer.printMoney(gameCrew.getMoney());
 							   		printer.printOutpostInventory(actualOutpost);
 								   	try
 								   	{
@@ -225,37 +225,54 @@ public class ConsoleGame
 								}
 								else
 								{
-									printer.printBuy(actualOutpost.availableItems.get(iInputType-1));
+									if(gameCrew.getMoney() >= actualOutpost.availableItems.get(iInputType-1).get_BuyPrice())
+									{
+										gameCrew.removeMoney(actualOutpost.availableItems.get(iInputType-1).get_BuyPrice());
+										printer.printBuy(actualOutpost.availableItems.get(iInputType-1));
+										gameCrew.addItem(actualOutpost.availableItems.get(iInputType-1));
+										actualOutpost.get_ItemList().remove(iInputType-1);
+									}
+									else
+									{
+										printer.printCantAfford();
+									}
 								}
 							}while(!leaveBuySellMenue);
 							break;
 						case 2:
 							do
-							{
-					   			inputTypeCorrect = false;
-						   		printer.printCrewInventory(gameCrew);
-							   	try
-							   	{
-						   			iInputType = inputScanner.nextInt();
-						   			if(iInputType >= 1 && iInputType <= gameCrew.inventory.size()+2)
-						   			{
-						   				inputTypeCorrect = true;
-						   			}
-						   		}catch(Exception e)
-							   	{
+							{	
+								do
+								{
 						   			inputTypeCorrect = false;
-						   			inputScanner.nextLine();
-						   		}
-							}while(!inputTypeCorrect);
-//							if (iInputType >= gameCrew.inventory.size()+2)
-//							{
-//								exitCase = true;
-//							}
-//							item = gameCrew.inventory.get(iInputType-1);
-//							gameCrew.inventory.remove(item);
-//							actualOutpost.availableItems.add(item);
-//							gameCrew.addMoney(item.get_SellPrice());
-//							printer.printSell(item);
+						   			printer.printMoney(gameCrew.getMoney());
+							   		printer.printCrewInventory(gameCrew);
+								   	try
+								   	{
+							   			iInputType = inputScanner.nextInt();
+							   			if(iInputType >= 1 && iInputType <= (gameCrew.inventory.size()+1))
+							   			{
+							   				inputTypeCorrect = true;
+							   			}
+							   		}catch(Exception e)
+								   	{
+							   			inputTypeCorrect = false;
+							   			inputScanner.nextLine();
+							   		}
+								}while(!inputTypeCorrect);
+								
+								if(iInputType == (gameCrew.inventory.size() + 1))
+								{
+									leaveBuySellMenue = true;
+								}
+								else
+								{
+									gameCrew.addMoney(gameCrew.inventory.get(iInputType-1).get_SellPrice());
+									printer.printSell(gameCrew.inventory.get(iInputType-1));
+									actualOutpost.get_ItemList().add(gameCrew.inventory.get(iInputType-1));
+									gameCrew.inventory.remove(iInputType-1);
+								}
+							}while(!leaveBuySellMenue);
 							break;
 						case 3:
 							leaveOutpost = true;
@@ -264,6 +281,7 @@ public class ConsoleGame
 							break;
 					}
 		   		}while(!leaveOutpost);
+		   		break;
 		   	case 4:
 				do
 				{
@@ -348,18 +366,18 @@ public class ConsoleGame
 								{
 									Item item = gameCrew.inventory.get(iInputType-1);
 									gameCrew.inventory.remove(iInputType-1);
-									if (item.isInstance(MedicalItem))
-									{
-										if (item.getType() == MedicalItem.typeMedical.CURES_SPACE_PLAGUE)
-										{
-											chosenMember.setState(HEALTHY);
-										}
-										chosenMember.updateHealth(item.get_Value());
-									}
-									else
-									{
-										chosenMember.updateHunger(item.get_Value());
-									}
+//									if (item.isInstance(MedicalItem))
+//									{
+//										if (item.getType() == MedicalItem.typeMedical.CURES_SPACE_PLAGUE)
+//										{
+//											chosenMember.setState(HEALTHY);
+//										}
+//										chosenMember.updateHealth(item.get_Value());
+//									}
+//									else
+//									{
+//										chosenMember.updateHunger(item.get_Value());
+//									}
 									printer.printActionCrewMemberDoes(chosenMember.getName() + CrewMember.ITEM_ACTION);
 								}
 							}
@@ -447,31 +465,32 @@ public class ConsoleGame
 					}
 			   		break;
 				}
+				break;
 	   		case 5:
 
 					StartGame.score += 1000;
 
-					if (gameCrew.shipParts >= StartGame.m_iParts)
-					{
-						// Endgame score calculation
-						StartGame.score += 2000;
-						for (Item thing: gameCrew.inventory)
-						{
-							StartGame.score += 25;
-						}
-						for (String part: gameCrew.shipParts)
-						{
-							StartGame.score += 200;
-						}
-						StartGame.score += 5*gameCrew.getMoney();
-						StartGame.score += 100*gameCrew.crewSize();
-
-						// Huge bonus for finding all parts
-						StartGame.score += 5000;
-
-						StartGame.m_bEndCondition = true;
-
-					}
+//					if (gameCrew.shipParts >= StartGame.m_iParts)
+//					{
+//						// Endgame score calculation
+//						StartGame.score += 2000;
+//						for (Item thing: gameCrew.inventory)
+//						{
+//							StartGame.score += 25;
+//						}
+//						for (String part: gameCrew.shipParts)
+//						{
+//							StartGame.score += 200;
+//						}
+//						StartGame.score += 5*gameCrew.getMoney();
+//						StartGame.score += 100*gameCrew.crewSize();
+//
+//						// Huge bonus for finding all parts
+//						StartGame.score += 5000;
+//
+//						StartGame.m_bEndCondition = true;
+//
+//					}
 	   			StartGame.m_iActualDay++;
 
 					//CHECK IF READY TO FLY - if so, generate new planet and outpost.
@@ -487,10 +506,10 @@ public class ConsoleGame
 						cosmonaut.clearActions();
 						cosmonaut.updateFatigue(10);
 						cosmonaut.updateHunger(10);
-						if (cosmonaut.getState() == SPACE_PLAGUE_INFECTED)
-						{
-							cosmonaut.updateHealth(-10);
-						}
+//						if (cosmonaut.getState() == SPACE_PLAGUE_INFECTED)
+//						{
+//							cosmonaut.updateHealth(-10);
+//						}
 					}
 
 					encounterToday = encounter.nextInt(3);
@@ -534,7 +553,7 @@ public class ConsoleGame
 									}
 									else
 									{
-										damage = -(50+shieldMod);
+										//damage = -(50+shieldMod);
 									}
 									gameCrew.crewShip.update(damage);
 
