@@ -354,7 +354,7 @@ public class ConsoleGame
 									gameCrew.inventory.remove(iInputType-1);
 									if (item.isInstance(MedicalItem))
 									{
-										if (item.getType() == CURES_SPACE_PLAGUE)
+										if (item.getType() == MedicalItem.typeMedical.CURES_SPACE_PLAGUE)
 										{
 											chosenMember.setState(HEALTHY);
 										}
@@ -391,23 +391,23 @@ public class ConsoleGame
 								String part;
 								int money;
 								Random luckyFind = new Random();
-								luckyFind.nextInt(5);
-								if (luckyFind < 1)
+								int found = luckyFind.nextInt(5);
+								if (found < 1)
 								{
 									thing = actualPlanet.get_RandomFoodItem();
 									gameCrew.addItem(thing);
 								}
-								else if (luckyFind >= 1 && luckyFind < 2)
+								else if (found >= 1 && found < 2)
 								{
 									thing = actualPlanet.get_RandomMedicalItem();
 									gameCrew.addItem(thing);
 								}
-								else if (luckyFind >= 2 && luckyFind < 3)
+								else if (found >= 2 && found < 3)
 								{
 									money = actualPlanet.get_RandomAmountMoney();
 									gameCrew.addMoney(money);
 								}
-								else if (luckyFind >= 3 && luckyFind < 4)
+								else if (found >= 3 && found < 4)
 								{
 									part = actualPlanet.get_RandomShipPart();
 									gameCrew.addPart(part);
@@ -453,9 +453,28 @@ public class ConsoleGame
 				}
 	   		case 5:
 
+					StartGame.score += 1000;
+
 					if (gameCrew.shipParts >= StartGame.m_iParts)
 					{
+						// Endgame score calculation
+						StartGame.score += 2000;
+						for (Item thing: gameCrew.inventory)
+						{
+							StartGame.score += 25;
+						}
+						for (String part: gameCrew.shipParts)
+						{
+							StartGame.score += 200;
+						}
+						StartGame.score += 5*gameCrew.getMoney();
+						StartGame.score += 100*gameCrew.crewSize();
+
+						// Huge bonus for finding all parts
+						StartGame.score += 5000;
+
 						StartGame.m_bEndCondition = true;
+
 					}
 	   			StartGame.m_iActualDay++;
 
@@ -549,6 +568,19 @@ public class ConsoleGame
 	   	}
 	   	if(StartGame.m_iActualDay > StartGame.m_iDays)
 	   	{
+				// Endgame score calculation
+				StartGame.score += 2000;
+				for (Item thing: gameCrew.inventory)
+				{
+					StartGame.score += 25;
+				}
+				for (String part: gameCrew.shipParts)
+				{
+					StartGame.score += 200;
+				}
+				StartGame.score += 5*gameCrew.getMoney();
+				StartGame.score += 100*gameCrew.crewSize();
+
 	   		StartGame.m_bEndCondition = true;
 	   	}
 		}while(!StartGame.m_bEndCondition);

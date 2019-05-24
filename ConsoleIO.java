@@ -184,4 +184,11 @@ public class ConsoleIO
   {
     System.out.println("You don't find anything :(");
   }
+
+  public void printEndGame()
+  {
+    System.out.println("--- GAME OVER ---");
+    System.out.println("Final Score: " + StartGame.score);
+    System.out.println("-----------------");
+  }
 }

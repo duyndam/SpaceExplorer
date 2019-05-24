@@ -21,6 +21,7 @@ public class StartGame
 	public static int m_iGameScore = 0;
 	public static int m_iActualParts = 0;
 	public static int m_iActualDay = 1;
+	public static int score = 0;
 	public static boolean m_bEndCondition = false;
 	public static ConsoleIO printer = new ConsoleIO();
 
@@ -76,6 +77,11 @@ public class StartGame
 		{
 			gui.StartFrame spaceExplorerGUI = new gui.StartFrame();
 			spaceExplorerGUI.main(args);
+		}
+
+		if (m_bEndCondition)
+		{
+			printer.printEndGame();
 		}
 	}
 }
