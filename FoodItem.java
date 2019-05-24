@@ -18,6 +18,7 @@ enum typeFood
 	LIQUID
 }
 
+
 public class FoodItem extends Item
 {
 	private typeFood m_Type = typeFood.MEAT;
@@ -28,6 +29,7 @@ public class FoodItem extends Item
 	 *
 	 * @return      the type of food, e.g. Meat, vegetable - this affects m_value
 	 */
+{
 	public typeFood get_Type()
 	{
 		return m_Type;
@@ -38,6 +40,7 @@ public class FoodItem extends Item
 	 *
 	 * @param m_Type the type of food, e.g. Meat, vegetable - this affects m_value
 	 */
+
 	public void set_Type(typeFood m_Type)
 	{
 		this.m_Type = m_Type;
@@ -53,7 +56,8 @@ public class FoodItem extends Item
 	 {
 		 try
 		 {
- 			FileInputStream fs= new FileInputStream("/graphics/items.txt");
+ 			//FileInputStream fs= new FileInputStream("/graphics/items.txt");
+ 			FileInputStream fs= new FileInputStream(getClass().getResource("/graphics/items.txt").getFile());
  		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
 
  		  for(int i = 0; i < choice; ++i)
