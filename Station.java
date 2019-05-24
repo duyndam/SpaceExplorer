@@ -13,11 +13,11 @@ public class Station {
 	ArrayList<Item> availableItems;
 	Random randomGenerator = null;
 
-	private final int MAX_NUMBER_FOOD_ITEMS = 2;
-	private final int MIN_NUMBER_FOOD_ITEMS = 8;
+	private final int MAX_NUMBER_FOOD_ITEMS = 8;
+	private final int MIN_NUMBER_FOOD_ITEMS = 2;
 
-	private final int MAX_NUMBER_MEDICAL_ITEMS = 1;
-	private final int MIN_NUMBER_MEDICAL_ITEMS = 4;
+	private final int MAX_NUMBER_MEDICAL_ITEMS = 4;
+	private final int MIN_NUMBER_MEDICAL_ITEMS = 1;
 
 	public String showOutpostMenu()
 	{
@@ -157,10 +157,8 @@ public class Station {
 	{
 		availableItems = new ArrayList<Item>();
 		randomGenerator = new Random();
-	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS);
-	numMed += 1;
-	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS);
-	numFood += 1;
+	int numMed = randomGenerator.nextInt(MAX_NUMBER_MEDICAL_ITEMS - MIN_NUMBER_MEDICAL_ITEMS)+MIN_NUMBER_MEDICAL_ITEMS;
+	int numFood = randomGenerator.nextInt(MAX_NUMBER_FOOD_ITEMS - MIN_NUMBER_FOOD_ITEMS)+MIN_NUMBER_FOOD_ITEMS;
 	for(int iMedItemAmount = 0; iMedItemAmount < numMed; iMedItemAmount++)
 	{
 		int itemNum = randomGenerator.nextInt(MedicalItem.AMOUNT_MED_ITEMS);
@@ -181,10 +179,19 @@ public class Station {
 
 	public String toString() {
     String shopInventory = "";
+    int counter = 0;
     for (Item product: availableItems) {
-      shopInventory += "\n" + product.toString();
+    	
+      shopInventory +=  (counter+1) + ": " + product.toString() + "\n";
+      counter++;
     }
+    shopInventory += (counter+1) + ": leave Outpost";
     return shopInventory;
   }
+	
+	public int get_ItemCount()
+	{
+		return availableItems.size();
+	}
 
 }

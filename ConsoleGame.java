@@ -169,105 +169,101 @@ public class ConsoleGame
 		   		printer.printShipStatus(gameCrew);
 		   		break;
 		   	case 3:
-				do
-				{
-					inputTypeCorrect = false;
-					printer.printOutpostMenu();
-					try
-					{
-						iInputType = inputScanner.nextInt();
-						if(iInputType >= 1 && iInputType <= 3)
-						{
-							inputTypeCorrect = true;
-						}
-					}catch(Exception e)
+		   		//SPACEOUTPUT MENUE
+		   		boolean leaveOutpost = false;
+		   		boolean leaveBuySellMenue = false;
+		   		do
+		   		{
+					do
 					{
 						inputTypeCorrect = false;
-						inputScanner.nextLine();
-					}
-				}while(!inputTypeCorrect);
-
-				//BUY/SELL AT STORE
-				boolean exitCase = false;
-				boolean atStore = true;
-				while(atStore)
-				{
+						printer.printOutpostMenu();
+						try
+						{
+							iInputType = inputScanner.nextInt();
+							if(iInputType >= 1 && iInputType <= 3)
+							{
+								inputTypeCorrect = true;
+							}
+						}catch(Exception e)
+						{
+							inputTypeCorrect = false;
+							inputScanner.nextLine();
+						}
+					}while(!inputTypeCorrect);
+	
+					//BUY/SELL AT STORE
+					leaveBuySellMenue = false;
 					switch(iInputType)
 					{
 						//VIEW ITEMS FOR SALE
 						case 1:
-						do
-			   		{
-			   			inputTypeCorrect = false;
-				   		printer.printOutpostInventory(actualOutpost);
-					   	try
-					   	{
-				   			iInputType = inputScanner.nextInt();
-				   			if(iInputType >= 1 && iInputType <= actualOutpost.availableItems.size()+2)
-				   			{
-				   				inputTypeCorrect = true;
-				   			}
-				   		}catch(Exception e)
-					   	{
-				   			inputTypeCorrect = false;
-				   			inputScanner.nextLine();
-				   		}
-				   	}while(!inputTypeCorrect);
-						if (iInputType >= actualOutpost.availableItems.size()+2)
-						{
-							exitCase = true;
-						}
-							Item item = actualOutpost.availableItems.get(iInputType-1);
-							if (gameCrew.getMoney() >= item.get_BuyPrice())
-							{
-								actualOutpost.availableItems.remove(item);
-								gameCrew.inventory.add(item);
-								gameCrew.removeMoney(item.get_BuyPrice());
-								printer.printBuy(item);
-							}
-							else
-							{
-								printer.printDoingActionAlready();
-							}
-							case 2:
 							do
-				   		{
-				   			inputTypeCorrect = false;
-					   		printer.printCrewInventory(gameCrew);
-						   	try
-						   	{
-					   			iInputType = inputScanner.nextInt();
-					   			if(iInputType >= 1 && iInputType <= gameCrew.inventory.size()+2)
-					   			{
-					   				inputTypeCorrect = true;
-					   			}
-					   		}catch(Exception e)
-						   	{
-					   			inputTypeCorrect = false;
-					   			inputScanner.nextLine();
-					   		}
-					   	}while(!inputTypeCorrect);
-								if (iInputType >= gameCrew.inventory.size()+2)
+							{	
+								
+								do
 								{
-									exitCase = true;
+						   			inputTypeCorrect = false;
+							   		printer.printOutpostInventory(actualOutpost);
+								   	try
+								   	{
+							   			iInputType = inputScanner.nextInt();
+							   			if(iInputType >= 1 && iInputType <= (actualOutpost.availableItems.size()+1))
+							   			{
+							   				inputTypeCorrect = true;
+							   			}
+							   		}catch(Exception e)
+								   	{
+							   			inputTypeCorrect = false;
+							   			inputScanner.nextLine();
+							   		}
+								}while(!inputTypeCorrect);
+								
+								if(iInputType == (actualOutpost.availableItems.size() + 1))
+								{
+									leaveBuySellMenue = true;
 								}
-									item = gameCrew.inventory.get(iInputType-1);
-									gameCrew.inventory.remove(item);
-									actualOutpost.availableItems.add(item);
-									gameCrew.addMoney(item.get_SellPrice());
-									printer.printSell(item);
-									break;
-							case 3:
-									break;
-							default:
-									break;
+								else
+								{
+									printer.printBuy(actualOutpost.availableItems.get(iInputType-1));
+								}
+							}while(!leaveBuySellMenue);
+							break;
+						case 2:
+							do
+							{
+					   			inputTypeCorrect = false;
+						   		printer.printCrewInventory(gameCrew);
+							   	try
+							   	{
+						   			iInputType = inputScanner.nextInt();
+						   			if(iInputType >= 1 && iInputType <= gameCrew.inventory.size()+2)
+						   			{
+						   				inputTypeCorrect = true;
+						   			}
+						   		}catch(Exception e)
+							   	{
+						   			inputTypeCorrect = false;
+						   			inputScanner.nextLine();
+						   		}
+							}while(!inputTypeCorrect);
+//							if (iInputType >= gameCrew.inventory.size()+2)
+//							{
+//								exitCase = true;
+//							}
+//							item = gameCrew.inventory.get(iInputType-1);
+//							gameCrew.inventory.remove(item);
+//							actualOutpost.availableItems.add(item);
+//							gameCrew.addMoney(item.get_SellPrice());
+//							printer.printSell(item);
+							break;
+						case 3:
+							leaveOutpost = true;
+							break;
+						default:
+							break;
 					}
-				}
-				if (exitCase == true)
-				{
-					atStore = false;
-					break;
-				}
+		   		}while(!leaveOutpost);
 		   	case 4:
 				do
 				{

@@ -41,7 +41,8 @@ public class MedicalItem extends Item{
 
 	public void stringIfy(int choice) {
 		try {
-			FileInputStream fs= new FileInputStream("/graphics/items.txt");
+			//FileInputStream fs= new FileInputStream("graphics/items.txt");
+			FileInputStream fs= new FileInputStream(getClass().getResource("/graphics/items.txt").getFile());
 		  BufferedReader br = new BufferedReader(new InputStreamReader(fs));
 
 		  for(int i = 0; i < choice; ++i)
