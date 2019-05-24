@@ -474,7 +474,7 @@ public class ConsoleGame
 
 					StartGame.score += 1000;
 
-					if (gameCrew.shipParts.size() >= StartGame.m_iParts)
+					if (gameCrew.shipParts != null && gameCrew.shipParts.size() >= StartGame.m_iParts)
 					{
 						// Endgame score calculation
 						StartGame.score += 2000;
@@ -594,9 +594,12 @@ public class ConsoleGame
 				{
 					StartGame.score += 25;
 				}
-				for (String part: gameCrew.shipParts)
+				if (gameCrew.shipParts != null)
 				{
-					StartGame.score += 200;
+					for (String part: gameCrew.shipParts)
+					{
+						StartGame.score += 200;
+					}
 				}
 				StartGame.score += 5*gameCrew.getMoney();
 				StartGame.score += 100*gameCrew.crewSize();
