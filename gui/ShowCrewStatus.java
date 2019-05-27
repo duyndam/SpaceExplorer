@@ -12,9 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.EmptyBorder;
+
+import Game.StartGame;
+
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ShowCrewStatus extends JDialog {
 
@@ -40,7 +45,15 @@ public class ShowCrewStatus extends JDialog {
 	 * Create the dialog.
 	 */
 	public ShowCrewStatus(String[] args) {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				StartGame.m_stringInputReadyGUI = true;
+			}
+		});
 		setTitle("Crew Status");
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowCrewStatus.class.getResource("/graphics/game_icon_sun.png")));
 		int iAmountMembers = Integer.parseInt(args[0]);
 		switch(iAmountMembers)
@@ -58,7 +71,7 @@ public class ShowCrewStatus extends JDialog {
 		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.BLACK);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
@@ -93,6 +106,7 @@ public class ShowCrewStatus extends JDialog {
 			        return location ;
 			    }
 			};
+			splitPane.setBackground(Color.BLUE);
 			splitPane.setBounds(13, 30 + iCountCrewMember, 278, 86);
 			contentPanel.add(splitPane);
 			{
@@ -102,6 +116,8 @@ public class ShowCrewStatus extends JDialog {
 			}
 			{
 				JLabel lbl_Status = new JLabel(strStatusComplete);
+				lbl_Status.setForeground(Color.WHITE);
+				lbl_Status.setFont(new Font("Snap ITC", Font.PLAIN, 14));
 				splitPane.setRightComponent(lbl_Status);
 			}
 			}
@@ -110,30 +126,9 @@ public class ShowCrewStatus extends JDialog {
 			JLabel lbl_Crew = new JLabel("Crew");
 			lbl_Crew.setForeground(Color.WHITE);
 			lbl_Crew.setFont(new Font("Snap ITC", Font.PLAIN, 14));
-			lbl_Crew.setBounds(123, 5, 57, 19);
+			lbl_Crew.setBounds(128, 5, 57, 19);
 			contentPanel.add(lbl_Crew);
 		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			
-		}
-		JSplitPane splitPane = new JSplitPane()
-		{
-		    private final int location = 60;
-		    {
-		        setDividerLocation( location );
-		    }
-		    @Override
-		    public int getDividerLocation() {
-		        return location ;
-		    }
-		    @Override
-		    public int getLastDividerLocation() {
-		        return location ;
-		    }
-		};
 		
 	}
 

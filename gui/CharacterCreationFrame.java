@@ -1,4 +1,5 @@
 package gui;
+import Game.StartGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -47,6 +48,11 @@ public class CharacterCreationFrame extends JFrame {
 	private int indexModify = 0;
 	
 	private int actualCrewNameSetter = 0;
+	
+	private int iTypeCrewMember1 = -1;
+	private int iTypeCrewMember2 = -1;
+	private int iTypeCrewMember3 = -1;
+	private int iTypeCrewMember4 = -1;
 	
 	private String crewMember1Name = "";
 	private String crewMember2Name = "";
@@ -323,18 +329,66 @@ public class CharacterCreationFrame extends JFrame {
 		
 		
 		JButton btn_startAdventure = new JButton("Start Adventure");
+		btn_startAdventure.setBackground(Color.BLUE);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btn_startAdventure, 21, SpringLayout.SOUTH, txtf_name);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btn_startAdventure, -28, SpringLayout.SOUTH, contentPane);
 		btn_startAdventure.setVisible(false);
 		btn_startAdventure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DailyFrame myDaily = new DailyFrame();
+				
+				
+				StartGame.m_stringInputGUI = "";
+				StartGame.m_stringInputGUI += actualMemberCount + ",";
+				StartGame.m_stringInputGUI += txtf_spaceshipName.getText() + ",";
+				if(iTypeCrewMember1 != -1)
+				{
+					StartGame.m_stringInputGUI += crewMember1Name + "," + iTypeCrewMember1 + ",";
+				}
+				if(iTypeCrewMember2 != -1)
+				{
+					StartGame.m_stringInputGUI += crewMember2Name + "," + iTypeCrewMember2 + ",";
+				}
+				if(iTypeCrewMember3 != -1)
+				{
+					StartGame.m_stringInputGUI += crewMember3Name + "," + iTypeCrewMember3 + ",";
+				}
+				if(iTypeCrewMember4 != -1)
+				{
+					StartGame.m_stringInputGUI += crewMember4Name + "," + iTypeCrewMember4 + ",";
+				}
+				StartGame.m_stringInputReadyGUI = true;
+				while(!StartGame.m_stringInputReadyLogic)
+				{
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				StartGame.m_stringInputReadyLogic = false;
+				
+				String[] strArguments = new String[1];
+				if(spaceShip1)
+				{
+					strArguments[0] = "/graphics/spaceship_1.png";
+				}
+				if(spaceShip2)
+				{
+					strArguments[0] = "/graphics/spaceship_2.png";
+				}
+				if(spaceShip3)
+				{
+					strArguments[0] = "/graphics/spaceship_3.png";
+				}
+				
+				DailyFrame myDaily = new DailyFrame(strArguments);
 				myDaily.setVisible(true);
 				dispose();
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.WEST, btn_startAdventure, 422, SpringLayout.WEST, contentPane);
-		btn_startAdventure.setForeground(Color.BLUE);
+		btn_startAdventure.setForeground(Color.BLACK);
 		btn_startAdventure.setFont(new Font("Snap ITC", Font.PLAIN, 11));
 		contentPane.add(btn_startAdventure);
 		
@@ -495,6 +549,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_pilot.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 0;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -503,6 +558,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_pilot.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 0;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -511,6 +567,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_pilot.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 0;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -519,6 +576,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_pilot.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 0;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -532,7 +590,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_pilot.setText("SELECT");
+				lbl_pilot.setText("PILOT");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -573,6 +631,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_engineer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 1;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -581,6 +640,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_engineer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 1;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -589,6 +649,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_engineer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 1;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -597,6 +658,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_engineer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 1;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -610,7 +672,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_engineer.setText("SELECT");
+				lbl_engineer.setText("ENGINEER");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -651,6 +713,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_normal.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 4;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -659,6 +722,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_normal.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 4;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -667,6 +731,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_normal.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 4;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -675,6 +740,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_normal.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 4;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -688,7 +754,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_scavenger.setText("SELECT");
+				lbl_scavenger.setText("SCAVENGER");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -729,6 +795,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_navigator.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 5;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -737,6 +804,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_navigator.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 5;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -745,6 +813,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_navigator.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 5;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -753,6 +822,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_navigator.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 5;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -766,7 +836,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_navigator.setText("SELECT");
+				lbl_navigator.setText("NAVIGATOR");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -807,6 +877,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_soldier.png")).getImage().getScaledInstance(50, 60, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 2;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -815,6 +886,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_soldier.png")).getImage().getScaledInstance(50, 60, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 2;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -823,6 +895,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_soldier.png")).getImage().getScaledInstance(50, 60, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 2;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -831,6 +904,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_soldier.png")).getImage().getScaledInstance(50, 60, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 2;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -844,7 +918,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_soldier.setText("SELECT");
+				lbl_soldier.setText("SOLDIER");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -885,6 +959,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 1:
 					lbl_crewMember1.setVisible(true);
 					lbl_crewMember1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_medical_officer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember1 = 3;
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -893,6 +968,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 2:
 					lbl_crewMember2.setVisible(true);
 					lbl_crewMember2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_medical_officer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember2 = 3;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember3.setText("");
 //					lbl_crewMember4.setText("");
@@ -901,6 +977,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 3:
 					lbl_crewMember3.setVisible(true);
 					lbl_crewMember3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_medical_officer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember3 = 3;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember4.setText("");
@@ -909,6 +986,7 @@ public class CharacterCreationFrame extends JFrame {
 				case 4:
 					lbl_crewMember4.setVisible(true);
 					lbl_crewMember4.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_medical_officer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+					iTypeCrewMember4 = 3;
 //					lbl_crewMember1.setText("");
 //					lbl_crewMember2.setText("");
 //					lbl_crewMember3.setText("");
@@ -923,7 +1001,7 @@ public class CharacterCreationFrame extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_doctor.setText("SELECT");
+				lbl_doctor.setText("DOCTOR");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -945,6 +1023,7 @@ public class CharacterCreationFrame extends JFrame {
 					{
 						btn_startAdventure.setVisible(false);
 					}
+					iTypeCrewMember1 = -1;
 					crewMember1Name = "";
 					lbl_crewMember1.setIcon(null);
 					lbl_crewMember1.setText("");
@@ -1000,6 +1079,7 @@ public class CharacterCreationFrame extends JFrame {
 					{
 						btn_startAdventure.setVisible(false);
 					}
+					iTypeCrewMember2 = -1;
 					crewMember2Name = "";
 					lbl_crewMember2.setIcon(null);
 					lbl_crewMember2.setText("");
@@ -1054,6 +1134,7 @@ public class CharacterCreationFrame extends JFrame {
 					{
 						btn_startAdventure.setVisible(false);
 					}
+					iTypeCrewMember3 = -1;
 					crewMember3Name = "";
 					lbl_crewMember3.setIcon(null);
 					lbl_crewMember3.setText("");
@@ -1109,6 +1190,7 @@ public class CharacterCreationFrame extends JFrame {
 					{
 						btn_startAdventure.setVisible(false);
 					}
+					iTypeCrewMember4 = -1;
 					lbl_crewMember4.setIcon(null);
 					lbl_crewMember4.setText("");
 					lbl_crewMember4.setVisible(false);

@@ -12,9 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.EmptyBorder;
+
+import Game.StartGame;
+
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ShowSpaceshipStatus extends JDialog {
 
@@ -40,13 +45,21 @@ public class ShowSpaceshipStatus extends JDialog {
 	 * Create the dialog.
 	 */
 	public ShowSpaceshipStatus(String[] args) {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				StartGame.m_stringInputReadyGUI = true;
+			}
+		});
 		getContentPane().setBackground(Color.BLACK);
 		setTitle("Spaceship Status");
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowSpaceshipStatus.class.getResource("/graphics/game_icon_sun.png")));
 		setBounds(100, 100, 500, 320);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.BLACK);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
@@ -59,7 +72,7 @@ public class ShowSpaceshipStatus extends JDialog {
 			strStatusComplete += "Hull: ";
 			strStatusComplete += args[iCounterVariable++] + "%<BR>";
 			strStatusComplete += "NumPiloting: ";
-			strStatusComplete += args[iCounterVariable++] + "%<HTML>";
+			strStatusComplete += args[iCounterVariable++] + "<HTML>";
 				
 			JSplitPane splitPane = new JSplitPane()
 			{
@@ -76,6 +89,7 @@ public class ShowSpaceshipStatus extends JDialog {
 			        return location ;
 			    }
 			};
+			splitPane.setBackground(Color.BLUE);
 			splitPane.setBounds(42, 60 , 400, 150);
 			contentPanel.add(splitPane);
 			{
@@ -85,6 +99,8 @@ public class ShowSpaceshipStatus extends JDialog {
 			}
 			{
 				JLabel lbl_Status = new JLabel(strStatusComplete);
+				lbl_Status.setFont(new Font("Snap ITC", Font.PLAIN, 11));
+				lbl_Status.setForeground(Color.WHITE);
 				splitPane.setRightComponent(lbl_Status);
 			}
 			
@@ -93,30 +109,9 @@ public class ShowSpaceshipStatus extends JDialog {
 			JLabel lbl_Spaceship = new JLabel("Spaceship");
 			lbl_Spaceship.setForeground(Color.WHITE);
 			lbl_Spaceship.setFont(new Font("Snap ITC", Font.PLAIN, 14));
-			lbl_Spaceship.setBounds(167, 5, 100, 40);
+			lbl_Spaceship.setBounds(201, 5, 91, 40);
 			contentPanel.add(lbl_Spaceship);
 		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			
-		}
-		JSplitPane splitPane = new JSplitPane()
-		{
-		    private final int location = 60;
-		    {
-		        setDividerLocation( location );
-		    }
-		    @Override
-		    public int getDividerLocation() {
-		        return location ;
-		    }
-		    @Override
-		    public int getLastDividerLocation() {
-		        return location ;
-		    }
-		};
 		
 	}
 
