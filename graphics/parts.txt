@@ -1,0 +1,24 @@
+0,Positron Flow Regulator
+1,External Thrust Flange
+2,Warp Stabilisation Module
+3,Radiation Shielding
+4,Antimatter Capsule
+5,Fuel Cell Adapter
+6,Dorsal Molecular Disassociator
+7,Toroidal Singularity Engine
+8,Aft Graviton Generator
+9,Beryllium Power Core
+10,Plasma Injector
+11,Aft Starboard Phase Circuit
+12,Singularity Containment Field
+13,Molecular Filament Core
+14,Hyperwave Infuser
+15,Active Vacuum Inhibitor
+16,Multi-Spacial Gearbox
+17,Ventral Gamma Ray Chamber
+18,Nanosphere Reflection Energizer
+19,Rubidium Microfilament Transporter
+20,Rubidium Isotope Matrix
+21,Lithium Resonance Shaft
+22,Graviton Phase Scrambler
+23,Axionic Deflector Shell

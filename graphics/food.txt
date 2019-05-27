@@ -1,0 +1,36 @@
+
+NAME              | Type | Buy | Sell | Nutritional value
+Types:
+0 - MEAT
+1 - FRUIT
+2 - DAIRY
+3 - POULTRY
+4 - VEGETABLE
+5 - LIQUID
+
+Fill store with 2-8 items, completely random distribution
+
+0  |Zak Steak           | 0 | 20 | 12 | 40
+1  |Filet Mignon        | 0 | 40 | 30 | 60
+2  |Larsh Tongue        | 0 | 12 | 5  | 15
+3  |Sleen Bacon         | 0 | 30 | 18 | 45
+4  |Gromf Berry         | 1 | 10 | 6  | 20
+5  |Bubuya Fruit        | 1 | 15 | 8  | 25
+6  |Fried Banana        | 1 | 35 | 20 | 50
+7  |Gnoush Gourd        | 1 | 12 | 8  | 16
+8  |Wheel of Camembert  | 2 | 18 | 12 | 25
+9  |Hankho Nachos       | 2 | 20 | 15 | 30
+10 |Frozen Sloop Yogurt | 2 | 18 | 8  | 26
+11 |Mint Ice Cream      | 2 | 22 | 16 | 35
+12 |Space Chicken       | 3 | 32 | 26 | 46
+13 |Spicy Gnash Wings   | 3 | 25 | 20 | 35
+14 |Sauteed Besh Leg    | 3 | 45 | 35 | 50
+15 |Teriyaki Gurp       | 3 | 30 | 22 | 40
+16 |Crispy Nid Salad    | 4 | 22 | 15 | 24
+17 |Caesar Salad        | 4 | 12 | 10 | 16
+18 |Knish Sticks        | 4 | 10 | 5  | 10
+19 |Tebbin Root         | 4 | 36 | 25 | 38
+20 |Moon Juice          | 5 | 18 | 12 | 30
+21 |Bubuya Juice        | 5 | 15 | 10 | 25
+22 |Sparkling Water     | 5 | 10 | 6  | 15
+23 |Sloop Milk          | 5 | 24 | 16 | 32

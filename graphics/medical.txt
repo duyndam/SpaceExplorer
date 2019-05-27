@@ -1,0 +1,21 @@
+NAME              | Type | Buy | Sell | Healing value
+
+Types:
+0 - BANDAGE
+1 - PAINKILLER
+2 - CURES_SPACE_PLAGUE
+
+Fill store with 1-4 items, completely random distribution
+
+24 |Simple Bandage           | 0 | 12 | 8  | 15
+25 |Suture Kit               | 0 | 25 | 15 | 30
+26 |3D Printed Cast          | 0 | 30 | 20 | 35
+27 |Spray-on Skin            | 0 | 32 | 25 | 40
+28 |Tylenspirin              | 1 | 10 | 6  | 12
+29 |Shuvarian Opiates        | 1 | 42 | 35 | 40
+30 |Aged Colirian Whiskey    | 1 | 35 | 30 | 38
+31 |Imperial Zonk Pills      | 1 | 25 | 15 | 22
+32 |Zzxhxjshkiiik?           | 2 | 65 | 20 | 60
+33 |Super Strong Antibiotics | 2 | 40 | 35 | 5
+34 |Special Sauce            | 2 | 45 | 40 | 10
+35 |Blue Pill                | 2 | 30 | 20 | 0
