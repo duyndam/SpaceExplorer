@@ -239,7 +239,7 @@ public class ConsoleGame
 		
 		Station actualOutpost = new Station();
 		Planet actualPlanet = new Planet();
-
+		boolean shipPartFound = false;
 		do
 		{
 			if(!StartGame.bGUI)
@@ -297,7 +297,8 @@ public class ConsoleGame
 			   		else
 			   		{
 			   			StartGame.m_stringInputLogic = "";
-			   			StartGame.m_stringInputLogic += gameCrew.crewSize();
+			   			StartGame.m_stringInputLogic += gameCrew.getMoney();
+			   			StartGame.m_stringInputLogic += "," + gameCrew.crewSize();
 			   			for(int iCrewIndex = 0; iCrewIndex < gameCrew.crewSize(); iCrewIndex++)
 			   			{
 			   				StartGame.m_stringInputLogic += gameCrew.crewMembers.get(iCrewIndex).serialize();
@@ -382,7 +383,7 @@ public class ConsoleGame
 			   				{
 			   					strSerializedOutpostItems += actualOutpost.availableItems.get(iOutpostItemIndex).toString() + ",";
 			   				}
-			   				StartGame.m_stringInputLogic = strSerializedCrewItems + "::" + strSerializedOutpostItems;
+			   				StartGame.m_stringInputLogic = Integer.toString(gameCrew.getMoney()) + "::" + strSerializedCrewItems + "::" + strSerializedOutpostItems;
 			   				StartGame.m_stringInputReadyLogic = true;
 			   				while(!StartGame.m_stringInputReadyGUI)
 			   				{
@@ -483,6 +484,8 @@ public class ConsoleGame
 												gameCrew.addFood(addItem);
 											}
 											actualOutpost.get_ItemList().remove(iInputType-1);
+											now = LocalDateTime.now();
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + " You bought an item\n";
 										}
 										else
 										{
@@ -492,7 +495,8 @@ public class ConsoleGame
 											}
 											else
 											{
-												DailyFrame.strActionLog += "Can't afford that\n";
+												now = LocalDateTime.now();
+												DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + "Can't afford that\n";
 											}
 										}
 									}
@@ -545,6 +549,8 @@ public class ConsoleGame
 										}
 										actualOutpost.get_ItemList().add(gameCrew.inventory.get(iInputType-1));
 										gameCrew.inventory.remove(iInputType-1);
+										now = LocalDateTime.now();
+										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + " You sold an item\n";
 									}
 									if(StartGame.bGUI)
 									{
@@ -922,33 +928,41 @@ public class ConsoleGame
 									int money;
 									Random luckyFind = new Random();
 									int found = luckyFind.nextInt(5);
-									if (found < 1)
+									
+									if (found == 0)
 									{
 										FoodItem thing = new FoodItem();
 										thing = actualPlanet.get_RandomFoodItem();
 										gameCrew.addFood(thing);
 									}
-									else if (found >= 1 && found < 2)
+									else if (found == 1)
 									{
 										MedicalItem thing = new MedicalItem();
 										thing = actualPlanet.get_RandomMedicalItem();
 										gameCrew.addMedical(thing);
 									}
-									else if (found >= 2 && found < 3)
+									else if (found == 2)
 									{
 										money = actualPlanet.get_RandomAmountMoney();
 										gameCrew.addMoney(money);
 									}
-									if (found >= 3 && found < 4)
+									else if (found == 3 && shipPartFound == false)
 									{
+										shipPartFound = true;
 										part = actualPlanet.get_RandomShipPart();
 										gameCrew.addPart(part);
+										StartGame.m_iActualParts++;
 									}
 									else
 									{
 										if(!StartGame.bGUI)
 										{
 											printer.printNothing();
+										}
+										else
+										{
+											now = LocalDateTime.now();
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + " but found nothing\n";
 										}
 									}
 									if(!StartGame.bGUI)
@@ -958,7 +972,22 @@ public class ConsoleGame
 									else
 									{
 										now = LocalDateTime.now();
-										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + "\n";
+										switch(found)
+										{
+										case 0:
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + " and found food\n";
+											break;
+										case 1:
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + " and found medicals\n";
+											break;
+										case 2:
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + " and found money\n";
+											break;
+										case 3:
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + chosenMember.getName() + CrewMember.VISIT_PLANET_ACTION + " and found a ship part\n";
+											break;											
+										}
+										
 										StartGame.m_stringInputReadyLogic = true;
 									}
 								}
@@ -1053,6 +1082,8 @@ public class ConsoleGame
 					{
 						actualOutpost = new Station();
 						actualPlanet = new Planet();
+						gameCrew.crewShip.clearPilots();
+						shipPartFound = false;
 					}
 	
 					//RESET CREW ACTIONS AND UPDATE FATIGUE/HUNGER
@@ -1068,7 +1099,6 @@ public class ConsoleGame
 					}
 	
 					encounterToday = encounter.nextInt(3);
-	
 					if (encounterToday < 1) {
 						boolean encounterHappens = true;
 						encounterType = encounter.nextInt(3);
@@ -1088,6 +1118,11 @@ public class ConsoleGame
 										if(!StartGame.bGUI)							//TODO: print pirate encounter in gui
 										{
 											printer.printPirates();
+										}
+										else
+										{
+											now = LocalDateTime.now();
+											DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ " Pirates boarded your ship while you sleep, and stole an item!\n";
 										}
 									}
 								}
@@ -1119,6 +1154,12 @@ public class ConsoleGame
 									{
 										printer.printAsteroids(damage);
 									}
+									else
+									{
+										now = LocalDateTime.now();
+										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ " You fly through an asteroid belt, colliding with some large rocks...\n";
+										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ "Your ship takes " + -damage + "points of damage.\n";
+									}
 								}
 								break;
 							case 2:
@@ -1134,6 +1175,11 @@ public class ConsoleGame
 									if(!StartGame.bGUI)										////TODO: print plague encounter in gui
 									{
 										printer.printPlague();
+									}
+									else
+									{
+										now = LocalDateTime.now();
+										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ " A member of your crew comes down with a strange illness.\n";
 									}
 								}
 								break;
@@ -1167,5 +1213,24 @@ public class ConsoleGame
 		   		StartGame.m_bEndCondition = true;
 		   	}
 		}while(!StartGame.m_bEndCondition);
+		if (!StartGame.bGUI)
+		{
+			printer.printEndGame();
+		}
+		else
+		{
+			while(!StartGame.m_stringInputReadyGUI)
+			{
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			StartGame.m_stringInputReadyGUI = false;
+			StartGame.m_stringInputLogic = gameCrew.getShip().getName();
+			StartGame.m_stringInputReadyLogic = true;
+		}
 	}
 }
