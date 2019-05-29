@@ -19,6 +19,10 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -64,6 +68,7 @@ public class DailyFrame extends JFrame {
 	JButton btn_buy = null;
 	JScrollPane scrollPaneOutpostInventory = null;
 	JButton btn_LeaveOutpost = null;
+	private JLabel lbl_Money;
 	/**
 	 * Launch the application.
 	 */
@@ -147,11 +152,12 @@ public class DailyFrame extends JFrame {
 				StartGame.m_stringInputReadyLogic = false;
 				String[] strMessage = StartGame.m_stringInputLogic.split(",");
 				String strGUIMessage = "";
-				if(strMessage.length >= 13)
+				if(strMessage.length >= 14)
 				{
-					int iAmountMembers = Integer.parseInt(strMessage[0]);
 					strGUIMessage += strMessage[0] + ",";
-					for(int iMemberIndex = 1; iMemberIndex < iAmountMembers*6;iMemberIndex += 6)
+					int iAmountMembers = Integer.parseInt(strMessage[1]);
+					strGUIMessage += strMessage[1] + ",";
+					for(int iMemberIndex = 2; iMemberIndex < iAmountMembers*6;iMemberIndex += 6)
 					{
 						strGUIMessage += strMessage[iMemberIndex] + ",";
 						strGUIMessage += strMessage[iMemberIndex+1] + ",";
@@ -235,9 +241,12 @@ public class DailyFrame extends JFrame {
 		lbl_VisitOutpost.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 				sendShoppingEvent();
 				setVisibilityMainMenue(false);
+				now = LocalDateTime.now();
+				DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + "You entered the Outpost\n";
 				setVisibilityOutpostMenue(true);
 			}
 			@Override
@@ -346,8 +355,33 @@ public class DailyFrame extends JFrame {
 						e1.printStackTrace();
 					}
 				}
-				lbl_Day.setText("DAY " + StartGame.m_iActualDay);
 				StartGame.m_stringInputReadyLogic = false;
+				if(StartGame.m_iActualDay <= StartGame.m_iDays)
+				{
+					lbl_Day.setText("DAY " + StartGame.m_iActualDay);
+				}
+				else
+				{
+					StartGame.m_stringInputReadyGUI = true;
+					while(!StartGame.m_stringInputReadyLogic)
+					{
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					StartGame.m_stringInputReadyLogic = false;
+					String strMessage = "";
+					strMessage += strShipResource + ",";
+					strMessage += StartGame.m_stringInputLogic;
+					String[] arguments = strMessage.split(",");
+					EndScreen myEndscreen = new EndScreen(arguments);
+					myEndscreen.setVisible(true);
+					dispose();
+				}
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -440,6 +474,7 @@ public class DailyFrame extends JFrame {
 		contentPane.add(lbl_OutpostInventory);
 		
 		btn_buy = new JButton("Buy");
+		btn_buy.setForeground(Color.BLACK);
 		btn_buy.setBackground(Color.BLUE);
 		btn_buy.setFont(new Font("Snap ITC", Font.PLAIN, 10));
 		btn_buy.setVisible(false);
@@ -483,6 +518,7 @@ public class DailyFrame extends JFrame {
 		contentPane.add(scrollPaneOutpostInventory);
 		
 		btn_LeaveOutpost = new JButton("Leave Outpost");
+		btn_LeaveOutpost.setForeground(Color.BLACK);
 		btn_LeaveOutpost.setBackground(Color.BLUE);
 		btn_LeaveOutpost.setFont(new Font("Snap ITC", Font.PLAIN, 10));
 		btn_LeaveOutpost.setVisible(false);
@@ -508,19 +544,41 @@ public class DailyFrame extends JFrame {
 		addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent arg0) {
 				txtr_ActionsDone.setText(strActionLog);
+			
 			}
 			public void windowLostFocus(WindowEvent arg0) {
 			}
 		});
 		
+		TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+            	txtr_ActionsDone.setText(strActionLog);
+            }
+		};
+		Timer timer = new Timer("Repeated Interval");
+		long duration = 500;
+        long delay= 500;
+        timer.schedule(task, delay,duration);
+		
 		JScrollPane scrollPane_LogField = new JScrollPane(txtr_ActionsDone);
 		scrollPane_LogField.setBounds(100, 350, 500, 200);
 		contentPane.add(scrollPane_LogField);
-//		lbl_background = new JLabel("");
-//		lbl_background.setForeground(Color.WHITE);
-//		lbl_background.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/space_moon.png")).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
-//		lbl_background.setBounds(0, 0, this.getWidth(), this.getHeight());
-//		contentPane.add(lbl_background);
+		
+		lbl_Money = new JLabel("Money: 0");
+		lbl_Money.setVisible(false);
+		lbl_Money.setForeground(Color.WHITE);
+		lbl_Money.setFont(new Font("Snap ITC", Font.PLAIN, 16));
+		lbl_Money.setBounds(560, 40, 140, 29);
+		contentPane.add(lbl_Money);
+		
+		lbl_background = new JLabel("");
+		lbl_background.setForeground(Color.WHITE);
+		lbl_background.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/space_moon.png")).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+		lbl_background.setBounds(0, 0, this.getWidth(), this.getHeight());
+		contentPane.add(lbl_background);
+		
+		
 //		
 		
 	}
@@ -540,8 +598,9 @@ public class DailyFrame extends JFrame {
 		}
 		StartGame.m_stringInputReadyLogic = false;
 		String[] strParts = StartGame.m_stringInputLogic.split("::");
-		String[] strItemsInventory = strParts[0].split(",");
-		String[] strItemsOutpost = strParts[1].split(",");
+		lbl_Money.setText("Money: " + strParts[0]);
+		String[] strItemsInventory = strParts[1].split(",");
+		String[] strItemsOutpost = strParts[2].split(",");
 		int iCounter = 0;
 		myItemsCrew.clear();
 		myItemsOutpost.clear();
@@ -571,6 +630,7 @@ public class DailyFrame extends JFrame {
 	{
 		lbl_CrewInventory.setVisible(bFlag);
 		lbl_OutpostInventory.setVisible(bFlag);
+		lbl_Money.setVisible(bFlag);
 		scrollPaneCrewInventory.setVisible(bFlag);
 		scrollPaneOutpostInventory.setVisible(bFlag);
 		btn_buy.setVisible(bFlag);

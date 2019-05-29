@@ -30,7 +30,7 @@ public class ShowCrewStatus extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			if(args.length >= 13)
+			if(args.length >= 14)
 			{
 				ShowCrewStatus dialog = new ShowCrewStatus(args);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -55,7 +55,8 @@ public class ShowCrewStatus extends JDialog {
 		setTitle("Crew Status");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ShowCrewStatus.class.getResource("/graphics/game_icon_sun.png")));
-		int iAmountMembers = Integer.parseInt(args[0]);
+		int iMoney = Integer.parseInt(args[0]);
+		int iAmountMembers = Integer.parseInt(args[1]);
 		switch(iAmountMembers)
 		{
 		case 2:
@@ -76,7 +77,7 @@ public class ShowCrewStatus extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			
-			int iCounterVariable = 1;
+			int iCounterVariable = 2;
 			String strStatusComplete = "<HTML>Name: ";
 			for(int iCountCrewMember = 0; iCountCrewMember < iAmountMembers * 100; iCountCrewMember+=100)
 			{
@@ -117,7 +118,7 @@ public class ShowCrewStatus extends JDialog {
 			{
 				JLabel lbl_Status = new JLabel(strStatusComplete);
 				lbl_Status.setForeground(Color.WHITE);
-				lbl_Status.setFont(new Font("Snap ITC", Font.PLAIN, 14));
+				lbl_Status.setFont(new Font("Snap ITC", Font.PLAIN, 10));
 				splitPane.setRightComponent(lbl_Status);
 			}
 			}
@@ -126,10 +127,22 @@ public class ShowCrewStatus extends JDialog {
 			JLabel lbl_Crew = new JLabel("Crew");
 			lbl_Crew.setForeground(Color.WHITE);
 			lbl_Crew.setFont(new Font("Snap ITC", Font.PLAIN, 14));
-			lbl_Crew.setBounds(128, 5, 57, 19);
+			lbl_Crew.setBounds(20, 5, 60, 19);
 			contentPanel.add(lbl_Crew);
 		}
 		
+		JLabel lbl_Money = new JLabel("Money:");
+		lbl_Money.setForeground(Color.WHITE);
+		lbl_Money.setFont(new Font("Snap ITC", Font.PLAIN, 14));
+		lbl_Money.setBounds(150, 5, 60, 19);
+		contentPanel.add(lbl_Money);
+		
+		JLabel lbl_MoneyVal = new JLabel("0");
+		lbl_MoneyVal.setText(args[0]);
+		lbl_MoneyVal.setForeground(Color.WHITE);
+		lbl_MoneyVal.setFont(new Font("Snap ITC", Font.PLAIN, 14));
+		lbl_MoneyVal.setBounds(230, 5, 60, 19);
+		contentPanel.add(lbl_MoneyVal);
+		
 	}
-
 }
