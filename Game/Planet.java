@@ -88,12 +88,12 @@ public class Planet
 		try
 		{
 
- 			FileInputStream fs= new FileInputStream("txts/parts.txt");
+ 			FileInputStream fs= new FileInputStream(getClass().getResource("/graphics/parts.txt").getFile());
  			BufferedReader br = new BufferedReader(new InputStreamReader(fs));
  			String[] strLineSplit = null;
  			for (String line = br.readLine(); line != null; line = br.readLine()) {
  				strLineSplit = line.split(",");
- 			    if(Integer.toString(iChoice) == strLineSplit[0])
+ 			    if(Integer.toString(iChoice).equals(strLineSplit[0]))
  			    {
  			    	strRandomShipPart = strLineSplit[1];
  			    }

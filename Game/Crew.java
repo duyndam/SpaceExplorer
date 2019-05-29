@@ -41,6 +41,7 @@ public class Crew
 	  crewMoney = 100;
     crewMembers = listOfMembers;
     crewShip = spaceShip;
+    shipParts = new ArrayList<String>();
   }
 
   /**

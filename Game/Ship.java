@@ -106,6 +106,11 @@ public class Ship
       return true;
     }
   }
+  
+  public void clearPilots()
+  {
+	  numPilots = 0;
+  }
 
   /**
    * Updates ship shield/hull values when repairing/taking damage.

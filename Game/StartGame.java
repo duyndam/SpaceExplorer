@@ -52,7 +52,6 @@ public class StartGame
 		// run GUI.
 		if(mode.equals("CONSOLE"))
 		{
-			
 			ConsoleGame spaceExplorer = new ConsoleGame();
 			spaceExplorer.run();
 		}
@@ -63,11 +62,6 @@ public class StartGame
 			ConsoleGame spaceExplorer = new ConsoleGame();
 			bGUI = true;
 			spaceExplorer.run();
-		}
-
-		if (m_bEndCondition)
-		{
-			printer.printEndGame();
 		}
 	}
 }
