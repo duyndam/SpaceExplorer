@@ -1076,6 +1076,11 @@ public class ConsoleGame
 	
 					}
 		   			StartGame.m_iActualDay++;
+		   			if(StartGame.bGUI)
+		   			{
+		   				now = LocalDateTime.now();
+						DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] " + " Moved to the next Day\n";
+		   			}
 	
 					//CHECK IF READY TO FLY - if so, generate new planet and outpost.
 					if (gameCrew.crewShip.getNumPilots() >= 2)
