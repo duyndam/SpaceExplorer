@@ -80,7 +80,7 @@ public class EndScreen extends JFrame {
 		}
 		else
 		{
-			lbl_PiecesMessage.setText("You did found " + Integer.toString(StartGame.m_iActualParts) + "/" + Integer.toString(StartGame.m_iParts) + " pieces, sadly not all");
+			lbl_PiecesMessage.setText("You found " + Integer.toString(StartGame.m_iActualParts) + "/" + Integer.toString(StartGame.m_iParts) + " pieces, sadly not all");
 		}
 		contentPane.add(lbl_PiecesMessage);
 		

@@ -60,6 +60,7 @@ public class CharacterCreationFrame extends JFrame {
 	private String crewMember4Name = "";
 	private JTextField txtf_name;
 	private JTextField txtf_spaceshipName;
+	private JLabel lbl_InvalidInput;
 
 	/**
 	 * Launch the application.
@@ -216,6 +217,7 @@ public class CharacterCreationFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_pilot, -300, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_pilot, 220, SpringLayout.WEST, contentPane);
 		lbl_pilot.setForeground(Color.WHITE);
+		lbl_pilot.setToolTipText("Reduce Damage from asteroids");
 		lbl_pilot.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_pilot.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_pilot);
 		
@@ -223,6 +225,7 @@ public class CharacterCreationFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_engineer, 0, SpringLayout.NORTH, lbl_pilot);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_engineer, 45, SpringLayout.EAST, lbl_pilot);
 		lbl_engineer.setForeground(Color.WHITE);
+		lbl_engineer.setToolTipText("Higher repair value when repairing ship");
 		lbl_engineer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_engineer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_engineer);
 		
@@ -230,12 +233,14 @@ public class CharacterCreationFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_scavenger, 0, SpringLayout.NORTH, lbl_pilot);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_scavenger, 45, SpringLayout.EAST, lbl_engineer);
 		lbl_scavenger.setForeground(Color.WHITE);
+		lbl_scavenger.setToolTipText("Higher chance of finding a ship part");
 		lbl_scavenger.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_normal.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_scavenger);
 		
 		JLabel lbl_navigator = new JLabel("");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_navigator, 0, SpringLayout.NORTH, lbl_pilot);
 		lbl_navigator.setForeground(Color.WHITE);
+		lbl_navigator.setToolTipText("Reduces the chance to fly through an asteroid belt");
 		lbl_navigator.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_navigator.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_navigator);
 		
@@ -243,6 +248,7 @@ public class CharacterCreationFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_soldier, 45, SpringLayout.EAST, lbl_navigator);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lbl_soldier, 0, SpringLayout.SOUTH, lbl_pilot);
 		lbl_soldier.setForeground(Color.WHITE);
+		lbl_soldier.setToolTipText("Reduces chance that pirates appear");
 		lbl_soldier.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_soldier.png")).getImage().getScaledInstance(50, 70, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_soldier);
 		
@@ -251,6 +257,7 @@ public class CharacterCreationFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_doctor, 0, SpringLayout.NORTH, lbl_pilot);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_doctor, 45, SpringLayout.EAST, lbl_scavenger);
 		lbl_doctor.setForeground(Color.WHITE);
+		lbl_doctor.setToolTipText("Reduces the chance of space plague infecting the crew");
 		lbl_doctor.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/penguin_medical_officer.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_doctor);
 		
@@ -417,10 +424,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 2 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 2 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
         		if(actualMemberCount == 3)
         		{
@@ -433,10 +444,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 3 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 3 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
         		if(actualMemberCount == 4)
         		{
@@ -449,10 +464,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 4 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 4 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
 			}
 			@Override
@@ -468,10 +487,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 2 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 2 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
         		if(actualMemberCount == 3)
         		{
@@ -484,10 +507,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 3 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 3 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
         		if(actualMemberCount == 4)
         		{
@@ -500,10 +527,14 @@ public class CharacterCreationFrame extends JFrame {
         				iCount++;
         			if(!crewMember4Name.equals(""))
         				iCount++;
-        			if(iCount == 4 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 4 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
         		}
 			}
 		});
@@ -1241,50 +1272,70 @@ public class CharacterCreationFrame extends JFrame {
             		if(actualMemberCount == 2)
             		{
             			int iCount = 0;
-            			if(!crewMember1Name.equals(""))
+            			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
             				iCount++;
-            			if(!crewMember2Name.equals(""))
+            			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
             				iCount++;
-            			if(!crewMember3Name.equals(""))
+            			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
             				iCount++;
-            			if(!crewMember4Name.equals(""))
+            			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
             				iCount++;
-            			if(iCount == 2 && !txtf_spaceshipName.getText().equals(""))
+            			if(iCount == 2 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
             				btn_startAdventure.setVisible(true);
             			else
             				btn_startAdventure.setVisible(false);
+            			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+            			{
+            				lbl_InvalidInput.setVisible(true);
+            			}
+            			else
+            			{
+            				lbl_InvalidInput.setVisible(false);
+            			}
             		}
             		if(actualMemberCount == 3)
             		{
             			int iCount = 0;
-            			if(!crewMember1Name.equals(""))
+            			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
             				iCount++;
-            			if(!crewMember2Name.equals(""))
+            			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
             				iCount++;
-            			if(!crewMember3Name.equals(""))
+            			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
             				iCount++;
-            			if(!crewMember4Name.equals(""))
+            			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
             				iCount++;
-            			if(iCount == 3 && !txtf_spaceshipName.getText().equals(""))
+            			if(iCount == 3 && !txtf_spaceshipName.getText().equals("")&& !txtf_spaceshipName.getText().contains(","))
             				btn_startAdventure.setVisible(true);
             			else
             				btn_startAdventure.setVisible(false);
+            			if(txtf_spaceshipName.getText().contains(","))
+            			{
+            				lbl_InvalidInput.setVisible(true);
+            			}
             		}
             		if(actualMemberCount == 4)
             		{
             			int iCount = 0;
-            			if(!crewMember1Name.equals(""))
+            			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
             				iCount++;
-            			if(!crewMember2Name.equals(""))
+            			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
             				iCount++;
-            			if(!crewMember3Name.equals(""))
+            			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
             				iCount++;
-            			if(!crewMember4Name.equals(""))
+            			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
             				iCount++;
-            			if(iCount == 4 && !txtf_spaceshipName.getText().equals(""))
+            			if(iCount == 4 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
             				btn_startAdventure.setVisible(true);
             			else
             				btn_startAdventure.setVisible(false);
+            			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+            			{
+            				lbl_InvalidInput.setVisible(true);
+            			}
+            			else
+            			{
+            				lbl_InvalidInput.setVisible(false);
+            			}
             		}
             	}
                 //System.out.println("Execution time is :" + System.currentTimeMillis() + " Name of the thread is :" + Thread.currentThread().getName());
@@ -1316,50 +1367,74 @@ public class CharacterCreationFrame extends JFrame {
 				if(actualMemberCount == 2)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 2 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 2 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
         		if(actualMemberCount == 3)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 3 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 3 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
         		if(actualMemberCount == 4)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 4 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 4 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
 			}
         	@Override
@@ -1383,53 +1458,91 @@ public class CharacterCreationFrame extends JFrame {
 				if(actualMemberCount == 2)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 2 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 2 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
         		if(actualMemberCount == 3)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 3 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 3 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
         		if(actualMemberCount == 4)
         		{
         			int iCount = 0;
-        			if(!crewMember1Name.equals(""))
+        			if(!crewMember1Name.equals("") && !crewMember1Name.contains(","))
         				iCount++;
-        			if(!crewMember2Name.equals(""))
+        			if(!crewMember2Name.equals("") && !crewMember2Name.contains(","))
         				iCount++;
-        			if(!crewMember3Name.equals(""))
+        			if(!crewMember3Name.equals("") && !crewMember3Name.contains(","))
         				iCount++;
-        			if(!crewMember4Name.equals(""))
+        			if(!crewMember4Name.equals("") && !crewMember4Name.contains(","))
         				iCount++;
-        			if(iCount == 4 && !txtf_spaceshipName.getText().equals(""))
+        			if(iCount == 4 && !txtf_spaceshipName.getText().equals("") && !txtf_spaceshipName.getText().contains(","))
         				btn_startAdventure.setVisible(true);
         			else
         				btn_startAdventure.setVisible(false);
+        			if(txtf_spaceshipName.getText().contains(",") || crewMember1Name.contains(",") || crewMember2Name.contains(",") || crewMember3Name.contains(",") || crewMember4Name.contains(","))
+        			{
+        				lbl_InvalidInput.setVisible(true);
+        			}
+        			else
+        			{
+        				lbl_InvalidInput.setVisible(false);
+        			}
         		}
         	}
 		});
+        JLabel lbl_ModifyHelp = new JLabel("");
+        lbl_ModifyHelp.setFont(new Font("Snap ITC", Font.PLAIN, 11));
+        sl_contentPane.putConstraint(SpringLayout.SOUTH, lbl_ModifyHelp, -141, SpringLayout.SOUTH, contentPane);
+        sl_contentPane.putConstraint(SpringLayout.EAST, lbl_ModifyHelp, -59, SpringLayout.WEST, crewPanel);
+		lbl_ModifyHelp.setForeground(Color.WHITE);
+		contentPane.add(lbl_ModifyHelp);
+		
+		lbl_InvalidInput = new JLabel("Check inputs, they aren't allowed to be empty or contain a comma");
+		lbl_InvalidInput.setVisible(false);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_InvalidInput, 284, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lbl_InvalidInput, -5, SpringLayout.SOUTH, contentPane);
+		lbl_InvalidInput.setFont(new Font("Snap ITC", Font.PLAIN, 11));
+		lbl_InvalidInput.setForeground(Color.ORANGE);
+		contentPane.add(lbl_InvalidInput);
         
 		JLabel lbl_background = new JLabel("");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lbl_background, -5, SpringLayout.NORTH, contentPane);
@@ -1437,5 +1550,7 @@ public class CharacterCreationFrame extends JFrame {
 		lbl_background.setBounds(0, 0, 0, 0);
 		lbl_background.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/graphics/background_main.png")).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_background);
+		
+		
 	}
 }
