@@ -1099,7 +1099,7 @@ public class ConsoleGame
 						cosmonaut.updateHunger(10);
 						if (cosmonaut.getState() == CrewMember.status.SPACE_PLAGUE_INFECTED)
 						{
-							if(cosmonaut.updateHealth(-60))
+							if(cosmonaut.updateHealth(-30))
 							{
 								bRemoveTrue = true;
 								gameCrew.crewMembers.remove(cosmonaut);
