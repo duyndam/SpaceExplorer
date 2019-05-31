@@ -44,7 +44,7 @@ public class EndScreen extends JFrame {
 		setTitle("Space Explorer");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(EndScreen.class.getResource("/graphics/game_icon_sun.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 370);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,28 +52,32 @@ public class EndScreen extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lbl_Spaceship = new JLabel("");
-		lbl_Spaceship.setBounds(50, 0, 280, 150);
+		lbl_Spaceship.setBounds(77, 10, 280, 150);
 		lbl_Spaceship.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource(args[iCounterVariable++])).getImage().getScaledInstance(280, 150, Image.SCALE_DEFAULT)));
 		contentPane.add(lbl_Spaceship);
 		
 		JLabel lbl_Spaceship_name = new JLabel("New label");
 		lbl_Spaceship_name.setFont(new Font("Snap ITC", Font.PLAIN, 11));
 		lbl_Spaceship_name.setForeground(Color.WHITE);
-		lbl_Spaceship_name.setBounds(86, 100, 250, 25);
-		lbl_Spaceship_name.setText(args[iCounterVariable++]);
+		lbl_Spaceship_name.setBounds(147, 195, 140, 25);
+		lbl_Spaceship_name.setText("Shipname: " + args[iCounterVariable++]);
 		contentPane.add(lbl_Spaceship_name);
 		
 		JLabel lbl_DaysTaken = new JLabel("New label");
 		lbl_DaysTaken.setForeground(Color.WHITE);
 		lbl_DaysTaken.setFont(new Font("Snap ITC", Font.PLAIN, 11));
-		lbl_DaysTaken.setBounds(86, 135, 262, 25);
+		lbl_DaysTaken.setBounds(86, 231, 262, 25);
+		if(DailyFrame.bMoveNextDayEnd)
+		{
+			StartGame.m_iActualDay--;
+		}
 		lbl_DaysTaken.setText("The game took " + StartGame.m_iActualDay + " Days to finish");
 		contentPane.add(lbl_DaysTaken);
 		
 		JLabel lbl_PiecesMessage = new JLabel("New label");
 		lbl_PiecesMessage.setForeground(Color.WHITE);
 		lbl_PiecesMessage.setFont(new Font("Snap ITC", Font.PLAIN, 11));
-		lbl_PiecesMessage.setBounds(40, 170, 350, 25);
+		lbl_PiecesMessage.setBounds(42, 267, 350, 25);
 		if(StartGame.m_iActualParts >= StartGame.m_iParts)
 		{
 			lbl_PiecesMessage.setText("You found all pieces " + Integer.toString(StartGame.m_iActualParts) + "/" + Integer.toString(StartGame.m_iParts));
@@ -87,7 +91,7 @@ public class EndScreen extends JFrame {
 		JLabel lbl_Score = new JLabel("New label");
 		lbl_Score.setForeground(Color.WHITE);
 		lbl_Score.setFont(new Font("Snap ITC", Font.PLAIN, 11));
-		lbl_Score.setBounds(42, 202, 350, 25);
+		lbl_Score.setBounds(149, 295, 135, 25);
 		lbl_Score.setText("Your Score: " + StartGame.score);
 		contentPane.add(lbl_Score);
 	}

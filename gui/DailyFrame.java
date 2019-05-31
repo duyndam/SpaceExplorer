@@ -44,6 +44,7 @@ import java.awt.event.WindowEvent;
 public class DailyFrame extends JFrame {
 
 	public static String strActionLog = "";
+	public static boolean bMoveNextDayEnd = false;
 	private String strShipResource = "";
 	
 	private JPanel contentPane;
@@ -362,6 +363,7 @@ public class DailyFrame extends JFrame {
 				}
 				else
 				{
+					bMoveNextDayEnd = true;
 					StartGame.m_stringInputReadyGUI = true;
 					while(!StartGame.m_stringInputReadyLogic)
 					{
@@ -554,6 +556,27 @@ public class DailyFrame extends JFrame {
             @Override
             public void run() {
             	txtr_ActionsDone.setText(strActionLog);
+            	if(StartGame.m_bEndCondition)
+            	{
+            		StartGame.m_stringInputReadyGUI = true;
+					while(!StartGame.m_stringInputReadyLogic)
+					{
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					StartGame.m_stringInputReadyLogic = false;
+					String strMessage = "";
+					strMessage += strShipResource + ",";
+					strMessage += StartGame.m_stringInputLogic;
+					String[] arguments = strMessage.split(",");
+					EndScreen myEndscreen = new EndScreen(arguments);
+					myEndscreen.setVisible(true);
+					dispose();
+            	}
             }
 		};
 		Timer timer = new Timer("Repeated Interval");
