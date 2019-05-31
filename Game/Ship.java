@@ -121,36 +121,69 @@ public class Ship
    */
   public boolean update(int amount)
   {
-    if(shield > 0) {
-      if(amount > 0 && shield+amount > 100)
-      {
-      	shield = 100;
-      }
-      else
-      {
-      	shield += amount;
-      }
-    }
-    else
-    {
-      if(amount > 0 && hull+amount > 100)
-      {
-      	hull = 100;
-      }
-      else
-      {
-      	hull += amount;
-      }
-      if (hull <= 0)
-      {
-        return true;
-      }
-      else
-      {
-      	return false;
-      }
-    }
-    return false;
+	  if(amount < 0)
+	  {
+		  if(shield + amount > 0)
+		  {
+			  shield += amount;
+		  }
+		  else
+		  {
+			  int iHullDamage = shield + amount;
+			  shield = 0;
+			  if(hull + iHullDamage < 0)
+			  {
+				  hull = 0;
+				  return true;
+			  }
+			  else
+			  {
+				  hull += iHullDamage;
+			  }
+		  }
+	  }
+	  else
+	  {
+		  if(hull < 100)
+		  {
+			  int amountRepair = 100 - hull;
+			  if(amount > amountRepair)
+			  {
+				  hull = 100;
+				  int ShieldRepair = amount - amountRepair;
+				  if(shield < 100)
+				  {
+					  if(shield + ShieldRepair > 100)
+					  {
+						  shield = 100;
+					  }
+					  else
+					  {
+						  shield += ShieldRepair;
+					  }
+				  }
+			  }
+			  else
+			  {
+				 hull += amount; 
+			  }
+		  }
+		  else
+		  {
+			  if(shield < 100)
+			  {
+				  if(shield + amount > 100)
+				  {
+					  shield = 100;
+				  }
+				  else
+				  {
+					  shield += amount;
+				  }
+			  }
+		  }
+	  }
+	  return false;
   }
 
   public String serialize()

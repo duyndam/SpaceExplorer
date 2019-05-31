@@ -56,7 +56,8 @@ public class Planet
 	{
 		MedicalItem generatedItem = new MedicalItem();
 		int iChoice = 0;
-		iChoice = randomGenerator.nextInt(MedicalItem.MEDIC_INDEX_MIN + MedicalItem.AMOUNT_MED_ITEMS - MedicalItem.MEDIC_INDEX_MIN +1) + MedicalItem.MEDIC_INDEX_MIN;
+		iChoice = randomGenerator.nextInt(MedicalItem.AMOUNT_MED_ITEMS);
+		iChoice += 24;
 		generatedItem.stringIfy(iChoice);
 		return generatedItem;
 	}

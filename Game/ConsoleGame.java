@@ -928,7 +928,6 @@ public class ConsoleGame
 									int money;
 									Random luckyFind = new Random();
 									int found = luckyFind.nextInt(5);
-									
 									if (found == 0)
 									{
 										FoodItem thing = new FoodItem();
@@ -1092,6 +1091,7 @@ public class ConsoleGame
 					}
 	
 					//RESET CREW ACTIONS AND UPDATE FATIGUE/HUNGER
+					boolean bRemoveTrue = false;
 					for (CrewMember cosmonaut: gameCrew.crewMembers)
 					{
 						cosmonaut.clearActions();
@@ -1099,7 +1099,18 @@ public class ConsoleGame
 						cosmonaut.updateHunger(10);
 						if (cosmonaut.getState() == CrewMember.status.SPACE_PLAGUE_INFECTED)
 						{
-							cosmonaut.updateHealth(-10);
+							if(cosmonaut.updateHealth(-60))
+							{
+								bRemoveTrue = true;
+								gameCrew.crewMembers.remove(cosmonaut);
+							}
+						}
+					}
+					if(bRemoveTrue)
+					{
+						if(gameCrew.crewMembers.size() < 2)
+						{
+							StartGame.m_bEndCondition = true;
 						}
 					}
 	
@@ -1112,7 +1123,7 @@ public class ConsoleGame
 							case 0:
 								if (!gameCrew.inventory.isEmpty())
 								{
-									modifier = gameCrew.jobCount(CrewMember.type.DOCTOR);
+									modifier = gameCrew.jobCount(CrewMember.type.SOLDIER);
 									chance = (int) Math.pow(2, modifier)*3;
 									newChance = encounter.nextInt(chance);
 									if (newChance < 1)
@@ -1154,7 +1165,10 @@ public class ConsoleGame
 									{
 										damage = (int)Math.round(-(50+shieldMod));
 									}
-									gameCrew.crewShip.update(damage);
+									if(gameCrew.crewShip.update(damage))
+									{
+										StartGame.m_bEndCondition = true;
+									}
 									if(!StartGame.bGUI)										//TODO: print asteroids encounter in gui
 									{
 										printer.printAsteroids(damage);
@@ -1174,9 +1188,14 @@ public class ConsoleGame
 								if (newChance < 1)
 								{
 									boolean plague = true;
-									int infected = encounter.nextInt(gameCrew.crewSize());
-									CrewMember sickCrew = gameCrew.crewMembers.get(infected);
-									sickCrew.setState(CrewMember.status.SPACE_PLAGUE_INFECTED);
+									int iCrewInfectCounter = encounter.nextInt(gameCrew.crewSize());
+									iCrewInfectCounter++;
+									for(int iCrewCounter = 0; iCrewCounter < iCrewInfectCounter; iCrewCounter++)
+									{
+										int infected = encounter.nextInt(gameCrew.crewSize());
+										CrewMember sickCrew = gameCrew.crewMembers.get(infected);
+										sickCrew.setState(CrewMember.status.SPACE_PLAGUE_INFECTED);
+									}
 									if(!StartGame.bGUI)										////TODO: print plague encounter in gui
 									{
 										printer.printPlague();
@@ -1184,7 +1203,7 @@ public class ConsoleGame
 									else
 									{
 										now = LocalDateTime.now();
-										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ " A member of your crew comes down with a strange illness.\n";
+										DailyFrame.strActionLog += "[" + dtf.format(now).toString() + "] "+ "A strange illness appeared on board.\n";
 									}
 								}
 								break;
